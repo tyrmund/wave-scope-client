@@ -1,6 +1,13 @@
+import { useContext } from "react"
 import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap"
+import { AuthContext } from "../contexts/auth.context"
+import { Link } from "react-router-dom"
+
 
 const Navigation = () => {
+
+  const { logout, loggedUser } = useContext(AuthContext)
+
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
@@ -10,6 +17,11 @@ const Navigation = () => {
           <Nav className="me-auto">
             <Nav.Link href="#home">Home</Nav.Link>
             <Nav.Link href="#link">Link</Nav.Link>
+            {
+              loggedUser
+              &&
+              <Nav.Link onClick={logout}>Logout</Nav.Link>
+            }
             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">

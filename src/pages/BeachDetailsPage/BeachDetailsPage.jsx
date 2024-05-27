@@ -23,6 +23,8 @@ const BeachDetailsPage = () => {
   }
 
   return (
+
+
     <div className="BeachDetailsPage">
       {isLoading ?
         <h1>LOADING...</h1> :
