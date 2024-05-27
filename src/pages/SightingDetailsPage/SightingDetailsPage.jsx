@@ -1,8 +1,11 @@
+import { Container } from "react-bootstrap"
+import sightingServices from '../../services/sighting.services'
+
 const SightingDetailsPage = () => {
   return (
-    <div className="SightingDetailsPage">
-      <h1>wow he visto un bicho :3</h1>
-    </div>
+    <Container>
+      Soy un mero espectador
+    </Container>
   )
 }
 

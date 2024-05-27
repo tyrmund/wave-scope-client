@@ -1,8 +1,17 @@
+import { Container } from "react-bootstrap"
+import specimenServices from "../../services/specimen.services"
+
 const MarineLifeDetailsPage = () => {
+
+
+
+
+
+
   return (
-    <div className="MarineLifeDetailsPage">
-      <h1>UN BICHOOOOOOOOOOOOOOOOOOOOO</h1>
-    </div>
+    <Container>
+      Soy un mero espectador
+    </Container>
   )
 }
 
