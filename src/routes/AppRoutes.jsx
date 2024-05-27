@@ -1,25 +1,25 @@
 import { Routes, Route } from "react-router-dom";
-import Homepage from "../pages/Homepage";
+import Homepage from "../pages/Homepage/Homepage";
 
-import BeachesPage from "../pages/BeachesPage";
-import BeachDetailsPage from "../pages/BeachDetailsPage";
+import BeachesPage from "../pages/BeachesPage/BeachesPage";
+import BeachDetailsPage from "../pages/BeachDetailsPage/BeachDetailsPage";
 
-import MarineLifePage from "../pages/MarineLifePage";
-import MarineLifeDetailsPage from "../pages/MarineLifeDetailsPage";
-import NewMarineLifePage from "../pages/NewMarineLifePage";
-import EditMarineLifePage from "../pages/EditMarineLifePage";
+import MarineLifePage from "../pages/MarineLifePage/MarineLifePage";
+import MarineLifeDetailsPage from "../pages/MarineLifeDetailsPage/MarineLifeDetailsPage";
+import NewMarineLifePage from "../pages/NewMarineLifePage/NewMarineLifePage";
+import EditMarineLifePage from "../pages/EditMarineLifePage/EditMarineLifePage";
 
-import SightingsPage from "../pages/SightingsPage";
-import SightingDetailsPage from "../pages/SightingDetailsPage";
-import NewSightingPage from "../pages/NewSightingPage";
-import EditSightingPage from "../pages/EditSightingPage";
+import SightingsPage from "../pages/SightingsPage/SightingsPage";
+import SightingDetailsPage from "../pages/SightingDetailsPage/SightingDetailsPage";
+import NewSightingPage from "../pages/NewSightingPage/NewSightingPage";
+import EditSightingPage from "../pages/EditSightingPage/EditSightingPage";
 
-import SignupPage from "../pages/SignupPage";
-import LoginPage from "../pages/LoginPage";
-import UserProfilePage from "../pages/UserProfilePage";
-import EditUserProfilePage from "../pages/EditUserProfile";
+import SignupPage from "../pages/SignupPage/SignupPage";
+import LoginPage from "../pages/LoginPage/LoginPage";
+import UserProfilePage from "../pages/UserProfilePage/UserProfilePage";
+import EditUserProfilePage from "../pages/EditUserProfile/EditUserProfile";
 
-import NotFoundPage from "../pages/NotFoundPage";
+import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
 
 const AppRoutes = () => {
   return (

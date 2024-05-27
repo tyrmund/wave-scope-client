@@ -26,7 +26,7 @@ In the global context of a massive tourism, WaveScope tries to reduce the ecolog
 | `/signup`                   | Creates a new user                 |             |
 | `/login`                    | Logs an existing user              |             |
 | `/profile`                  | Logs a user profile                |     ✔️      |
-| `/profile/edit`             | Edits an existing user             |             |
+| `/profile/edit`             | Edits an existing user             |     ✔️      |
 | `*`                         | 404 Page                           |             |
 
 
