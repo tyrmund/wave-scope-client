@@ -1,8 +1,19 @@
+import { Container } from "react-bootstrap"
+
+import SignupForm from "../../components/SignupForm/SignupForm"
+
+
 const SignupPage = () => {
+
+
+
   return (
-    <div className="SignupPage">
-      <h1>danos tus datos payo que no hacemos na con ellos te lo juro por la yaya</h1>
-    </div>
+
+    <Container className="signupPage">
+
+      <SignupForm />
+
+    </Container>
   )
 }
 
