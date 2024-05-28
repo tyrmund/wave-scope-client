@@ -1,9 +1,9 @@
-import { Container } from "react-bootstrap"
+import { Container, Spinner } from "react-bootstrap"
 import sightingServices from '../../services/sighting.services'
 
 const SightingDetailsPage = () => {
 
-  const [isLoading, setIsLoading] = useState(true)
+  // const [isLoading, setIsLoading] = useState(true)
   const [sighting, setSighting] = useState({})
   const { sightingId } = useParams()
 
@@ -15,23 +15,23 @@ const SightingDetailsPage = () => {
 
     sightingServices
       .getOneSighting(sightingId)
-      .then(({ data }) => setSighting(data))
+      .then(({ data }) => {
+        setSighting(data)
+        //   setIsLoading(false)
+      })
       .catch(err => console.log(err))
-
-    setIsLoading(false)
   }
 
   return (
     <div>
       {
-        isLoading
-          ?
-          <h1>Spinner</h1>
-          :
-
-          <Container>
-            <p>{` ¿Lo he visto? ${sighting.confirmation}`}</p>
-          </Container>
+        // isLoading
+        //   ?
+        //   <Spinner animation="grow" variant="dark" />
+        //   :
+        <Container>
+          <p>{` ¿Lo he visto? ${sighting.confirmation}`}</p>
+        </Container>
       }
     </div>
   )

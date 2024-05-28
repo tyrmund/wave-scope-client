@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap"
-import { AuthContext } from "../contexts/auth.context"
-import { Link } from "react-router-dom"
+import { AuthContext } from "../../contexts/auth.context"
+import "./Navigation.css"
 
 
 const Navigation = () => {

@@ -1,14 +1,15 @@
-.footer {
-  position: fixed;
+.Footer {
+  position: absolute;
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color: rgb(223, 223, 223);
+  background-color: #023047;
   color: white;
   text-align: center;
 }
 
+
 .footer p {
   padding: 0;
-  margin: 5px 0;
+  margin-top: 10px 0;
 }
