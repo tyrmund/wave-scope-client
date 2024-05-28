@@ -1,10 +1,11 @@
+import { Container } from 'react-bootstrap'
 import './Footer.css'
 
 const Footer = () => {
   return (
-    <div className="footer">
+    <Container className='Footer'>
       <p>WaveScope</p>
-    </div>
+    </Container>
   )
 }
 

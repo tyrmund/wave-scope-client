@@ -4,10 +4,13 @@
   box-sizing: border-box;
 }
 
+
 body {
   margin: 0;
   padding: 0;
   font-family: 'Reddit Mono', sans-serif;
+  background: linear-gradient(to bottom right, #8FDAFF, #FBE797);
+  height: 100vh;
 }
 
 img {
