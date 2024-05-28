@@ -33,7 +33,7 @@ const AppRoutes = () => {
 
           <Route path={"/welcome"} element={<WelcomePage />} />
 
-          <Route path={"/beaches"} element={<BeachesPage />} />
+          <Route path="/beaches" element={<BeachesPage />} />
           <Route path={"/beaches/:beachId"} element={<BeachDetailsPage />} />
 
           <Route path={"/marine-life"} element={<MarineLifePage />} />

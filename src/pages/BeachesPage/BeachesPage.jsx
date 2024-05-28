@@ -1,7 +1,10 @@
+import ListAllBeaches from "../../components/ListAllBeaches/ListAllBeaches"
+
 const BeachesPage = () => {
+
   return (
     <div className="BeachesPage">
-      <h1>ALL MY BEACHESSSSSSSSSSSSS</h1>
+      <ListAllBeaches />
     </div>
   )
 }
