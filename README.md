@@ -12,7 +12,8 @@ In the global context of a massive tourism, WaveScope tries to reduce the ecolog
 
 | Path                        | Description                        | Protected   |
 | :-------                    | :---------                         | :--------   |
-| `/`                         | Homepage                           |             |
+| `/`                         | Start page                         |             |
+| `/welcome`                  | Welcome page                       |             |
 | `/beaches`                  | List of beaches in your area       |             |
 | `/beaches/:beachId`         | Details of a specific beach        |             |
 | `/marine-life`              | List of marine life in your island |             |
@@ -24,7 +25,6 @@ In the global context of a massive tourism, WaveScope tries to reduce the ecolog
 | `/sightings/new`            | Create a new sighting              |     ✔️      |
 | `/sightings/edit`           | Edit an existing sighting          |     ✔️      |
 | `/signup`                   | Creates a new user                 |             |
-| `/login`                    | Logs an existing user              |             |
 | `/profile`                  | Logs a user profile                |     ✔️      |
 | `/profile/edit`             | Edits an existing user             |     ✔️      |
 | `*`                         | 404 Page                           |             |

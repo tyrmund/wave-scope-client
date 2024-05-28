@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
-import Homepage from "../pages/Homepage/Homepage";
+import StartPage from "../pages/StartPage/StartPage";
+import WelcomePage from "../pages/WelcomePage/WelcomePage";
 
 import BeachesPage from "../pages/BeachesPage/BeachesPage";
 import BeachDetailsPage from "../pages/BeachDetailsPage/BeachDetailsPage";
@@ -15,7 +16,6 @@ import NewSightingPage from "../pages/NewSightingPage/NewSightingPage";
 import EditSightingPage from "../pages/EditSightingPage/EditSightingPage";
 
 import SignupPage from "../pages/SignupPage/SignupPage";
-import LoginPage from "../pages/LoginPage/LoginPage";
 import UserProfilePage from "../pages/UserProfilePage/UserProfilePage";
 import EditUserProfilePage from "../pages/EditUserProfile/EditUserProfile";
 
@@ -25,7 +25,8 @@ const AppRoutes = () => {
   return (
     <div className="AppRoutes">
       <Routes>
-        <Route path={"/"} element={<Homepage />} />
+        <Route path={"/"} element={<StartPage />} />
+        <Route path={"/welcome"} element={<WelcomePage />} />
 
         <Route path={"/beaches"} element={<BeachesPage />} />
         <Route path={"/beaches/:beachId"} element={<BeachDetailsPage />} />
@@ -41,7 +42,6 @@ const AppRoutes = () => {
         <Route path={"/sightings/edit"} element={<EditSightingPage />} />
 
         <Route path={"/signup"} element={<SignupPage />} />
-        <Route path={"/login"} element={<LoginPage />} />
         <Route path={"/profile"} element={<UserProfilePage />} />
         <Route path={"/profile/edit"} element={<EditUserProfilePage />} />
 
