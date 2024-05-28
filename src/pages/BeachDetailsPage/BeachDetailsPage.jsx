@@ -28,7 +28,7 @@ const BeachDetailsPage = () => {
     <div className="BeachDetailsPage">
       {isLoading ?
         <h1>LOADING...</h1> :
-        <h1>{`ONE OF MY BEACHESSSSSSSSSSSSS named ${beach.name}`}</h1>}
+        <h1>ONE OF MY BEACHESSSSSSSSSSSSS named ${beach.name}</h1>}
     </div>
   )
 }

@@ -3,8 +3,6 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import specimenServices from "../../services/specimen.services"
 
-
-
 const MarineLifeDetailsPage = () => {
 
   const [isLoading, setIsLoading] = useState(true)
@@ -17,13 +15,13 @@ const MarineLifeDetailsPage = () => {
 
   const loadSpecimenDetails = () => {
 
-
     specimenServices
       .getOneSpecimen(specimenId)
-      .then(({ data }) => setSpecimen(data))
+      .then(({ data }) => {
+        setSpecimen(data)
+        setIsLoading(false)
+      })
       .catch(err => console.log(err))
-
-    setIsLoading(false)
   }
 
   return (

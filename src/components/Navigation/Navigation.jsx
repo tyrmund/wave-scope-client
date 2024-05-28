@@ -2,6 +2,7 @@ import { useContext } from "react"
 import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap"
 import { AuthContext } from "../../contexts/auth.context"
 import "./Navigation.css"
+import { Link } from "react-router-dom"
 
 
 const Navigation = () => {
@@ -11,7 +12,7 @@ const Navigation = () => {
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
-        <Navbar.Brand href="#home">WaveScope</Navbar.Brand>
+        <Navbar.Brand href="/">WaveScope</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
@@ -20,7 +21,11 @@ const Navigation = () => {
             {
               loggedUser
               &&
-              <Nav.Link onClick={logout}>Logout</Nav.Link>
+              <>
+                <Nav.Link onClick={logout}>Logout</Nav.Link>
+                <Link to={'/profile'} className="nav-link">Profile</Link>
+
+              </>
             }
             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
