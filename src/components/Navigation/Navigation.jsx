@@ -12,12 +12,19 @@ const Navigation = () => {
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
-        <Navbar.Brand href="/">WaveScope</Navbar.Brand>
+        <Navbar.Brand href="/welcome">WaveScope</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#link">Link</Nav.Link>
+            <Link to="/beaches" className="link">
+              <Nav.Link as="span">Beaches</Nav.Link>
+            </Link>
+            <Link to="/marine-life" className="link">
+              <Nav.Link as="span">Marine Life</Nav.Link>
+            </Link>
+            <Link to="/sightings" className="link">
+              <Nav.Link as="span">Sightings</Nav.Link>
+            </Link>
             {
               loggedUser
               &&

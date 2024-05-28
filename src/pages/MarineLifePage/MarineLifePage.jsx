@@ -1,7 +1,11 @@
+import MarineLifeList from "../../components/MarineLifeList/MarineLifeList"
+
 const MarineLifePage = () => {
+
+
   return (
     <div className="MarineLifePage">
-      <h1>BICHOS BICHOS BICHOSBICHOSBICHOS ALL MY MADAFAKING BICHOOOOOOOOS</h1>
+      <MarineLifeList />
     </div>
   )
 }
