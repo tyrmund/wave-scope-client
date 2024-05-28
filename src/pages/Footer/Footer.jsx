@@ -3,9 +3,9 @@ import './Footer.css'
 
 const Footer = () => {
   return (
-    <Container className='Footer'>
+    <div className='Footer'>
       <p>WaveScope</p>
-    </Container>
+    </div>
   )
 }
 

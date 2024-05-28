@@ -48,30 +48,23 @@ const LoginForm = () => {
                     ?
                     <Spinner animation="grow" variant="dark" />
                     :
+                    <Form onSubmit={handleSubmit} className="mb-20">
 
-                    <Container className="mt-6">
-                        <img src="https://res.cloudinary.com/du8mlfcf9/image/upload/v1716900017/Wave%20Scope/pixel1_m5ue4w.png" alt="Logo Wave Scope" />
+                        <Form.Group className="mb-3" controlId="email">
+                            <Form.Label>Email</Form.Label>
+                            <Form.Control type="email" value={loginData.email} onChange={handleInputChange} name="email" />
+                        </Form.Group>
 
-                        <h1>Welcome !</h1>
+                        <Form.Group className="mb-3" controlId="password">
+                            <Form.Label>Contraseña</Form.Label>
+                            <Form.Control type="password" value={loginData.password} onChange={handleInputChange} name="password" />
+                        </Form.Group>
 
-                        <Form onSubmit={handleSubmit}>
+                        <div className="d-grid">
+                            <Button variant="dark" type="submit">Acceder</Button>
+                        </div>
 
-                            <Form.Group className="mb-3" controlId="email">
-                                <Form.Label>Email</Form.Label>
-                                <Form.Control type="email" value={loginData.email} onChange={handleInputChange} name="email" />
-                            </Form.Group>
-
-                            <Form.Group className="mb-3" controlId="password">
-                                <Form.Label>Contraseña</Form.Label>
-                                <Form.Control type="password" value={loginData.password} onChange={handleInputChange} name="password" />
-                            </Form.Group>
-
-                            <div className="d-grid">
-                                <Button variant="dark" type="submit">Acceder</Button>
-                            </div>
-
-                        </Form>
-                    </Container>
+                    </Form>
             }
         </div>
     )
