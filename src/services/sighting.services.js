@@ -32,4 +32,4 @@ class SightingServices {
 
 const sightingServices = new SightingServices()
 
-export default SightingServices
+export default sightingServices

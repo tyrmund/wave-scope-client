@@ -32,4 +32,4 @@ class SpecimenServices {
 
 const specimenServices = new SpecimenServices()
 
-export default SpecimenServices
+export default specimenServices
