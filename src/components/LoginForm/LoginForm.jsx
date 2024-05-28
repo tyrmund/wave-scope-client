@@ -3,6 +3,7 @@ import { Form, Button, Spinner, Container } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
 import authServices from "../../services/auth.services"
 import { AuthContext } from "../../contexts/auth.context"
+import Loader from "../Loader/Loader"
 
 const LoginForm = () => {
 
@@ -38,35 +39,33 @@ const LoginForm = () => {
                 authenticateUser()
                 navigate('/welcome')
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                console.log(err)
+                navigate('/signup')
+            })
     }
 
+
     return (
-        <div>
-            {
-                isLoading
-                    ?
-                    <Spinner animation="grow" variant="dark" />
-                    :
-                    <Form onSubmit={handleSubmit} className="mb-20">
 
-                        <Form.Group className="mb-3" controlId="email">
-                            <Form.Label>Email</Form.Label>
-                            <Form.Control type="email" value={loginData.email} onChange={handleInputChange} name="email" />
-                        </Form.Group>
+        < Form onSubmit={handleSubmit} >
 
-                        <Form.Group className="mb-3" controlId="password">
-                            <Form.Label>Contraseña</Form.Label>
-                            <Form.Control type="password" value={loginData.password} onChange={handleInputChange} name="password" />
-                        </Form.Group>
+            <Form.Group className="mb-3" controlId="email">
+                <Form.Label>Email</Form.Label>
+                <Form.Control type="email" value={loginData.email} onChange={handleInputChange} name="email" />
+            </Form.Group>
 
-                        <div className="d-grid">
-                            <Button variant="dark" type="submit">Acceder</Button>
-                        </div>
+            <Form.Group className="mb-3" controlId="password">
+                <Form.Label>Contraseña</Form.Label>
+                <Form.Control type="password" value={loginData.password} onChange={handleInputChange} name="password" />
+            </Form.Group>
 
-                    </Form>
-            }
-        </div>
+            <div className="d-grid">
+                <Button variant="dark" type="submit">Acceder</Button>
+            </div>
+
+        </Form >
+
     )
 }
 

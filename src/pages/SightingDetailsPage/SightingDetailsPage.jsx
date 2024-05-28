@@ -30,7 +30,7 @@ const SightingDetailsPage = () => {
         //   <Spinner animation="grow" variant="dark" />
         //   :
         <Container>
-          <p>{` ¿Lo he visto? ${sighting.confirmation}`}</p>
+          <p>¿Lo he visto? ${sighting.confirmation}</p>
         </Container>
       }
     </div>

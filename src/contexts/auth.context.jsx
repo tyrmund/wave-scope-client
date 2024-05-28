@@ -1,12 +1,12 @@
 import { createContext, useEffect, useState } from "react"
 import authServices from "../services/auth.services"
-import { useNavigate } from "react-router-dom"
 
 const AuthContext = createContext()
 
 function AuthProviderWrapper(props) {
 
     const [loggedUser, setLoggedUser] = useState(null)
+    const [isLoading, setIsLoading] = useState(true)
 
     const authenticateUser = () => {
 
@@ -16,18 +16,21 @@ function AuthProviderWrapper(props) {
 
             authServices
                 .verifyUser(token)
-                .then(({ data }) => setLoggedUser(data))
+                .then(({ data }) => {
+                    setLoggedUser(data)
+                    setIsLoading(false)
+                })
                 .catch(err => logout())
+
+        } else {
+            logout()
         }
     }
 
-    const navigate = useNavigate()
-
     const logout = () => {
-
         setLoggedUser(null)
         localStorage.removeItem('authToken')
-        navigate('/')
+        setIsLoading(false)
     }
 
     useEffect(() => {
@@ -36,10 +39,8 @@ function AuthProviderWrapper(props) {
 
     return (
 
-        <AuthContext.Provider value={{ loggedUser, authenticateUser, logout }}>
-
+        <AuthContext.Provider value={{ loggedUser, authenticateUser, logout, isLoading }}>
             {props.children}
-
         </AuthContext.Provider>
     )
 

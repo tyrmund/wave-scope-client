@@ -61,7 +61,7 @@ const SignupForm = () => {
             </Form.Group>
 
             <Button type="submit" variant="dark">
-                suuuuuuuuuuuubmit
+                Submit
             </Button>
 
         </Form>
