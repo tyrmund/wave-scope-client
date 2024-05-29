@@ -1,7 +1,8 @@
-import { Container } from "react-bootstrap"
+import { Card, Container, Image } from "react-bootstrap"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import specimenServices from "../../services/specimen.services"
+import Loader from "../../components/Loader/Loader"
 
 const MarineLifeDetailsPage = () => {
 
@@ -25,18 +26,25 @@ const MarineLifeDetailsPage = () => {
   }
 
   return (
-    <div className="SpecimenDetailsPage">
+    <Container className="SpecimenDetailsPage mt-3">
       {
         isLoading
           ?
-          <h1>Spinner</h1>
+          <Loader />
           :
-          <Container>
-            <p>{` Mi nombre es ${specimen.commonName}`}</p>
-          </Container>
+          <Card style={{ width: '18rem' }}>
+            <Card.Body >
+              <Image src={specimen.images[0]} />
+              <Card.Title className="text-center mt-3">{specimen.commonName}</Card.Title>
+              <Card.Subtitle className="mb-2 text-muted text-center">{specimen.scientificName}</Card.Subtitle>
+              <Card.Text className="mt-5">
+                {specimen.description}
+              </Card.Text>
+            </Card.Body>
+          </Card>
 
       }
-    </div>
+    </Container>
   )
 }
 

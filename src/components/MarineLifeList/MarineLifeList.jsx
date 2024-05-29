@@ -1,4 +1,4 @@
-import { Col, Row } from "react-bootstrap"
+import { Col, Container, Row } from "react-bootstrap"
 import SpecimenCard from "../SpecimenCard/SpecimenCard"
 import { useEffect, useState } from "react"
 import specimenServices from "../../services/specimen.services"
@@ -27,7 +27,7 @@ const MarineLifeList = () => {
   }
 
   return (
-    <div className="MarineLifeList">
+    <Container className="MarineLifeList">
       {
         isLoading ? <Loader /> :
           <Row>
@@ -36,10 +36,11 @@ const MarineLifeList = () => {
 
                 return (
 
-                  <Col key={specimen._id} sm={{ span: 8, offset: 2 }}>
+                  <Col key={specimen._id}
+                    md={{ span: 3 }}>
                     <Link
                       style={{ textDecoration: 'none', color: 'black' }}
-                      to={`/marine-life/${specimens._id}`}
+                      to={`/marine-life/${specimen._id}`}
                     >
                       <SpecimenCard {...specimen} />
                     </Link>
@@ -50,7 +51,7 @@ const MarineLifeList = () => {
             }
           </Row>
       }
-    </div>
+    </Container>
   )
 }
 
