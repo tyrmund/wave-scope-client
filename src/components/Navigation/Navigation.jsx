@@ -10,7 +10,7 @@ const Navigation = () => {
   const { logout, loggedUser } = useContext(AuthContext)
 
   return (
-    <Navbar expand="lg" className="bg-body-tertiary">
+    <Navbar expand="lg" className="Navbar">
       <Container>
         <Navbar.Brand href="/welcome">WaveScope</Navbar.Brand>
         {

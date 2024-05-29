@@ -1,7 +1,25 @@
-.bg-body-tertiary {
-    background-color: #023047 !important;
+.Navbar {
+    background-color: #023047;
+    color: #FFFBEB;
 }
 
 .link {
     text-decoration: none;
+    color: #FFFBEB;
+}
+
+.navbar-brand {
+    --bs-navbar-brand-color: #FFE63F;
+}
+
+.nav-link {
+    --bs-nav-link-color: #FFE63F;
+}
+
+.dropdown-menu.show {
+    background-color: #FFFBEB;
+}
+
+#basic-nav-dropdown-toogle.nav-link:hover {
+    color: #FFFBEB;
 }

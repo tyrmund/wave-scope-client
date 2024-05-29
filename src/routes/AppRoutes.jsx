@@ -4,6 +4,7 @@ import WelcomePage from "../pages/WelcomePage/WelcomePage";
 
 import BeachesPage from "../pages/BeachesPage/BeachesPage";
 import BeachDetailsPage from "../pages/BeachDetailsPage/BeachDetailsPage";
+import NewBeachForm from "../pages/NewBeachPage/NewBeachPage";
 
 import MarineLifePage from "../pages/MarineLifePage/MarineLifePage";
 import MarineLifeDetailsPage from "../pages/MarineLifeDetailsPage/MarineLifeDetailsPage";
@@ -33,8 +34,9 @@ const AppRoutes = () => {
 
           <Route path={"/welcome"} element={<WelcomePage />} />
 
-          <Route path="/beaches" element={<BeachesPage />} />
+          <Route path={"/beaches"} element={<BeachesPage />} />
           <Route path={"/beaches/:beachId"} element={<BeachDetailsPage />} />
+          <Route path={"/new-beach"} element={<NewBeachForm />} />
 
           <Route path={"/marine-life"} element={<MarineLifePage />} />
           <Route path={"/marine-life/:specimenId"} element={<MarineLifeDetailsPage />} />

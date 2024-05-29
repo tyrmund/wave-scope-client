@@ -24,7 +24,7 @@ const BeachCard = ({ name, images, length, composition, _id }) => {
                         {composition}
                     </Card.Text>
                     <Link to={`/beaches/${_id}`}>
-                        <Button variant="dark" size="md" >
+                        <Button className='custom-color-button' size="md" >
                             More info
                         </Button>
                     </Link>
