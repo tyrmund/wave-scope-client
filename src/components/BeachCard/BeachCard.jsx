@@ -1,5 +1,6 @@
 import { Card, Button } from 'react-bootstrap'
 import { Link } from "react-router-dom"
+import './BeachCard.css'
 
 
 const BeachCard = ({ name, images, description, length, composition, _id }) => {
@@ -16,9 +17,6 @@ const BeachCard = ({ name, images, description, length, composition, _id }) => {
                 </Link>
                 <Card.Body >
                     <Card.Title>{name}</Card.Title>
-                    <Card.Text >
-                        {description}
-                    </Card.Text>
                     <Card.Text >
                         {length} m
                     </Card.Text>

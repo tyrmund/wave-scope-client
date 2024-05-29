@@ -5,7 +5,7 @@ import { useEffect, useState } from "react"
 import beachServices from "../../services/beach.services"
 
 
-const ListAllBeaches = () => {
+const BeachesList = () => {
 
     const [beaches, setBeaches] = useState([])
     const [isLoading, setIsloading] = useState(true)
@@ -51,4 +51,4 @@ const ListAllBeaches = () => {
     )
 }
 
-export default ListAllBeaches
+export default BeachesList

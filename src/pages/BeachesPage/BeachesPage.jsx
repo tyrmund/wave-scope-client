@@ -1,10 +1,10 @@
-import ListAllBeaches from "../../components/ListAllBeaches/ListAllBeaches"
+import BeachesList from "../../components/BeachesList/BeachesList"
 
 const BeachesPage = () => {
 
   return (
     <div className="BeachesPage">
-      <ListAllBeaches />
+      <BeachesList />
     </div>
   )
 }
