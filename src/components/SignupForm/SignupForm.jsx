@@ -23,7 +23,6 @@ const SignupForm = () => {
 
     const handleForSubmit = e => {
         e.preventDefault()
-        console.log(signupData)
 
         authServices
             .signupUser(signupData)
