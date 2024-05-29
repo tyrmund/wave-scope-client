@@ -1,4 +1,4 @@
-import { Accordion, Container, Spinner } from "react-bootstrap"
+import { Accordion, Container, Spinner, Row, Col, Badge } from "react-bootstrap"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import sightingServices from '../../services/sighting.services'
@@ -24,8 +24,6 @@ const SightingDetailsPage = () => {
       .catch(err => console.log(err))
   }
 
-  console.log(sighting)
-
   return (
     <div className="SightingDetailsPage">
       {
@@ -34,38 +32,60 @@ const SightingDetailsPage = () => {
           <Spinner animation="grow" variant="dark" />
           :
           <Container>
-            <Accordion defaultActiveKey="0" className="mt-5">
-              <Accordion.Item eventKey="0">
-                <Accordion.Header>Species Info</Accordion.Header>
-                <Accordion.Body>
-                  <img className="rounded" src={sighting.specimen.images[0]} />
-                  <h1 className="fs-5 ">{sighting.specimen.commonName} <i>({sighting.specimen.scientificName})</i></h1>
-                  <p>Average Size: {sighting.specimen.mediumSize}</p>
-                  <p>Endemic to this region: {sighting.specimen.isEndemic}</p>
-                  <p>Habitat: {sighting.specimen.habitat}</p>
-                </Accordion.Body>
-              </Accordion.Item>
-              <Accordion.Item eventKey="1">
-                <Accordion.Header>Region Info</Accordion.Header>
-                <Accordion.Body>
-                  <img className="rounded" src={sighting.beach.images[0]} />
-                  <h1 className="fs-5 mt-3">{sighting.beach.name}</h1>
-                  <hr />
-                  <p>Length: {sighting.beach.length} m</p>
-                  <p>Soil composition: {sighting.beach.composition}</p>
-                  <p>Nearby Bus Stops: {sighting.beach.nearBusStops.length}</p>
-                </Accordion.Body>
-              </Accordion.Item>
-              <Accordion.Item eventKey="2">
-                <Accordion.Header>User Input</Accordion.Header>
-                <Accordion.Body>
-                  <i className="mb-3">{sighting.comment}</i>
-                  <hr />
-                  <p>Confirmations: {sighting.confirmations}</p>
-                  <p>Rejections: {sighting.rejections}</p>
-                </Accordion.Body>
-              </Accordion.Item>
-            </Accordion>
+            <Row>
+              <Col md={{ span: 6, offset: 3 }}>
+                <Container>
+                  <img className="mt-5 rounded" src={sighting.image} alt={sighting.specimen.scientificName} />
+                  <h1 className="text-center mt-3 fs-6">
+                    Sighting date: {sighting.createdAt.substring(8, 10)}/{sighting.createdAt.substring(5, 7)}/{sighting.createdAt.substring(0, 4)}</h1>
+                  <h1 className="text-center fs-6">
+                    At {sighting.location.coordinates[0]}, {sighting.location.coordinates[1]}</h1>
+                </Container>
+              </Col>
+            </Row>
+            <Row>
+              <Col md={{ span: 6, offset: 3 }}>
+                <Accordion className="mt-3">
+                  <Accordion.Item eventKey="0">
+                    <Accordion.Header>{sighting.specimen.commonName}&nbsp;<i>({sighting.specimen.scientificName})</i></Accordion.Header>
+                    <Accordion.Body>
+                      <img className="rounded" src={sighting.specimen.images[0]} />
+                      <p className="mt-3">Average Size: {sighting.specimen.mediumSize}</p>
+                      <p>Endemic to this region: {sighting.specimen.isEndemic}</p>
+                      <p>Habitat: {sighting.specimen.habitat}</p>
+                    </Accordion.Body>
+                  </Accordion.Item>
+                  <Accordion.Item eventKey="1">
+                    <Accordion.Header>Region Info</Accordion.Header>
+                    <Accordion.Body>
+                      <img className="rounded" src={sighting.beach.images[0]} />
+                      <h1 className="fs-5 mt-3">{sighting.beach.name}</h1>
+                      <hr />
+                      <p>Length: {sighting.beach.length} m</p>
+                      <p>Soil composition: {sighting.beach.composition}</p>
+                      <h2 className="fs-6">Nearby Bus Stops</h2>
+                      {sighting.beach.nearBusStops.map((busStop, index) =>
+                        <div key={busStop._id}>
+                          <h3 className="fs-6 mt-3">• {busStop.name}</h3>
+                          {busStop.lines.map((line, index) =>
+                            <Badge key={index} bg="primary">{line}</Badge>
+                          )}
+                        </div>
+                      )}
+                    </Accordion.Body>
+                  </Accordion.Item>
+                  <Accordion.Item eventKey="2">
+                    <Accordion.Header>User Input</Accordion.Header>
+                    <Accordion.Body>
+                      <i className="mb-3">{sighting.comment}</i>
+                      <hr />
+                      <p>Confirmations: {sighting.confirmations}</p>
+                      <p>Rejections: {sighting.rejections}</p>
+                    </Accordion.Body>
+                  </Accordion.Item>
+                </Accordion>
+              </Col>
+            </Row>
           </Container>
       }
     </div>
