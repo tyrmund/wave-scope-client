@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import './BeachCard.css'
 
 
-const BeachCard = ({ name, images, description, length, composition, _id }) => {
+const BeachCard = ({ name, images, length, composition, _id }) => {
 
     return (
         <div className="BeachCard mx-auto">
