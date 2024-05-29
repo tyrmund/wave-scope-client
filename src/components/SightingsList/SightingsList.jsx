@@ -33,10 +33,9 @@ const SightingsList = () => {
                 <Row>
                     {sightings.map(sighting =>
                         <Col key={sighting._id} md={{ span: 4 }}>
-                            {sighting.specimen.commonName}
-                            {/* <SightingCard
+                            <SightingCard
                                 name={sighting.specimen.commonName}
-                                {...sighting} /> */}
+                                {...sighting} />
                         </Col>
                     )}
                 </Row>

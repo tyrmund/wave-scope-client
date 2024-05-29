@@ -45,7 +45,7 @@ const SightingDetailsPage = () => {
             </Row>
             <Row>
               <Col md={{ span: 6, offset: 3 }}>
-                <Accordion className="mt-3">
+                <Accordion className="mt-3 shadow-lg">
                   <Accordion.Item eventKey="0">
                     <Accordion.Header>{sighting.specimen.commonName}&nbsp;<i>({sighting.specimen.scientificName})</i></Accordion.Header>
                     <Accordion.Body>

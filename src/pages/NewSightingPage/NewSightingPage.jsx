@@ -1,13 +1,12 @@
-import { useState } from "react"
+import NewSightingForm from "../../components/NewSightingForm/NewSightingForm"
 
 const NewSightingPage = () => {
 
-  const [newSighting, setNewSighting] = useState()
-
   return (
     <div className="NewSightingPage">
-      <h1>wow he visto un bicho :3</h1>
-    </div>
+      <h1 className="text-center m-5">Report your sighting here!</h1>
+      <NewSightingForm />
+    </div >
   )
 }
 

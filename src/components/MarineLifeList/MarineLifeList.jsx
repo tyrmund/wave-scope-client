@@ -37,7 +37,9 @@ const MarineLifeList = () => {
                 return (
 
                   <Col key={specimen._id}
-                    md={{ span: 3 }}>
+
+                    md={{ span: 4 }}>
+
                     <Link
                       style={{ textDecoration: 'none', color: 'black' }}
                       to={`/marine-life/${specimen._id}`}

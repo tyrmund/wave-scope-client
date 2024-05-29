@@ -4,7 +4,6 @@
   box-sizing: border-box;
 }
 
-
 body {
   margin: 0;
   padding: 0;
@@ -12,6 +11,11 @@ body {
   background: linear-gradient(to bottom right, #2AB2D4, #FBE797);
   height: 100%;
   min-height: 100vh;
+<<<<<<< HEAD
+=======
+  display: flex;
+  flex-direction: column;
+>>>>>>> d472649d7e4760cf2012e2b066bcb5b1bd76f0d6
   background-size: cover;
   background-repeat: no-repeat;
 }
