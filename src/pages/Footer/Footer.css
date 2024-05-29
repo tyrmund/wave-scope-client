@@ -1,13 +1,23 @@
 .Footer {
   position: absolute;
   width: 100%;
+<<<<<<< HEAD
   height: 50px;
+=======
+  bottom: 0;
+  height: 50px;
+  margin-top: auto;
+>>>>>>> 09fff67f283b58dcc73737dd020a8720dc4c9277
   background-color: #023047;
   color: white;
   text-align: center;
 }
 
 .Footer p {
+<<<<<<< HEAD
   margin-top: 10px;
   padding: 0;
+=======
+  padding: 0
+>>>>>>> 09fff67f283b58dcc73737dd020a8720dc4c9277
 }
