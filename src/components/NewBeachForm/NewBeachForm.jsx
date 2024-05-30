@@ -25,12 +25,21 @@ const NewBeachForm = () => {
         const busStopsCopy = [...busStops]
         busStopsCopy[idx] = busStopInfo
         setBusStops(busStopsCopy)
+        console.log(busStopsCopy)
     }
 
     const addNewBusStop = () => {
         const newStop = {}
         const newBusStops = [...busStops, newStop]
         setBusStops(newBusStops)
+    }
+
+    const deleteBusStop = (index) => {
+        const updatedBusStops = [...busStops]
+        if (updatedBusStops.length > 1) {
+            updatedBusStops.splice(index, 1)
+            setBusStops(updatedBusStops)
+        }
     }
 
     const handleInputChange = event => {
@@ -49,7 +58,6 @@ const NewBeachForm = () => {
             })
             .catch(err => console.log(err))
     }
-
 
     return (
 
@@ -132,19 +140,15 @@ const NewBeachForm = () => {
                 </Row>
             </Form.Group>
 
-
-
             <br />
 
             <Form.Label className="h4">Nearest Bus Stops</Form.Label>
 
-
             {
-                busStops.map((elm, idx) => <BusStopGroup key={idx} index={idx} handleBusStopChange={handleBusStopChange} />)
+                busStops.map((_, idx) => <BusStopGroup key={idx} index={idx} handleBusStopChange={handleBusStopChange} deleteBusStop={deleteBusStop} />)
             }
-
-            <Button size="sm" onClick={addNewBusStop}>Add more stops</Button>
-
+            <br />
+            <Button className="custom-color-button mb-3" size="sm" onClick={addNewBusStop}>Add more stops</Button>
             <br />
 
             <Form.Label className="h4">Description</Form.Label>
@@ -161,22 +165,8 @@ const NewBeachForm = () => {
 
             <Form.Group controlId="ImagesGallery" className="mb-3">
                 <Form.Label>Images</Form.Label>
-                {/* 
-                {
-                    aircraftData.images_url.map((eachField, idx) => {
-                        return (
-                            <Form.Control
-                                className="mb-3"
-                                type="url"
-                                placeholder={`Place your image here`}
-                                value={aircraftData.images_url[idx]}
-                                onChange={event => handleGalleryChange(event, idx)} />
-                        )
-                    })
-                }
-                <Button size="sm" variant="dark" onClick={addNewImageField}>Add more</Button> */}
             </Form.Group>
-            <Button size="sm" variant="dark" type='submit'>Add the new beach</Button>
+            <Button className="custom-color-button mb-3" size="sm" variant="dark" type='submit'>Add the new beach</Button>
         </Form>
 
 
