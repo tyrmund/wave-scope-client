@@ -60,8 +60,8 @@ const LoginForm = () => {
                 <Form.Control type="password" value={loginData.password} onChange={handleInputChange} name="password" />
             </Form.Group>
 
-            <div className="d-grid">
-                <Button variant="dark" type="submit">Acceder</Button>
+            <div className="d-flex justify-content-center mb-5">
+                <Button className="custom-color-button " type="submit">Log in</Button>
             </div>
 
         </Form >
