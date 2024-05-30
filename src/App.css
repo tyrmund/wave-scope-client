@@ -22,3 +22,16 @@ img {
 .Description {
   white-space: pre-line;
 }
+
+.custom-color-button {
+  background-color: #023047 !important;
+  border: #023047 !important;
+  color: #FFFBEB !important;
+  margin-right: 20px;
+}
+
+.custom-color-button:hover {
+  background-color: #FFE63F !important;
+  border: #FFE63F !important;
+  color: #023047 !important;
+}
