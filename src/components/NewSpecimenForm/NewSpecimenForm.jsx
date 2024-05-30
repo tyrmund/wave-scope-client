@@ -4,6 +4,8 @@ import specimenServices from "../../services/specimen.services"
 import { useNavigate } from "react-router-dom"
 import { AuthContext } from "../../contexts/auth.context"
 import { SPECIMEN_HABITAT, SPECIMEN_ISENDEMIC } from "../../data/lists.data"
+import uploadServices from "../../services/upload.services"
+
 
 const NewSpecimenForm = () => {
 
@@ -16,7 +18,7 @@ const NewSpecimenForm = () => {
     description: ''
   })
 
-  const [selectedFiles, setSelectedFiles] = useState([''])
+  const [selectedFiles, setSelectedFiles] = useState([])
 
   const navigate = useNavigate()
 
@@ -27,8 +29,22 @@ const NewSpecimenForm = () => {
     setSpecimenFormData({ ...specimenFormData, [name]: value })
   }
 
-  const handleFileChange = e => {
-    setSelectedFiles(Array.from(e.target.files))
+  // const handleFileChange = e => {
+  //   setSelectedFiles(Array.from(e.target.files))
+  // }
+
+  const handleFileUpload = e => {
+
+    const formData = new FormData()                        //creando un formulario en la memoria del equipo con new FormData() y puede tener todos los campos que quiera
+    formData.append('imageData', e.target.files[0])        //en esta línea estamos creando un nuevo campo de este nuevo formulario y le estamos dando del target del evento la primera de las files, los inputs de tipo file tienen una propiedad .files dentro de su target (un array con imágenes seleccionadas)
+
+    uploadServices
+      .uploadimage(formData)                                                         //le mandamos un formulario que no es real pero que está guardado en memoria con un campo que lleva la imagen y lo mandamos al servicio de subida
+      .then(({ data }) => {
+        console.log(data)
+        // setCoasterData({ ...coasterData, imageUrl: res.data.cloudinary_url })
+      })
+      .catch(err => console.log(err))
   }
 
   const handleSubmit = e => {
@@ -36,10 +52,11 @@ const NewSpecimenForm = () => {
     e.preventDefault()
 
     const fullSpecimen = {
-      specimenFormData,
+      ...specimenFormData,
       images: selectedFiles
     }
 
+    console.log(fullSpecimen)
     specimenServices
       .newSpecimen(fullSpecimen)
       .then(() => navigate('/marine-life'))
@@ -72,7 +89,7 @@ const NewSpecimenForm = () => {
         <Row>
           <Col >
 
-            <Form.Group className="" >
+            <Form.Group  >
               <Form.Label className="mb-3 h5">Is the specimen endemic to the area?</Form.Label>
               <Form.Select value={specimenFormData.isEndemic} onChange={handleInputChange} name='isEndemic' placeholder="Endemic" >
                 {
@@ -84,11 +101,11 @@ const NewSpecimenForm = () => {
           </Col>
 
           <Col>
-            <Form.Group className="" >
+            <Form.Group  >
               <Form.Label className="mb-3 h5">Select the type of habitat of the specimen</Form.Label>
-              <Form.Select value={specimenFormData.habitat} onChange={handleInputChange} name='habitat' placeholder="Endemic" >
+              <Form.Select value={specimenFormData.habitat} onChange={handleInputChange} name='habitat' placeholder="Habitat" >
                 {
-                  SPECIMEN_HABITAT.map(elm => <option key={elm} value={elm} >{elm}</option>)
+                  SPECIMEN_HABITAT.map(elm => <option key={elm} value={elm}>{elm}</option>)
                 }
               </Form.Select>
               <br />
@@ -97,16 +114,15 @@ const NewSpecimenForm = () => {
 
         </Row>
 
-        <Form.Group className="" >
+        <Form.Group  >
           <Form.Label className="mb-3 h5">Give a small description of the specimen and its characteristics</Form.Label>
           <Form.Control type="text" as='textarea' rows='5' value={specimenFormData.description} onChange={handleInputChange} name='description' placeholder="Description of the specimen" />
           <br />
         </Form.Group>
 
-        <Form.Group className="" >
-          <Form.Label className="mb-3 h5">Add a set of pictures of the specimen</Form.Label>
-          <Form.Control type="file" name='images' multiple value={specimenFormData.images} onChange={handleFileChange} />
-          <br />
+        <Form.Group className="mb-3" controlId="image">
+          <Form.Label>Add a set of pictures of the specimen</Form.Label>
+          <Form.Control type="file" onChange={handleFileUpload} />
         </Form.Group>
 
         {selectedFiles.length > 0 && (
