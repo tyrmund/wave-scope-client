@@ -1,13 +1,15 @@
-import { Accordion, Container, Spinner, Row, Col, Badge } from "react-bootstrap"
+import { Accordion, Container, Spinner, Row, Col, Badge, Button } from "react-bootstrap"
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useParams, Link, useNavigate } from "react-router-dom"
 import sightingServices from '../../services/sighting.services'
+import './SightingDetailsPage.css'
 
 const SightingDetailsPage = () => {
 
   const [isLoading, setIsLoading] = useState(true)
   const [sighting, setSighting] = useState({})
   const { sightingId } = useParams()
+  const navigate = useNavigate()
 
   useEffect(() => {
     loadSightingDetails()
@@ -22,6 +24,16 @@ const SightingDetailsPage = () => {
         setIsLoading(false)
       })
       .catch(err => console.log(err))
+  }
+
+  const deleteSighting = () => {
+
+    console.log(`Deleting sighting id: ${sighting._id}`)
+    // sightingServices
+    // .deleteSighting(sighting._id)
+    // .then(navigate('/sightings'))
+    // .catch(err => console.log(err))
+
   }
 
   return (
@@ -45,7 +57,7 @@ const SightingDetailsPage = () => {
             </Row>
             <Row>
               <Col md={{ span: 6, offset: 3 }}>
-                <Accordion className="mt-3 shadow-lg">
+                <Accordion className="mt-3 mb-5 shadow-lg sand-colored">
                   <Accordion.Item eventKey="0">
                     <Accordion.Header>{sighting.specimen.commonName}&nbsp;<i>({sighting.specimen.scientificName})</i></Accordion.Header>
                     <Accordion.Body>
@@ -81,6 +93,21 @@ const SightingDetailsPage = () => {
                       <hr />
                       <p>Confirmations: {sighting.confirmations}</p>
                       <p>Rejections: {sighting.rejections}</p>
+                    </Accordion.Body>
+                  </Accordion.Item>
+                  <Accordion.Item eventKey="3">
+                    <Accordion.Header>Options</Accordion.Header>
+                    <Accordion.Body>
+                      <Row>
+                        <Col md={{ span: 2 }}>
+                          <Link to={`/sightings/edit/${sighting._id}`}>
+                            <Button className="custom-color-button">Edit</Button>
+                          </Link>
+                        </Col>
+                        <Col md={{ span: 2, offset: 1 }}>
+                          <Button className="delete-color-button">Delete</Button>
+                        </Col>
+                      </Row>
                     </Accordion.Body>
                   </Accordion.Item>
                 </Accordion>

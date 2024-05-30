@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
-import { Form, Row, InputGroup, Button, Col } from "react-bootstrap"
+import { Form, Row, InputGroup, Button, Col, Card } from "react-bootstrap"
+import './NewBeachForm'
 
-const BusStopGroup = ({ index, handleBusStopChange }) => {
+const BusStopGroup = ({ index, handleBusStopChange, deleteBusStop }) => {
 
     const [busStopData, setBusStopData] = useState({
         name: "",
@@ -45,74 +46,79 @@ const BusStopGroup = ({ index, handleBusStopChange }) => {
         setLinesData(newLine)
     }
 
-
-
+    const handleDeleteButton = (_, index) => {
+        deleteBusStop(index)
+    }
 
     return (
-        <Form.Group className="mb-3" >
-            <Row className="mb-3">
-                <Form.Group as={Col} md="4" controlId="validationCustom01">
-                    <Form.Label className="h6">Name</Form.Label>
-                    <Form.Control
-                        required
-                        type=""
-                        name="name"
-                        placeholder="Name"
-                        value={busStopData.name}
-                        onChange={handleBusStop}
-                    />
-                    <br />
-                </Form.Group>
+        <Card className="BusStopGroup mb-3" >
 
-                <Form.Group as={Col} md="4" controlId="validationCustom01">
-                    <Form.Label className="h6">Latitude</Form.Label>
-                    <Form.Control
-                        required
-                        placeholder="Ex. 28.0000001"
-                        name="latitude"
-                        value={busStopData.latitude}
-                        onChange={handleBusStop}
-                    />
-                    <br />
-                </Form.Group>
-                <Form.Group as={Col} md="4" controlId="validationCustom01">
-                    <Form.Label className="h6">Longitude</Form.Label>
-                    <Form.Control
-                        required
-                        placeholder="Ex. -15.0000001"
-                        name="longitude"
-                        value={busStopData.longitude}
-                        onChange={handleBusStop}
-                    />
-                    <br />
-                </Form.Group>
-            </Row>
-            <Row>
-                <Form.Group as={Col} md="3" controlId="validationCustom01">
-                    <Form.Label className="h6">Lines</Form.Label>
-                    {
-                        linesData.map((line, index) => {
-                            return (
-                                <InputGroup key={index}>
-                                    <Button as={Col} size="sm" md="2" className="btn-danger" onClick={(event) => handleDeleteLine(event, index)}>-</Button>
-                                    <Form.Control
-                                        required
-                                        type="text"
-                                        name="line"
-                                        placeholder="Ex. 25"
-                                        value={line}
-                                        onChange={(event) => handleLineInput(event, index)}
-                                    />
-                                </InputGroup>
-                            )
-                        })
-                    }
-                    <br />
-                    <Button as={Col} onClick={handleNewLine} size="sm" md="2" >+</Button>
-                </Form.Group>
-            </Row>
+            <Form.Group className="mb-3" >
+                <Row className="mb-3">
+                    <Form.Group as={Col} md="4" controlId="validationCustom01">
+                        <Form.Label className="h6">Name</Form.Label>
+                        <Form.Control
+                            required
+                            type=""
+                            name="name"
+                            placeholder="Name"
+                            value={busStopData.name}
+                            onChange={handleBusStop}
+                        />
+                        <br />
+                    </Form.Group>
 
-        </Form.Group>
+                    <Form.Group as={Col} md="4" controlId="validationCustom01">
+                        <Form.Label className="h6">Latitude</Form.Label>
+                        <Form.Control
+                            required
+                            placeholder="Ex. 28.0000001"
+                            name="latitude"
+                            value={busStopData.latitude}
+                            onChange={handleBusStop}
+                        />
+                        <br />
+                    </Form.Group>
+                    <Form.Group as={Col} md="4" controlId="validationCustom01">
+                        <Form.Label className="h6">Longitude</Form.Label>
+                        <Form.Control
+                            required
+                            placeholder="Ex. -15.0000001"
+                            name="longitude"
+                            value={busStopData.longitude}
+                            onChange={handleBusStop}
+                        />
+                        <br />
+                    </Form.Group>
+                </Row>
+                <Row>
+                    <Form.Group as={Col} md="3" controlId="validationCustom01">
+                        <Form.Label className="h6">Lines</Form.Label>
+                        {
+                            linesData.map((line, index) => {
+                                return (
+                                    <InputGroup key={index}>
+                                        <Button as={Col} size="sm" md="2" className="delete-color-button" onClick={(event) => handleDeleteLine(event, index)}>-</Button>
+                                        <Form.Control
+                                            required
+                                            type="text"
+                                            name="line"
+                                            placeholder="Ex. 25"
+                                            value={line}
+                                            onChange={(event) => handleLineInput(event, index)}
+                                        />
+                                    </InputGroup>
+                                )
+                            })
+                        }
+                        <Button className="custom-color-button" as={Col} md="2" onClick={handleNewLine} size="sm"  >+</Button>
+                    </Form.Group>
+                </Row>
+
+            </Form.Group>
+            <Button className="delete-color-button" onClick={(event) => handleDeleteButton(event, index)}>Delete this stop</Button>
+
+        </Card >
     )
 }
 
