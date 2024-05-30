@@ -37,10 +37,10 @@ const MarineLifeDetailsPage = () => {
           <Loader />
           :
           <div className="SpecimenDetailsPage">
-            <Carousel >
+            <Carousel className="specimen-carousel">
               {specimen.images.map((image, index) => (
                 <Carousel.Item key={index}>
-                  <img src={image}
+                  <img className="carousel-image" src={image}
                     alt={specimen.commonName} />
                 </Carousel.Item>
               ))}

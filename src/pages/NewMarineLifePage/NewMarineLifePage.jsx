@@ -4,8 +4,8 @@ import NewSpecimenForm from "../../components/NewSpecimenForm/NewSpecimenForm"
 const NewMarineLifePage = () => {
 
   return (
-    <Container className="NewMarineLifePage">
-      <h1>Create a new specimen for our list !</h1>
+    <Container className="NewMarineLifePage text-align-center mt-5 mb-5">
+      <h1 className="text-center mt-3 mb-5">Create a new specimen for our list !</h1>
 
       <NewSpecimenForm />
     </Container>

@@ -1,3 +1,18 @@
+.specimen-carousel {
+  margin-top: 15px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 20px;
+}
+
+
+.carousel-image {
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+}
+
+
 .specimenDetails-titular {
   margin: 5px;
   min-height: 100vh;
