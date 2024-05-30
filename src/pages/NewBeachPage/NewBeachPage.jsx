@@ -1,13 +1,15 @@
+import { Container } from "react-bootstrap"
 import NewBeachForm from "../../components/NewBeachForm/NewBeachForm.jsx"
 
 const NewBeachPage = () => {
 
     return (
-        <div className="NewBeachForm">
-
-            <p>Hola Soy un formulario</p>
+        <Container className="NewBeachPage">
+            <br />
+            <h4>Admin: </h4>
+            <br />
             <NewBeachForm />
-        </div>
+        </Container>
     )
 }
 

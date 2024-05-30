@@ -61,8 +61,8 @@ const SightingDetailsPage = () => {
                       <img className="rounded" src={sighting.beach.images[0]} />
                       <h1 className="fs-5 mt-3">{sighting.beach.name}</h1>
                       <hr />
-                      <p>Length: {sighting.beach.length} m</p>
-                      <p>Soil composition: {sighting.beach.composition}</p>
+                      <p>Coast Length: {sighting.beach.length} m</p>
+                      <p>Soil Composition: {sighting.beach.composition}</p>
                       <h2 className="fs-6">Nearby Bus Stops</h2>
                       {sighting.beach.nearBusStops.map((busStop, index) =>
                         <div key={busStop._id}>
