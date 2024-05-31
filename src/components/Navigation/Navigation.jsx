@@ -17,7 +17,7 @@ const Navigation = () => {
           loggedUser
           &&
           <>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Toggle aria-controls="basic-navbar-nav" className="Navicon" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
                 <Link to="/beaches" className="link">

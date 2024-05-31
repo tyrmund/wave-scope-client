@@ -23,3 +23,20 @@
 #basic-nav-dropdown-toogle.nav-link:hover {
     color: #FFFBEB;
 }
+
+.navbar-collapse {
+    --bs-navbar-color: #FFE63F !important;
+}
+
+.navbar-toggle {
+    color: #FFE63F !important;
+    --bs-border-width: #FFE63F !important;
+}
+
+.navbar-toggle:hover {
+    color: #FFE63F !important;
+}
+
+.Navicon {
+    --bs-navbar-color: #FFE63F !important;
+}

@@ -92,6 +92,9 @@ const BeachDetailsPage = () => {
               </Card.Body>
             </Card>
             <Button className='delete-color-button mb-3' onClick={showConfirmModal}> Delete this beach</Button>
+            <Link to={`/beaches/edit/${beachId}`}>
+              <Button className="custom-color-button mb-3">Edit this beach </Button>
+            </Link>
             <ModalConfirm show={show}
               handleClose={handleClose}
               handleConfirm={deleteThisBeach}
