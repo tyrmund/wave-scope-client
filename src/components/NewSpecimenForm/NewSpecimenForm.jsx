@@ -4,7 +4,7 @@ import specimenServices from "../../services/specimen.services"
 import { useNavigate } from "react-router-dom"
 import { AuthContext } from "../../contexts/auth.context"
 import { SPECIMEN_HABITAT, SPECIMEN_ISENDEMIC } from "../../data/lists.data"
-import uploadServices from "../../services/upload.services"
+//import uploadServices from "../../services/upload.services"
 
 
 const NewSpecimenForm = () => {

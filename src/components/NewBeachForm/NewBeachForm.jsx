@@ -50,7 +50,7 @@ const NewBeachForm = () => {
     const handleBeachFormSubmit = e => {
 
         e.preventDefault()
-
+        console.log(beachData)
         beachServices
             .newBeach(beachData)
             .then(() => {
@@ -76,8 +76,9 @@ const NewBeachForm = () => {
                         <Form.Control
                             required
                             type="number"
+                            name="latitude"
                             placeholder="Ex. 28.0000001"
-                            value={beachData.location}
+                            value={beachData.latitude}
                             onChange={handleInputChange}
                         />
                         <br />
@@ -87,8 +88,9 @@ const NewBeachForm = () => {
                         <Form.Control
                             required
                             type="number"
+                            name="longitude"
                             placeholder="Ex. -15.0000001"
-                            value={beachData.location}
+                            value={beachData.longitude}
                             onChange={handleInputChange}
                         />
                     </Form.Group>
@@ -116,6 +118,7 @@ const NewBeachForm = () => {
                         <Form.Label className="h6">Composition</Form.Label>
                         <Form.Select
                             value={beachData.composition}
+                            name="composition"
                             onChange={handleInputChange}>
                             {
                                 BEACH_COMPOSITION.map((elm, index) => <option key={index} value={elm}>{elm}</option>)

@@ -36,7 +36,7 @@ const AppRoutes = () => {
 
           <Route path={"/beaches"} element={<BeachesPage />} />
           <Route path={"/beaches/:beachId"} element={<BeachDetailsPage />} />
-          <Route path={"/new-beach"} element={<NewBeachForm />} />
+          <Route path={"/beaches/new"} element={<NewBeachForm />} />
 
           <Route path={"/marine-life"} element={<MarineLifePage />} />
           <Route path={"/marine-life/:specimenId"} element={<MarineLifeDetailsPage />} />
