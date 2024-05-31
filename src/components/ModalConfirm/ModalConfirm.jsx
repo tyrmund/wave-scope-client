@@ -2,6 +2,7 @@ import { Button, Modal } from 'react-bootstrap'
 
 const ModalConfirm = ({ show, handleClose, handleConfirm, bodyMessage, buttonMessage }) => {
 
+
     return (
         <Modal className="ModalConfirm"
             show={show}

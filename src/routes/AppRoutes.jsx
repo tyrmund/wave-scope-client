@@ -36,21 +36,21 @@ const AppRoutes = () => {
 
           <Route path={"/beaches"} element={<BeachesPage />} />
           <Route path={"/beaches/:beachId"} element={<BeachDetailsPage />} />
-          <Route path={"/beaches/new"} element={<NewBeachForm />} />
 
           <Route path={"/marine-life"} element={<MarineLifePage />} />
           <Route path={"/marine-life/:specimenId"} element={<MarineLifeDetailsPage />} />
-          <Route path={"/marine-life/new"} element={<NewMarineLifePage />} />
           <Route path={"/marine-life/edit/:specimenId"} element={<EditMarineLifePage />} />
 
           <Route path={"/sightings"} element={<SightingsPage />} />
           <Route path={"/sightings/:sightingId"} element={<SightingDetailsPage />} />
-          <Route path={"/sightings/new"} element={<NewSightingPage />} />
           <Route path={"/sightings/edit/:sightingId"} element={<EditSightingPage />} />
 
           <Route path={"/profile"} element={<UserProfilePage />} />
           <Route path={"/profile/edit"} element={<EditUserProfilePage />} />
 
+          <Route path={"/beaches/new"} element={<NewBeachForm />} />
+          <Route path={"/marine-life/new"} element={<NewMarineLifePage />} />
+          <Route path={"/sightings/new"} element={<NewSightingPage />} />
         </Route>
 
         <Route path={"/*"} element={<NotFoundPage />} />
