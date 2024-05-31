@@ -1,11 +1,14 @@
-import { Container } from "react-bootstrap"
-
+import { Button, Container } from "react-bootstrap"
 
 const WelcomePage = () => {
+
+
     return (
-        <Container className="WelcomePage" >
-            Holiiiiiiiiiis
-        </Container>
+        <div>
+            <Container className="WelcomePage" >
+
+            </Container>
+        </div>
     )
 }
 
