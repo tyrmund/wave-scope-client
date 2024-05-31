@@ -1,8 +1,8 @@
 import { Button, Card, Carousel, CardBody } from 'react-bootstrap'
 import './BeachDetailsPage.css'
 import { useState, useEffect } from 'react'
-import ModalDelete from '../../components/ModalDelete/ModalDelete'
-import { useParams, Link } from 'react-router-dom'
+import ModalConfirm from '../../components/ModalConfirm/ModalConfirm'
+import { useParams, Link, useNavigate } from 'react-router-dom'
 import Loader from "../../components/Loader/Loader"
 import beachServices from "../../services/beach.services"
 
@@ -33,6 +33,19 @@ const BeachDetailsPage = () => {
         setIsLoading(false)
       })
       .catch(err => console.log(err))
+  }
+
+  const navigate = useNavigate()
+
+  const deleteThisBeach = () => {
+
+    beachServices
+      .deleteBeach(beachId)
+      .then(() => {
+        handleClose()
+        navigate(`/beaches`)
+      })
+      .catch((error) => console.log(error))
   }
 
   return (
@@ -79,7 +92,11 @@ const BeachDetailsPage = () => {
               </Card.Body>
             </Card>
             <Button className='delete-color-button mb-3' onClick={showConfirmModal}> Delete this beach</Button>
-            <ModalDelete show={show} handleClose={handleClose} />
+            <ModalConfirm show={show}
+              handleClose={handleClose}
+              handleConfirm={deleteThisBeach}
+              bodyMessage={'You will delete this beach'}
+              buttonMessage={'Confirm'} />
           </>
       }
     </div>
