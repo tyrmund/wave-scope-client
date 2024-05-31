@@ -1,8 +1,13 @@
-const EditMarineLifePage = () => {
+import { Container } from "react-bootstrap"
+import EditSpecimenForm from "../../components/EditSpecimenForm/EditSpecimenForm"
+
+const EditMarineLifePage = ({ commonName }) => {
   return (
-    <div className="EditMarineLifePage">
-      <h1>editando un bicho nuevo</h1>
-    </div>
+    <Container className="EditMarineLifePage">
+      <h1>Edit the specimen {commonName}</h1>
+
+      <EditSpecimenForm />
+    </Container>
   )
 }
 

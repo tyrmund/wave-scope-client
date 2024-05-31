@@ -1,33 +1,53 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { Form, Button, Container, Row, Col } from "react-bootstrap"
 import specimenServices from "../../services/specimen.services"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { AuthContext } from "../../contexts/auth.context"
 import { SPECIMEN_HABITAT, SPECIMEN_ISENDEMIC } from "../../data/lists.data"
 import uploadServices from "../../services/upload.services"
 
 
-const NewSpecimenForm = () => {
+const EditSpecimenForm = () => {
 
-  const [specimenFormData, setSpecimenFormData] = useState({
+
+  const { specimenId } = useParams()
+  const navigate = useNavigate()
+  const [loadingImage, setLoadingImage] = useState(true)
+
+  const [editSpecimenData, setEditSpecimenData] = useState({
     commonName: '',
     scientificName: '',
     mediumSize: '',
-    isEndemic: 'Yes',
-    habitat: 'Air',
+    isEndemic: '',
+    habitat: '',
     description: '',
     images: []
   })
 
-  const [loadingImage, setLoadingImage] = useState(false)
+  useEffect(() => {
+    loadSpecimenData()
+  }, [])
 
-  const navigate = useNavigate()
+  const loadSpecimenData = () => {
 
-  const { authenticateUser } = useContext(AuthContext)
+    specimenServices
+      .getOneSpecimen(specimenId)
+      .then(({ data }) => {
+        console.log(data)
+        setEditSpecimenData({
+          ...data,
+          isEndemic: data.isEndemic,
+          habitat: data.habitat
+        })
+        setLoadingImage(false)
+      })
+      .catch(err => console.log(err))
+  }
+
 
   const handleInputChange = e => {
     const { value, name } = e.target
-    setSpecimenFormData({ ...specimenFormData, [name]: value })
+    setEditSpecimenData({ ...editSpecimenData, [name]: value })
   }
 
   const handleFileUpload = (e) => {
@@ -46,7 +66,7 @@ const NewSpecimenForm = () => {
     uploadServices
       .uploadImage(formData)                              //le mandamos un formulario que no es real pero que está guardado en memoria con un campo que lleva la imagen y lo mandamos al servicio de subida
       .then(({ data }) => {
-        setSpecimenFormData({ ...specimenFormData, images: data.cloudinary_urls })
+        setEditSpecimenData({ ...editSpecimenData, images: data.cloudinary_urls })
         setLoadingImage(false)
       })
       .catch(err => {
@@ -61,7 +81,7 @@ const NewSpecimenForm = () => {
     e.preventDefault()
 
     const fullSpecimen = {
-      ...specimenFormData
+      ...setEditSpecimenData
     }
 
     specimenServices
@@ -70,26 +90,26 @@ const NewSpecimenForm = () => {
       .catch(err => console.log(err))
   }
 
-
   return (
+
     <Container className="NewSpecimenForm">
 
       <Form onSubmit={handleSubmit}>
         <Form.Group className="" >
           <Form.Label className="mb-3 h5">Common Name</Form.Label>
-          <Form.Control type="text" value={specimenFormData.commonName} onChange={handleInputChange} name='commonName' placeholder="Ex: Correlimos tridáctilo" />
+          <Form.Control type="text" value={editSpecimenData.commonName} onChange={handleInputChange} name='commonName' placeholder="Ex: Correlimos tridáctilo" />
           <br />
         </Form.Group>
 
         <Form.Group className="" >
           <Form.Label className="mb-3 h5">Scientific Name</Form.Label>
-          <Form.Control type="text" value={specimenFormData.scientificName} onChange={handleInputChange} name='scientificName' placeholder="Ex: Calidris alba" />
+          <Form.Control type="text" value={editSpecimenData.scientificName} onChange={handleInputChange} name='scientificName' placeholder="Ex: Calidris alba" />
           <br />
         </Form.Group>
 
         <Form.Group className="" >
           <Form.Label className="mb-3 h5">Medium size of specimen</Form.Label>
-          <Form.Control type="text" value={specimenFormData.mediumSize} onChange={handleInputChange} name='mediumSize' placeholder="Enter the medium size of the specimen" />
+          <Form.Control type="text" value={editSpecimenData.mediumSize} onChange={handleInputChange} name='mediumSize' placeholder="Enter the medium size of the specimen" />
           <br />
         </Form.Group>
 
@@ -99,7 +119,7 @@ const NewSpecimenForm = () => {
             <Form.Group  >
               <Form.Label className="mb-3 h5">Is the specimen endemic to the area?</Form.Label>
               <Form.Select
-                value={specimenFormData.isEndemic}
+                value={editSpecimenData.isEndemic}
                 name='isEndemic'
                 onChange={handleInputChange} >
                 {
@@ -114,7 +134,7 @@ const NewSpecimenForm = () => {
             <Form.Group  >
               <Form.Label className="mb-3 h5">Select the type of habitat of the specimen</Form.Label>
               <Form.Select
-                value={specimenFormData.habitat}
+                value={editSpecimenData.habitat}
                 name='habitat'
                 onChange={handleInputChange} >
 
@@ -130,7 +150,7 @@ const NewSpecimenForm = () => {
 
         <Form.Group  >
           <Form.Label className="mb-3 h5">Give a small description of the specimen and its characteristics</Form.Label>
-          <Form.Control type="text" as='textarea' rows='5' value={specimenFormData.description} onChange={handleInputChange} name='description' placeholder="Description of the specimen" />
+          <Form.Control type="text" as='textarea' rows='5' value={editSpecimenData.description} onChange={handleInputChange} name='description' placeholder="Description of the specimen" />
           <br />
         </Form.Group>
 
@@ -146,8 +166,7 @@ const NewSpecimenForm = () => {
 
       </Form>
     </Container>
-
   )
 }
 
-export default NewSpecimenForm
+export default EditSpecimenForm

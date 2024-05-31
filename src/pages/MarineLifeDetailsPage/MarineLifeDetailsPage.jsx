@@ -1,6 +1,6 @@
-import { Card, Carousel, Container, Image } from "react-bootstrap"
+import { Button, Card, Carousel, Container, Image } from "react-bootstrap"
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import specimenServices from "../../services/specimen.services"
 import Loader from "../../components/Loader/Loader"
 import './MarineLifeDetailsPage.css'
@@ -56,7 +56,7 @@ const MarineLifeDetailsPage = () => {
 
             </Carousel>
 
-            <Card className="mb-5" style={{ marginLeft: '10px', marginRight: '10px' }}>
+            <Card className="mb-3" style={{ marginLeft: '10px', marginRight: '10px' }}>
               <Card.Body>
                 <Card.Title className="text-center mt-3">{specimen.commonName}</Card.Title>
                 <Card.Subtitle className="mb-5 text-muted text-center">{specimen.scientificName}</Card.Subtitle>
@@ -65,6 +65,10 @@ const MarineLifeDetailsPage = () => {
                 <Card.Text className="Description">{specimen.description}</Card.Text>
               </Card.Body>
             </Card>
+
+            <Link to={`/marine-life/edit/${specimenId}`}>
+              <Button className="custom-color-button mb-5" >Edit this specimen</Button>
+            </Link>
           </Container>
 
       }
