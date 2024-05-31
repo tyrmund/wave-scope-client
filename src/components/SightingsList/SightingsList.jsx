@@ -30,7 +30,7 @@ const SightingsList = () => {
             {isLoading ? <Loader /> :
                 <Row>
                     {sightings.map(sighting =>
-                        <Col key={sighting._id} md={{ span: 4 }}>
+                        <Col key={sighting._id} md="4" >
                             <SightingCard
                                 name={sighting.specimen.commonName}
                                 {...sighting} />

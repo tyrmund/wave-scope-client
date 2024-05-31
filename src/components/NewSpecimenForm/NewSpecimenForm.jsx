@@ -4,7 +4,7 @@ import specimenServices from "../../services/specimen.services"
 import { useNavigate } from "react-router-dom"
 import { AuthContext } from "../../contexts/auth.context"
 import { SPECIMEN_HABITAT, SPECIMEN_ISENDEMIC } from "../../data/lists.data"
-//import uploadServices from "../../services/upload.services"
+import uploadServices from "../../services/upload.services"
 
 
 const NewSpecimenForm = () => {
@@ -13,8 +13,8 @@ const NewSpecimenForm = () => {
     commonName: '',
     scientificName: '',
     mediumSize: '',
-    isEndemic: '',
-    habitat: '',
+    isEndemic: 'Yes',
+    habitat: 'Air',
     description: ''
   })
 
@@ -31,29 +31,22 @@ const NewSpecimenForm = () => {
     setSpecimenFormData({ ...specimenFormData, [name]: value })
   }
 
-  // const handleFileChange = e => {
-  //   setSelectedFiles(Array.from(e.target.files))
-  // }
-
   const handleFileUpload = (e) => {
 
     setLoadingImage(true)
 
-    const formData = new FormData()                        //creando un formulario en la memoria del equipo con new FormData() y puede tener todos los campos que quiera
+    //creando un formulario en la memoria del equipo con new FormData() y puede tener todos los campos que quiera
     //en esta línea estamos creando un nuevo campo de este nuevo formulario y le estamos dando como target del evento la primera de las files, los inputs de tipo file tienen una propiedad .files dentro de su target (un array con imágenes seleccionadas)
-    selectedFiles.forEach(eachFile => {
-      formData.append('imageData', eachFile)
-    })
+
+    const formData = new FormData()
+
+    for (let i = 0; i < e.target.files.length; i++) {
+      formData.append('imageData', e.target.files[i])
+    }
 
     uploadServices
-      .uploadimage(formData)                                                         //le mandamos un formulario que no es real pero que está guardado en memoria con un campo que lleva la imagen y lo mandamos al servicio de subida
+      .uploadImage(formData)                                                         //le mandamos un formulario que no es real pero que está guardado en memoria con un campo que lleva la imagen y lo mandamos al servicio de subida
       .then(({ data }) => {
-
-        // console.log(data)
-        // const updatedFiles = [...selectedFiles]
-        // updatedFiles.push(data.cloudinary_url)
-        // setSelectedFiles(updatedFiles)
-
         setSelectedFiles(data.cloudinary_url)
         console.log(selectedFiles)
         setLoadingImage(false)
@@ -108,9 +101,12 @@ const NewSpecimenForm = () => {
 
             <Form.Group  >
               <Form.Label className="mb-3 h5">Is the specimen endemic to the area?</Form.Label>
-              <Form.Select value={specimenFormData.isEndemic} onChange={handleInputChange} name='isEndemic' placeholder="Endemic" >
+              <Form.Select
+                defaultValue={specimenFormData.isEndemic}
+                name='isEndemic'
+                onChange={handleInputChange} >
                 {
-                  SPECIMEN_ISENDEMIC.map(elm => <option key={elm} value={elm}>{elm}</option>)
+                  SPECIMEN_ISENDEMIC.map((elm, index) => <option key={index} value={elm}>{elm}</option>)
                 }
               </Form.Select>
               <br />
@@ -120,9 +116,13 @@ const NewSpecimenForm = () => {
           <Col>
             <Form.Group  >
               <Form.Label className="mb-3 h5">Select the type of habitat of the specimen</Form.Label>
-              <Form.Select value={specimenFormData.habitat} onChange={handleInputChange} name='habitat' placeholder="Habitat" >
+              <Form.Select
+                defaultValue={specimenFormData.habitat}
+                name='habitat'
+                onChange={handleInputChange} >
+
                 {
-                  SPECIMEN_HABITAT.map(elm => <option key={elm} value={elm}>{elm}</option>)
+                  SPECIMEN_HABITAT.map((elm, index) => <option key={index} value={elm}>{elm}</option>)
                 }
               </Form.Select>
               <br />
