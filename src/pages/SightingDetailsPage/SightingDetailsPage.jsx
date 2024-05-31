@@ -2,12 +2,14 @@ import { Accordion, Container, Spinner, Row, Col, Badge, Button } from "react-bo
 import { useEffect, useState } from "react"
 import { useParams, Link, useNavigate } from "react-router-dom"
 import sightingServices from '../../services/sighting.services'
+import ModalConfirm from "../../components/ModalConfirm/ModalConfirm"
 import './SightingDetailsPage.css'
 
 const SightingDetailsPage = () => {
 
   const [isLoading, setIsLoading] = useState(true)
   const [sighting, setSighting] = useState({})
+  const [modalShow, setModalShow] = useState(false)
   const { sightingId } = useParams()
   const navigate = useNavigate()
 
@@ -26,9 +28,13 @@ const SightingDetailsPage = () => {
       .catch(err => console.log(err))
   }
 
+  const handleModalClose = () => setModalShow(false)
+  const handleModalShow = () => setModalShow(true)
+
   const deleteSighting = () => {
 
     console.log(`Deleting sighting id: ${sighting._id}`)
+    navigate('/sightings')
     // sightingServices
     // .deleteSighting(sighting._id)
     // .then(navigate('/sightings'))
@@ -105,7 +111,10 @@ const SightingDetailsPage = () => {
                           </Link>
                         </Col>
                         <Col md={{ span: 2, offset: 1 }}>
-                          <Button className="delete-color-button">Delete</Button>
+                          <Button
+                            className="delete-color-button"
+                            onClick={handleModalShow}>
+                            Delete</Button>
                         </Col>
                       </Row>
                     </Accordion.Body>
@@ -113,6 +122,12 @@ const SightingDetailsPage = () => {
                 </Accordion>
               </Col>
             </Row>
+            <ModalConfirm
+              show={modalShow}
+              handleClose={handleModalClose}
+              handleConfirm={deleteSighting}
+              bodyMessage={'This will delete the current sighting.'}
+              buttonMessage={'Confirm'} />
           </Container>
       }
     </div>
