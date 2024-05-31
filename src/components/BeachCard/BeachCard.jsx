@@ -1,4 +1,4 @@
-import { Card, Button } from 'react-bootstrap'
+import { Card, Button, Row, Col } from 'react-bootstrap'
 import { Link } from "react-router-dom"
 import './BeachCard.css'
 
@@ -17,12 +17,18 @@ const BeachCard = ({ name, images, length, composition, _id }) => {
                 </Link>
                 <Card.Body >
                     <Card.Title>{name}</Card.Title>
-                    <Card.Text >
-                        {length} m
-                    </Card.Text>
-                    <Card.Text >
-                        {composition}
-                    </Card.Text>
+                    <Row>
+                        <Col md="5" className="mb-5">
+                            <Card.Text >
+                                Longitude: {length} m
+                            </Card.Text>
+                        </Col>
+                        <Col md="6" className="mb-5">
+                            <Card.Text >
+                                Texture: {composition}
+                            </Card.Text>
+                        </Col>
+                    </Row>
                     <Link to={`/beaches/${_id}`}>
                         <Button className='custom-color-button' size="md" >
                             More info

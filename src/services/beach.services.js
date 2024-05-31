@@ -7,6 +7,17 @@ class BeachServices {
         this.axiosApp = axios.create({
             baseURL: `${import.meta.env.VITE_API_URL}/api/beaches`
         })
+
+        this.axiosApp.interceptors.request.use(config => {
+
+            const storedToken = localStorage.getItem('authToken');
+
+            if (storedToken) {
+                config.headers = { Authorization: `Bearer ${storedToken}` };
+            }
+
+            return config
+        })
     }
 
     getAllBeaches() {

@@ -1,12 +1,14 @@
 import { Accordion, Container, Spinner, Row, Col, Badge, Button } from "react-bootstrap"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useParams, Link, useNavigate } from "react-router-dom"
+import { AuthContext } from "../../contexts/auth.context"
 import sightingServices from '../../services/sighting.services'
 import ModalConfirm from "../../components/ModalConfirm/ModalConfirm"
 import './SightingDetailsPage.css'
 
 const SightingDetailsPage = () => {
 
+  const { loggedUser } = useContext(AuthContext)
   const [isLoading, setIsLoading] = useState(true)
   const [sighting, setSighting] = useState({})
   const [modalShow, setModalShow] = useState(false)
@@ -33,12 +35,10 @@ const SightingDetailsPage = () => {
 
   const deleteSighting = () => {
 
-    console.log(`Deleting sighting id: ${sighting._id}`)
-    navigate('/sightings')
-    // sightingServices
-    // .deleteSighting(sighting._id)
-    // .then(navigate('/sightings'))
-    // .catch(err => console.log(err))
+    sightingServices
+      .deleteSighting(sighting._id)
+      .then(navigate('/sightings'))
+      .catch(err => console.log(err))
 
   }
 
@@ -101,24 +101,26 @@ const SightingDetailsPage = () => {
                       <p>Rejections: {sighting.rejections}</p>
                     </Accordion.Body>
                   </Accordion.Item>
-                  <Accordion.Item eventKey="3">
-                    <Accordion.Header>Options</Accordion.Header>
-                    <Accordion.Body>
-                      <Row>
-                        <Col md={{ span: 2 }}>
-                          <Link to={`/sightings/edit/${sighting._id}`}>
-                            <Button className="custom-color-button">Edit</Button>
-                          </Link>
-                        </Col>
-                        <Col md={{ span: 2, offset: 1 }}>
-                          <Button
-                            className="delete-color-button"
-                            onClick={handleModalShow}>
-                            Delete</Button>
-                        </Col>
-                      </Row>
-                    </Accordion.Body>
-                  </Accordion.Item>
+                  {loggedUser._id === sighting.user._id &&
+                    <Accordion.Item eventKey="3">
+                      <Accordion.Header>Options</Accordion.Header>
+                      <Accordion.Body>
+                        <Row>
+                          <Col md={{ span: 2 }}>
+                            <Link to={`/sightings/edit/${sighting._id}`}>
+                              <Button className="custom-color-button">Edit</Button>
+                            </Link>
+                          </Col>
+                          <Col md={{ span: 2, offset: 1 }}>
+                            <Button
+                              className="delete-color-button"
+                              onClick={handleModalShow}>
+                              Delete</Button>
+                          </Col>
+                        </Row>
+                      </Accordion.Body>
+                    </Accordion.Item>
+                  }
                 </Accordion>
               </Col>
             </Row>

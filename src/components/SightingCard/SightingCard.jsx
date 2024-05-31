@@ -12,6 +12,7 @@ const SightingCard = ({ _id, image, name, createdAt }) => {
                 <Card.Body>
                     <Card.Title>{name}</Card.Title>
                     <Card.Text>Time of sighting: {createdAt.substring(8, 10)}/{createdAt.substring(5, 7)}/{createdAt.substring(0, 4)}</Card.Text>
+                    {/* <Card.Text>New addition!</Card.Text> */}
                     <Link style={{ textDecoration: 'none' }} to={`/sightings/${_id}`}>
                         <Button className="custom-color-button" variant="secondary">Details</Button>
                     </Link>

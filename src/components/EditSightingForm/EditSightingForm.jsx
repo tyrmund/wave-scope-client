@@ -1,22 +1,26 @@
 import { useEffect, useState, useContext } from "react"
 import { Form, Button, Row, Col } from "react-bootstrap"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 
 import beachServices from "../../services/beach.services"
 import specimenServices from "../../services/specimen.services"
 import sightingServices from "../../services/sighting.services"
 import Loader from "../Loader/Loader"
 
-const NewSightingForm = () => {
+const EditSightingForm = () => {
 
     const [beachesLoading, setBeachesLoading] = useState(true)
     const [specimensLoading, setSpecimensLoading] = useState(true)
+    const [sightingLoading, setSightingLoading] = useState(true)
+
     const [beaches, setBeaches] = useState()
     const [specimens, setSpecimens] = useState()
     const [onSite, setOnsite] = useState(false)
+
+    const { sightingId } = useParams()
     const navigate = useNavigate()
 
-    const [newSighting, setNewSighting] = useState({
+    const [sightingData, setSightingData] = useState({
         image: '',
         latitude: 0,
         longitude: 0,
@@ -50,11 +54,30 @@ const NewSightingForm = () => {
             })
             .catch(err => console.log(err))
 
+        sightingServices
+            .getOneSighting(sightingId)
+            .then(({ data }) => {
+                setSightingData({
+                    image: data.image,
+                    latitude: data.location.coordinates[1],
+                    longitude: data.location.coordinates[0],
+                    beach: data.beach._id,
+                    specimen: data.specimen._id,
+                    user: data.user._id,
+                    comment: data.comment,
+                    confirmations: data.confirmations,
+                    rejections: data.rejections
+                })
+                console.log(data)
+                setSightingLoading(false)
+            })
+            .catch(err => console.log(err))
+
     }
 
     const handleFormChange = e => {
         const { name, value } = e.target
-        setNewSighting({ ...newSighting, [name]: value })
+        setSightingData({ ...sightingData, [name]: value })
     }
 
     const handleSwitchChange = e => {
@@ -68,8 +91,8 @@ const NewSightingForm = () => {
 
     const showPos = (pos) => {
 
-        newSighting.latitude = pos.coords.latitude
-        newSighting.longitude = pos.coords.longitude
+        sightingData.latitude = pos.coords.latitude
+        sightingData.longitude = pos.coords.longitude
     }
 
     const handleSubmitSightingForm = e => {
@@ -82,22 +105,22 @@ const NewSightingForm = () => {
 
         } else {
 
-            const selectedBeach = beaches.find(beach => beach._id = newSighting.beach)
-            newSighting.latitude = selectedBeach.location.coordinates[0]
-            newSighting.longitude = selectedBeach.location.coordinates[1]
+            const selectedBeach = beaches.find(beach => beach._id = sightingData.beach)
+            sightingData.latitude = selectedBeach.location.coordinates[0]
+            sightingData.longitude = selectedBeach.location.coordinates[1]
 
         }
 
         sightingServices
-            .newSighting(newSighting)
+            .editSighting(sightingId, sightingData)
             .then(navigate('/sightings'))
             .catch(err => console.log(err))
 
     }
 
     return (
-        <div className="NewSightingForm">
-            {(beachesLoading || specimensLoading) ? <Loader /> :
+        <div className="EditSightingForm">
+            {(beachesLoading || specimensLoading || sightingLoading) ? <Loader /> :
                 <Form onSubmit={handleSubmitSightingForm} className="mt-5 mb-5">
                     <Row>
                         <Form.Group as={Col} xs={{ span: 6, offset: 3 }} md={{ span: 5 }} className="m-3">
@@ -105,7 +128,7 @@ const NewSightingForm = () => {
                             <Form.Select
                                 required
                                 name="beach"
-                                value={newSighting.beach}
+                                value={sightingData.beach}
                                 onChange={handleFormChange}
                                 aria-label="Default select example">
                                 <option>Beaches</option>
@@ -120,7 +143,7 @@ const NewSightingForm = () => {
                             <Form.Select
                                 required
                                 name="specimen"
-                                value={newSighting.specimen}
+                                value={sightingData.specimen}
                                 onChange={handleFormChange}
                                 aria-label="Default select example">
                                 <option>Specimens</option>
@@ -145,7 +168,7 @@ const NewSightingForm = () => {
                             <Form.Control
                                 type="text"
                                 name="image"
-                                value={newSighting.image}
+                                value={sightingData.image}
                                 onChange={handleFormChange}
                                 placeholder="http://www.example.com" />
                         </Form.Group>
@@ -158,7 +181,7 @@ const NewSightingForm = () => {
                             rows="5"
                             name="comment"
                             type="text"
-                            value={newSighting.comment}
+                            value={sightingData.comment}
                             onChange={handleFormChange}
                             placeholder="Cero trolleo por aquí, gracias" />
                     </Form.Group>
@@ -173,4 +196,4 @@ const NewSightingForm = () => {
 
 }
 
-export default NewSightingForm
+export default EditSightingForm

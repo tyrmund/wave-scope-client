@@ -18,7 +18,7 @@ const Navigation = () => {
           loggedUser
           &&
           <>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={() => setExpanded(!expanded)} />
+            <Navbar.Toggle aria-controls="basic-navbar-nav" className="Navicon" onClick={() => setExpanded(!expanded)} />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
                 <Link to="/beaches" className="link" onClick={() => setExpanded(true)}>
