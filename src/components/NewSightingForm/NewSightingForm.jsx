@@ -15,7 +15,6 @@ const NewSightingForm = () => {
     const [beaches, setBeaches] = useState()
     const [specimens, setSpecimens] = useState()
     const [onSite, setOnsite] = useState(false)
-
     const navigate = useNavigate()
 
     const [newSighting, setNewSighting] = useState({

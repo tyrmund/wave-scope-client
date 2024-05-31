@@ -4,8 +4,11 @@ import { useState } from "react"
 import beachServices from "../../services/beach.services"
 import { BEACH_COMPOSITION } from "../../data/lists.data"
 import BusStopGroup from "./BusStopGroup"
+import { useNavigate } from "react-router-dom"
 
 const NewBeachForm = () => {
+
+    const navigate = useNavigate()
 
     const [beachData, setBeachData] = useState({
         name: '',
@@ -13,7 +16,7 @@ const NewBeachForm = () => {
         longitude: 0,
         description: '',
         length: 1,
-        composition: '',
+        composition: 'Sand',
         sectors: 1
     })
 
@@ -25,7 +28,6 @@ const NewBeachForm = () => {
         const busStopsCopy = [...busStops]
         busStopsCopy[idx] = busStopInfo
         setBusStops(busStopsCopy)
-        console.log(busStopsCopy)
     }
 
     const addNewBusStop = () => {
@@ -58,6 +60,7 @@ const NewBeachForm = () => {
             })
             .catch(err => console.log(err))
     }
+
 
     return (
 
@@ -119,7 +122,8 @@ const NewBeachForm = () => {
                         <Form.Select
                             value={beachData.composition}
                             name="composition"
-                            onChange={handleInputChange}>
+                            onChange={handleInputChange}
+                            aria-label="Default select example">
                             {
                                 BEACH_COMPOSITION.map((elm, index) => <option key={index} value={elm}>{elm}</option>)
                             }
