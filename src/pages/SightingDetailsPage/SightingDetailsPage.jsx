@@ -126,7 +126,8 @@ const SightingDetailsPage = () => {
               show={modalShow}
               handleClose={handleModalClose}
               handleConfirm={deleteSighting}
-              bodyMessage={'This will delete the current sighting.'}
+              titleMessage={'Confirm deletion'}
+              bodyMessage={'This will remove the current sighting.'}
               buttonMessage={'Confirm'} />
           </Container>
       }

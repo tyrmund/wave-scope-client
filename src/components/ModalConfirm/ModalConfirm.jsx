@@ -1,13 +1,19 @@
 import { Button, Modal } from 'react-bootstrap'
 
-const ModalConfirm = ({ show, handleClose, handleConfirm, bodyMessage, buttonMessage }) => {
+const ModalConfirm = ({
+    show,
+    handleClose,
+    handleConfirm,
+    titleMessage,
+    bodyMessage,
+    buttonMessage }) => {
 
     return (
         <Modal className="ModalConfirm"
             show={show}
             onHide={handleClose}>
             <Modal.Header closeButton>
-                <Modal.Title>Are you sure?</Modal.Title>
+                <Modal.Title>{titleMessage}</Modal.Title>
             </Modal.Header>
             <Modal.Body>{bodyMessage}</Modal.Body>
             <Modal.Footer>

@@ -5,7 +5,7 @@ const SightingCard = ({ _id, image, name, createdAt }) => {
 
     return (
         <div className="SightingCard">
-            <Card className="m-3">
+            <Card className="m-3" style={{ border: 'none' }}>
                 <Link to={`/sightings/${_id}`}>
                     <Card.Img style={{ height: '300px', objectFit: 'cover' }} variant="top" src={image} alt={name} />
                 </Link>
