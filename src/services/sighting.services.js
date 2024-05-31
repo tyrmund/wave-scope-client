@@ -7,6 +7,17 @@ class SightingServices {
         this.axiosApp = axios.create({
             baseURL: `${import.meta.env.VITE_API_URL}/api/sightings`
         })
+
+        this.axiosApp.interceptors.request.use(config => {
+
+            const storedToken = localStorage.getItem('authToken');
+
+            if (storedToken) {
+                config.headers = { Authorization: `Bearer ${storedToken}` };
+            }
+
+            return config
+        })
     }
 
     getAllSightings() {

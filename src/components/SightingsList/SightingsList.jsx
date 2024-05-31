@@ -38,7 +38,7 @@ const SightingsList = () => {
                     )}
                 </Row>
             }
-        </div >
+        </div>
     )
 
 }

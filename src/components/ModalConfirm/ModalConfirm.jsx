@@ -8,7 +8,6 @@ const ModalConfirm = ({
     bodyMessage,
     buttonMessage }) => {
 
-
     return (
         <Modal className="ModalConfirm"
             show={show}
