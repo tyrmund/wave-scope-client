@@ -16,8 +16,6 @@ const NewSightingForm = () => {
     const [specimens, setSpecimens] = useState()
     const [onSite, setOnsite] = useState(false)
 
-    const { loggedUser } = useContext(AuthContext)
-
     const navigate = useNavigate()
 
     const [newSighting, setNewSighting] = useState({
@@ -80,8 +78,6 @@ const NewSightingForm = () => {
 
         e.preventDefault()
 
-        newSighting.user = loggedUser._id
-
         if (onSite) {
 
             navigator.geolocation.getCurrentPosition(showPos, showErr)
@@ -94,11 +90,10 @@ const NewSightingForm = () => {
 
         }
 
-        console.log(newSighting)
-        // sightingServices
-        //     .newSighting({ newSighting })
-        //     .then(navigate('/sightings'))
-        //     .catch(err => console.log(err))
+        sightingServices
+            .newSighting({ newSighting })
+            .then(navigate('/sightings'))
+            .catch(err => console.log(err))
 
     }
 

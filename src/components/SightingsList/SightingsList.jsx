@@ -25,8 +25,6 @@ const SightingsList = () => {
 
     }
 
-    console.log(sightings)
-
     return (
         <div className="SightingsList">
             {isLoading ? <Loader /> :
