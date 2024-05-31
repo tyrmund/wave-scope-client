@@ -1,16 +1,3 @@
-.delete-color-button:hover {
-    background-color: #023047 !important;
-    border: #023047 !important;
-    color: #FFFBEB !important;
-    margin-right: 20px;
-}
-
-.delete-color-button {
-    background-color: #FFE63F !important;
-    border: #FFE63F !important;
-    color: #023047 !important;
-}
-
 .BeachDetailsCard {
     width: 90%;
     margin: auto auto;

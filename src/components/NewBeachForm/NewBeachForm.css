@@ -9,17 +9,3 @@
     border-color: #9CE6DE !important;
 
 }
-
-
-.delete-color-button:hover {
-    background-color: #023047 !important;
-    border: #023047 !important;
-    color: #FFFBEB !important;
-}
-
-.delete-color-button {
-    background-color: #FFE63F !important;
-    border: #FFE63F !important;
-    color: #023047 !important;
-    margin-left: 10%;
-}
