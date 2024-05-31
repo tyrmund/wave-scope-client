@@ -1,4 +1,4 @@
-import { Card, Carousel, Image } from "react-bootstrap"
+import { Card, Carousel, Container, Image } from "react-bootstrap"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import specimenServices from "../../services/specimen.services"
@@ -7,8 +7,17 @@ import './MarineLifeDetailsPage.css'
 
 const MarineLifeDetailsPage = () => {
 
+
+  const [specimen, setSpecimen] = useState({
+    commonName: '',
+    scientificName: '',
+    mediumSize: '',
+    isEndemic: '',
+    habitat: '',
+    description: ''
+  })
+
   const [isLoading, setIsLoading] = useState(true)
-  const [specimen, setSpecimen] = useState({})
   const { specimenId } = useParams()
 
 
@@ -36,7 +45,7 @@ const MarineLifeDetailsPage = () => {
           ?
           <Loader />
           :
-          <div className="SpecimenDetailsPage">
+          <Container className="SpecimenDetailsPage mt-3">
             <Carousel className="specimen-carousel">
               {specimen.images.map((image, index) => (
                 <Carousel.Item key={index}>
@@ -47,24 +56,16 @@ const MarineLifeDetailsPage = () => {
 
             </Carousel>
 
-            <div className="specimenDetails-titular mt-3">
-              <h1>{specimen.commonName}</h1>
-              <h2>{specimen.scientificName}</h2>
+            <Card className="mb-5" style={{ marginLeft: '10px', marginRight: '10px' }}>
+              <Card.Body>
+                <Card.Title className="text-center mt-3">{specimen.commonName}</Card.Title>
+                <Card.Subtitle className="mb-5 text-muted text-center">{specimen.scientificName}</Card.Subtitle>
+                <Card.Text className="Description">Medium size: {specimen.mediumSize} | Endemic: {specimen.isEndemic} | Usual habitat: {specimen.habitat}</Card.Text>
 
-            </div>
-          </div>
-
-
-        // <Card style={{ width: '18rem' }}>
-        //   <Card.Body >
-        //     <Image src={specimen.images[0]} />
-        //     <Card.Title className="text-center mt-3">{specimen.commonName}</Card.Title>
-        //     <Card.Subtitle className="mb-2 text-muted text-center">{specimen.scientificName}</Card.Subtitle>
-        //     <Card.Text className="mt-5">
-        //       {specimen.description}
-        //     </Card.Text>
-        //   </Card.Body>
-        // </Card>
+                <Card.Text className="Description">{specimen.description}</Card.Text>
+              </Card.Body>
+            </Card>
+          </Container>
 
       }
     </>

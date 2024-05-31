@@ -1,4 +1,4 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap"
 import { AuthContext } from "../../contexts/auth.context"
 import "./Navigation.css"
@@ -8,28 +8,29 @@ import { Link } from "react-router-dom"
 const Navigation = () => {
 
   const { logout, loggedUser } = useContext(AuthContext)
+  const [expanded, setExpanded] = useState(true)
 
   return (
-    <Navbar expand="lg" className="Navbar">
+    <Navbar expand="lg" className="Navbar" expanded={!expanded}>
       <Container>
-        <Navbar.Brand href="/welcome">WaveScope</Navbar.Brand>
+        <Navbar.Brand href="/welcome" >WaveScope</Navbar.Brand>
         {
           loggedUser
           &&
           <>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={() => setExpanded(!expanded)} />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
-                <Link to="/beaches" className="link">
+                <Link to="/beaches" className="link" onClick={() => setExpanded(true)}>
                   <Nav.Link as="span">Beaches</Nav.Link>
                 </Link>
-                <Link to="/marine-life" className="link">
+                <Link to="/marine-life" className="link" onClick={() => setExpanded(true)}>
                   <Nav.Link as="span">Marine Life</Nav.Link>
                 </Link>
-                <Link to="/sightings" className="link">
+                <Link to="/sightings" className="link" onClick={() => setExpanded(true)}>
                   <Nav.Link as="span">Sightings</Nav.Link>
                 </Link>
-                <Link to={'/profile'} className="nav-link">Profile</Link>
+                <Link to={'/profile'} className="nav-link" onClick={() => setExpanded(true)}>Profile</Link>
                 <Nav.Link onClick={logout}>Logout</Nav.Link>
               </Nav>
             </Navbar.Collapse>

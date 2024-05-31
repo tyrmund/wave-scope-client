@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext, useState } from "react"
 import { Form, Button, Container, Row, Col } from "react-bootstrap"
 import specimenServices from "../../services/specimen.services"
 import { useNavigate } from "react-router-dom"
@@ -15,10 +15,9 @@ const NewSpecimenForm = () => {
     mediumSize: '',
     isEndemic: 'Yes',
     habitat: 'Air',
-    description: ''
+    description: '',
+    images: []
   })
-
-  const [selectedFiles, setSelectedFiles] = useState([])
 
   const [loadingImage, setLoadingImage] = useState(false)
 
@@ -45,16 +44,16 @@ const NewSpecimenForm = () => {
     }
 
     uploadServices
-      .uploadImage(formData)                                                         //le mandamos un formulario que no es real pero que está guardado en memoria con un campo que lleva la imagen y lo mandamos al servicio de subida
+      .uploadImage(formData)                              //le mandamos un formulario que no es real pero que está guardado en memoria con un campo que lleva la imagen y lo mandamos al servicio de subida
       .then(({ data }) => {
-        setSelectedFiles(data.cloudinary_url)
-        console.log(selectedFiles)
+        setSpecimenFormData({ ...specimenFormData, images: data.cloudinary_urls })
         setLoadingImage(false)
       })
       .catch(err => {
         console.log(err)
         setLoadingImage(false)
       })
+
   }
 
   const handleSubmit = e => {
@@ -62,11 +61,9 @@ const NewSpecimenForm = () => {
     e.preventDefault()
 
     const fullSpecimen = {
-      ...specimenFormData,
-      images: selectedFiles
+      ...specimenFormData
     }
 
-    console.log(fullSpecimen)
     specimenServices
       .newSpecimen(fullSpecimen)
       .then(() => navigate('/marine-life'))

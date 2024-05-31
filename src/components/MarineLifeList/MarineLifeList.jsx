@@ -2,7 +2,6 @@ import { Col, Container, Row } from "react-bootstrap"
 import SpecimenCard from "../SpecimenCard/SpecimenCard"
 import { useEffect, useState } from "react"
 import specimenServices from "../../services/specimen.services"
-import { Link } from "react-router-dom"
 import Loader from "./../Loader/Loader"
 
 
@@ -11,9 +10,11 @@ const MarineLifeList = () => {
   const [specimens, setSpecimens] = useState([])
   const [isLoading, setIsLoading] = useState(true)
 
+
   useEffect(() => {
     loadAllSpecimens()
   }, [])
+
 
   const loadAllSpecimens = () => {
 
@@ -40,12 +41,8 @@ const MarineLifeList = () => {
 
                     md={{ span: 4 }}>
 
-                    <Link
-                      style={{ textDecoration: 'none', color: 'black' }}
-                      to={`/marine-life/${specimen._id}`}
-                    >
-                      <SpecimenCard {...specimen} />
-                    </Link>
+                    <SpecimenCard {...specimen} />
+
                   </Col>
                 )
               }

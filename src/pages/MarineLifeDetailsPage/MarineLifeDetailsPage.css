@@ -2,7 +2,7 @@
   margin-top: 15px;
   margin-left: 10px;
   margin-right: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 20px
 }
 
 
@@ -10,12 +10,4 @@
   width: 100%;
   height: 450px;
   object-fit: cover;
-}
-
-
-.specimenDetails-titular {
-  margin: 5px;
-  min-height: 100vh;
-  background-color: white;
-  border-radius: 1;
 }

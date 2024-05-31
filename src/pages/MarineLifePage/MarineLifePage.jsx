@@ -7,9 +7,9 @@ const MarineLifePage = () => {
 
   return (
     <div className="MarineLifePage">
-      <Container className="mt-3 text-center">
+      <Container className="mt-3">
         <Link to={'/marine-life/new'}>
-          <Button>Add a new specimen!</Button>
+          <Button className="custom-color-button">Add a new specimen!</Button>
         </Link>
         <MarineLifeList />
       </Container>
