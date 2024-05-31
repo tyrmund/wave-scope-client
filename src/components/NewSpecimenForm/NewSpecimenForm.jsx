@@ -20,6 +20,8 @@ const NewSpecimenForm = () => {
 
   const [selectedFiles, setSelectedFiles] = useState([])
 
+  const [loadingImage, setLoadingImage] = useState(false)
+
   const navigate = useNavigate()
 
   const { authenticateUser } = useContext(AuthContext)
@@ -33,18 +35,33 @@ const NewSpecimenForm = () => {
   //   setSelectedFiles(Array.from(e.target.files))
   // }
 
-  const handleFileUpload = e => {
+  const handleFileUpload = (e) => {
+
+    setLoadingImage(true)
 
     const formData = new FormData()                        //creando un formulario en la memoria del equipo con new FormData() y puede tener todos los campos que quiera
-    formData.append('imageData', e.target.files[0])        //en esta línea estamos creando un nuevo campo de este nuevo formulario y le estamos dando del target del evento la primera de las files, los inputs de tipo file tienen una propiedad .files dentro de su target (un array con imágenes seleccionadas)
+    //en esta línea estamos creando un nuevo campo de este nuevo formulario y le estamos dando como target del evento la primera de las files, los inputs de tipo file tienen una propiedad .files dentro de su target (un array con imágenes seleccionadas)
+    selectedFiles.forEach(eachFile => {
+      formData.append('imageData', eachFile)
+    })
 
     uploadServices
       .uploadimage(formData)                                                         //le mandamos un formulario que no es real pero que está guardado en memoria con un campo que lleva la imagen y lo mandamos al servicio de subida
       .then(({ data }) => {
-        console.log(data)
-        // setCoasterData({ ...coasterData, imageUrl: res.data.cloudinary_url })
+
+        // console.log(data)
+        // const updatedFiles = [...selectedFiles]
+        // updatedFiles.push(data.cloudinary_url)
+        // setSelectedFiles(updatedFiles)
+
+        setSelectedFiles(data.cloudinary_url)
+        console.log(selectedFiles)
+        setLoadingImage(false)
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        console.log(err)
+        setLoadingImage(false)
+      })
   }
 
   const handleSubmit = e => {
@@ -122,33 +139,13 @@ const NewSpecimenForm = () => {
 
         <Form.Group className="mb-3" controlId="image">
           <Form.Label>Add a set of pictures of the specimen</Form.Label>
-          <Form.Control type="file" onChange={handleFileUpload} />
+          <Form.Control type="file" multiple onChange={handleFileUpload} />
         </Form.Group>
 
-        {selectedFiles.length > 0 && (
-          <div className="mb-5">
-            <Container >
-              <Row >
-                {selectedFiles.map((file, index) => (
-                  <Col key={index} sm={{ span: 2 }}>
-                    <div className="p-2">
-                      <img
-                        src={URL.createObjectURL(file)}
-                        alt={file.name}
-                        className="img-thumbnail p-0 m-0"
-                        style={{ width: '110px', height: '110px', objectFit: 'cover' }}
-                        onLoad={() => URL.revokeObjectURL(file)} />
-                    </div>
-                  </Col>
-                ))}
-              </Row>
-            </Container>
-          </div>
-        )}
-
-        <Button variant="primary" type="submit" className="mb-5">
-          Create new specimen
+        <Button variant="primary" type="submit" className="mb-5" disabled={loadingImage}>
+          {loadingImage ? 'Loading image...' : 'Create new specimen'}
         </Button>
+
 
       </Form>
     </Container>
@@ -157,3 +154,26 @@ const NewSpecimenForm = () => {
 }
 
 export default NewSpecimenForm
+
+
+
+// {selectedFiles.length > 0 && (
+//   <div className="mb-5">
+//     <Container >
+//       <Row >
+//         {selectedFiles.map((file, index) => (
+//           <Col key={index} sm={{ span: 2 }}>
+//             <div className="p-2">
+//               <img
+//                 src={URL.createObjectURL(file)}
+//                 alt={file.name}
+//                 className="img-thumbnail p-0 m-0"
+//                 style={{ width: '110px', height: '110px', objectFit: 'cover' }}
+//                 onLoad={() => URL.revokeObjectURL(file)} />
+//             </div>
+//           </Col>
+//         ))}
+//       </Row>
+//     </Container>
+//   </div>
+// )}
