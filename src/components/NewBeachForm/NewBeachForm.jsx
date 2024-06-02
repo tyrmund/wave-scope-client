@@ -5,19 +5,25 @@ import beachServices from "../../services/beach.services"
 import { BEACH_COMPOSITION } from "../../data/lists.data"
 import BusStopGroup from "./BusStopGroup"
 import { useNavigate } from "react-router-dom"
+import ModalConfirm from '../ModalConfirm/ModalConfirm'
 
 const NewBeachForm = () => {
 
     const navigate = useNavigate()
 
+    const [modalShow, setModalShow] = useState()
+
+    const handleModalClose = () => setModalShow(false)
+    const handleModalShow = () => setModalShow(true)
+
     const [beachData, setBeachData] = useState({
         name: '',
-        latitude: 0,
-        longitude: 0,
+        latitude: '',
+        longitude: '',
         description: '',
-        length: 1,
-        composition: 'Sand',
-        sectors: 1
+        length: '',
+        composition: '',
+        sectors: ''
     })
 
     const [busStops, setBusStops] = useState([
@@ -46,13 +52,29 @@ const NewBeachForm = () => {
 
     const handleInputChange = event => {
         const { name, value } = event.target
-        setBeachData({ ...beachData, [name]: value })
+        setBeachData({
+            ...beachData,
+            [name]: value
+        })
     }
 
     const handleBeachFormSubmit = e => {
 
         e.preventDefault()
-        console.log(beachData)
+
+        beachData.longitude = Number(beachData.longitude)
+        beachData.latitude = Number(beachData.latitude)
+        beachData.length = Number(beachData.length)
+        beachData.sectors = Number(beachData.sectors)
+        beachData.nearBusStops = busStops
+
+        //   console.log(beachData)
+
+        if (!beachData.name || !beachData.composition || beachData.composition === "Choose a composition" || !beachData.description) {
+            handleModalShow()
+            return
+        }
+
         beachServices
             .newBeach(beachData)
             .then(() => {
@@ -124,6 +146,7 @@ const NewBeachForm = () => {
                             name="composition"
                             onChange={handleInputChange}
                             aria-label="Default select example">
+                            <option>Choose a composition</option>
                             {
                                 BEACH_COMPOSITION.map((elm, index) => <option key={index} value={elm}>{elm}</option>)
                             }
@@ -136,6 +159,7 @@ const NewBeachForm = () => {
                             required
                             placeholder="Number of sectors"
                             name="sectors"
+                            type="number"
                             min={1}
                             max={299}
                             value={beachData.sectors}
@@ -173,7 +197,15 @@ const NewBeachForm = () => {
             <Form.Group controlId="ImagesGallery" className="mb-3">
                 <Form.Label>Images</Form.Label>
             </Form.Group>
-            <Button className="custom-color-button mb-3" size="sm" variant="dark" type='submit'>Add the new beach</Button>
+            <Button className="custom-color-button mb-3" size="sm" variant="dark" type='submit' onClick={handleBeachFormSubmit}>Add the new beach</Button>
+            <ModalConfirm
+                show={modalShow}
+                handleClose={handleModalClose}
+                handleConfirm={handleModalClose}
+                titleMessage={'Required fields incomplete'}
+                bodyMessage={'Please complete all fields'}
+                buttonMessage={'Ok'} />
+
         </Form>
 
 
