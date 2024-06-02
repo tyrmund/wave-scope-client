@@ -11,7 +11,7 @@ const SignupPage = () => {
 
     <Container className="signupPage">
 
-      <h1>REGISTRO</h1>
+      <h1 className="m-3 text-center">Sign Up</h1>
 
       <SignupForm />
 

@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect } from "react"
-import { Form, Button, Spinner, Container } from "react-bootstrap"
-import { useNavigate } from "react-router-dom"
+import { Form, Button, Row, Col, Spinner, Container } from "react-bootstrap"
+import { useNavigate, Link } from "react-router-dom"
 import authServices from "../../services/auth.services"
 import { AuthContext } from "../../contexts/auth.context"
 import Loader from "../Loader/Loader"
@@ -47,24 +47,31 @@ const LoginForm = () => {
 
 
     return (
+        <>
+            < Form onSubmit={handleSubmit} >
 
-        < Form onSubmit={handleSubmit} >
+                <Form.Group className="mb-3" controlId="email">
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control type="email" value={loginData.email} onChange={handleInputChange} name="email" />
+                </Form.Group>
 
-            <Form.Group className="mb-3" controlId="email">
-                <Form.Label>Email</Form.Label>
-                <Form.Control type="email" value={loginData.email} onChange={handleInputChange} name="email" />
-            </Form.Group>
+                <Form.Group className="mb-3" controlId="password">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control type="password" value={loginData.password} onChange={handleInputChange} name="password" />
+                </Form.Group>
 
-            <Form.Group className="mb-3" controlId="password">
-                <Form.Label>Contraseña</Form.Label>
-                <Form.Control type="password" value={loginData.password} onChange={handleInputChange} name="password" />
-            </Form.Group>
+                <Container className="mt-4 mb-3 d-flex justify-content-center">
+                    <Button className="custom-color-button" type='submit'>Log in</Button>
+                </Container>
 
-            <div className="d-flex justify-content-center mb-5">
-                <Button className="custom-color-button " type="submit">Log in</Button>
-            </div>
+            </Form >
 
-        </Form >
+            <Container className=" mb-5 d-flex justify-content-center">
+                <Link to={'/signup'}>
+                    <Button className="delete-color-button">Sign up!</Button>
+                </Link>
+            </Container>
+        </>
 
     )
 }

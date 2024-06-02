@@ -67,16 +67,20 @@ const SightingDetailsPage = () => {
                   <Accordion.Item eventKey="0">
                     <Accordion.Header>{sighting.specimen.commonName}&nbsp;<i>({sighting.specimen.scientificName})</i></Accordion.Header>
                     <Accordion.Body>
-                      <img className="rounded" src={sighting.specimen.images[0]} />
+                      <Link to={`/marine-life/${sighting.specimen._id}`}>
+                        <img className="rounded" src={sighting.specimen.images[0]} />
+                      </Link>
                       <p className="mt-3">Average Size: {sighting.specimen.mediumSize}</p>
                       <p>Endemic to this region: {sighting.specimen.isEndemic}</p>
-                      <p>Habitat: {sighting.specimen.habitat}</p>
+                      <p>Usual Habitat: {sighting.specimen.habitat}</p>
                     </Accordion.Body>
                   </Accordion.Item>
                   <Accordion.Item eventKey="1">
                     <Accordion.Header>Region Info</Accordion.Header>
                     <Accordion.Body>
-                      <img className="rounded" src={sighting.beach.images[0]} />
+                      <Link to={`/beaches/${sighting.beach._id}`}>
+                        <img className="rounded" src={sighting.beach.images[0]} />
+                      </Link>
                       <h1 className="fs-5 mt-3">{sighting.beach.name}</h1>
                       <hr />
                       <p>Coast Length: {sighting.beach.length} m</p>
