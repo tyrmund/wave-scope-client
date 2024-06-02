@@ -41,7 +41,7 @@ const EditBeachForm = () => {
         longitude: 0,
         description: '',
         length: 1,
-        composition: 'Sand',
+        composition: '',
         sectors: 1
     })
 
@@ -78,12 +78,24 @@ const EditBeachForm = () => {
 
         e.preventDefault()
         console.log(beachData)
-        beachServices
-            .editBeach(beachData)
-            .then(() => {
-                navigate('/beaches')
-            })
-            .catch(err => console.log(err))
+
+        beachData.longitude = Number(beachData.longitude)
+        beachData.latitude = Number(beachData.latitude)
+        beachData.length = Number(beachData.length)
+        beachData.sectors = Number(beachData.sectors)
+        beachData.nearBusStops = busStops
+
+        if (!beachData.name || !beachData.composition || beachData.composition === "Choose a composition" || !beachData.description) {
+            handleModalShow()
+            return
+        }
+
+        // beachServices
+        //     .editBeach(beachData)
+        //     .then(() => {
+        //         navigate('/beaches')
+        //     })
+        //     .catch(err => console.log(err))
     }
 
 
@@ -155,6 +167,7 @@ const EditBeachForm = () => {
                                         name="composition"
                                         onChange={handleInputChange}
                                         aria-label="Default select example">
+                                        <option>Choose a composition</option>
                                         {
                                             BEACH_COMPOSITION.map((elm, index) => <option key={index} value={elm}>{elm}</option>)
                                         }
@@ -165,6 +178,7 @@ const EditBeachForm = () => {
                                     <Form.Label className="h6">Sectors</Form.Label>
                                     <Form.Control
                                         required
+                                        type="number"
                                         placeholder="Number of sectors"
                                         name="sectors"
                                         min={1}
@@ -183,7 +197,10 @@ const EditBeachForm = () => {
                         <Form.Label className="h4">Nearest Bus Stops</Form.Label>
 
                         {
-                            busStops.map((_, idx) => <BusStopGroup key={idx} index={idx} handleBusStopChange={handleBusStopChange} deleteBusStop={deleteBusStop} />)
+                            busStops.map((_, idx) => <BusStopGroup
+                                key={idx} index={idx}
+                                handleBusStopChange={handleBusStopChange}
+                                deleteBusStop={deleteBusStop} />)
                         }
                         <br />
                         <Button className="custom-color-button mb-3" size="sm" onClick={addNewBusStop}>Add more stops</Button>

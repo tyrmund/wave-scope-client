@@ -1,4 +1,4 @@
-import { Button, Card, Carousel, CardBody } from 'react-bootstrap'
+import { Button, Card, Carousel, CardBody, Badge } from 'react-bootstrap'
 import './BeachDetailsPage.css'
 import { useState, useEffect } from 'react'
 import ModalConfirm from '../../components/ModalConfirm/ModalConfirm'
@@ -76,11 +76,26 @@ const BeachDetailsPage = () => {
                   {`Location: ${beach.location.coordinates[0]}, ${beach.location.coordinates[1]} `}
                 </Card.Text>
               </Card.Body>
-              <CardBody>
+              <Card.Body>
                 <Card.Text className="Description">
                   {beach.description}
                 </Card.Text>
-              </CardBody>
+              </Card.Body>
+              <Card.Body>
+                <Card.Text className='h6'>
+                  Nearest Bus Stops
+                </Card.Text>
+
+                {beach.nearBusStops.map((busStop, index) =>
+                  <div key={busStop._id}>
+                    <h3 className="fs-6 mt-3">• {busStop.name}</h3>
+                    {busStop.lines.map((line, index) =>
+                      <Badge key={index} bg="info">{line}</Badge>
+                    )}
+                  </div>
+                )}
+
+              </Card.Body>
 
               <Card.Body>
                 <Link to='/beaches'>
