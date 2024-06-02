@@ -2,16 +2,18 @@ import { useEffect, useState, useContext } from "react"
 import { Form, Button, Row, Col, Container } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
 
+import Loader from "../Loader/Loader"
 import ModalConfirm from "../ModalConfirm/ModalConfirm"
 import beachServices from "../../services/beach.services"
 import specimenServices from "../../services/specimen.services"
 import sightingServices from "../../services/sighting.services"
-import Loader from "../Loader/Loader"
+import uploadServices from "../../services/upload.services"
 
 const NewSightingForm = () => {
 
     const [beachesLoading, setBeachesLoading] = useState(true)
     const [specimensLoading, setSpecimensLoading] = useState(true)
+    const [loadingImage, setLoadingImage] = useState(false)
     const [beaches, setBeaches] = useState()
     const [specimens, setSpecimens] = useState()
     const [onSite, setOnsite] = useState(false)
@@ -19,7 +21,7 @@ const NewSightingForm = () => {
     const navigate = useNavigate()
 
     const [newSighting, setNewSighting] = useState({
-        image: '',
+        images: [],
         latitude: 0,
         longitude: 0,
         beach: '',
@@ -61,6 +63,28 @@ const NewSightingForm = () => {
 
     const handleSwitchChange = e => {
         setOnsite(!onSite)
+    }
+
+    const handleFileUpload = e => {
+
+        setLoadingImage(true)
+        const formData = new FormData()
+
+        for (let i = 0; i < e.target.files.length; i++) {
+            formData.append('imageData', e.target.files[i])
+        }
+
+        uploadServices
+            .uploadImage(formData)
+            .then(({ data }) => {
+                setNewSighting({ ...newSighting, images: data.cloudinary_urls })
+                setLoadingImage(false)
+            })
+            .catch(err => {
+                console.log(err)
+                setLoadingImage(false)
+            })
+
     }
 
     const handleModalClose = () => setModalShow(false)
@@ -117,7 +141,6 @@ const NewSightingForm = () => {
                             <Form.Group as={Col} xs={{ span: 6, offset: 3 }} md={{ span: 5 }} className="m-3">
                                 <Form.Label>Select sighting place</Form.Label>
                                 <Form.Select
-                                    required
                                     name="beach"
                                     value={newSighting.beach}
                                     onChange={handleFormChange}
@@ -132,7 +155,6 @@ const NewSightingForm = () => {
                             <Form.Group as={Col} xs={{ span: 6, offset: 3 }} md={{ span: 5 }} className="m-3">
                                 <Form.Label>Select creature sighted</Form.Label>
                                 <Form.Select
-                                    required
                                     name="specimen"
                                     value={newSighting.specimen}
                                     onChange={handleFormChange}
@@ -154,14 +176,16 @@ const NewSightingForm = () => {
                         />
 
                         <Row>
-                            <Form.Group as={Col} xs={{ span: 8, offset: 2 }} md={{ span: 10, offset: 1 }} className="m-3">
+                            <Form.Group
+                                as={Col}
+                                xs={{ span: 8, offset: 2 }}
+                                md={{ span: 10, offset: 1 }}
+                                className="m-3">
                                 <Form.Label>Image</Form.Label>
                                 <Form.Control
-                                    type="text"
-                                    name="image"
-                                    value={newSighting.image}
-                                    onChange={handleFormChange}
-                                    placeholder="http://www.example.com" />
+                                    type="file"
+                                    multiple
+                                    onChange={handleFileUpload} />
                             </Form.Group>
                         </Row>
 
@@ -174,12 +198,17 @@ const NewSightingForm = () => {
                                 type="text"
                                 value={newSighting.comment}
                                 onChange={handleFormChange}
-                                placeholder="Cero trolleo por aquí, gracias" />
+                                placeholder="A brief description or additional info" />
                         </Form.Group>
 
-                        <Button className="m-5 d-block mx-auto custom-color-button" variant="secondary" type="submit">
-                            Submit
+                        <Button
+                            className="m-5 d-block mx-auto custom-color-button"
+                            disabled={loadingImage}
+                            variant="primary"
+                            type="submit">
+                            {loadingImage ? 'Loading image...' : 'Create new sighting'}
                         </Button>
+
                         <ModalConfirm
                             show={modalShow}
                             handleClose={handleModalClose}

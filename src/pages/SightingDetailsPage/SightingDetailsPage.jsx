@@ -1,4 +1,4 @@
-import { Accordion, Container, Spinner, Row, Col, Badge, Button } from "react-bootstrap"
+import { Accordion, Container, Spinner, Carousel, Row, Col, Badge, Button } from "react-bootstrap"
 import { useContext, useEffect, useState } from "react"
 import { useParams, Link, useNavigate } from "react-router-dom"
 import { AuthContext } from "../../contexts/auth.context"
@@ -51,9 +51,20 @@ const SightingDetailsPage = () => {
           :
           <Container>
             <Row>
-              <Col md={{ span: 6, offset: 3 }}>
+              <Col md={{ span: 8, offset: 2 }}>
                 <Container>
-                  <img className="mt-5 rounded" src={sighting.image} alt={sighting.specimen.scientificName} />
+                  <Carousel>
+                    {sighting.images.map((image, index) => (
+                      <Carousel.Item key={index}>
+                        <img
+                          className="d-block w-100 img-fluid mt-5 rounded"
+                          style={{ height: 450, objectFit: "cover", objectPosition: "center bottom" }}
+                          src={image}
+                          alt={sighting.specimen.scientificName} />
+                      </Carousel.Item>
+                    )
+                    )}
+                  </Carousel>
                   <h1 className="text-center mt-3 fs-6">
                     Sighting date: {sighting.createdAt.substring(8, 10)}/{sighting.createdAt.substring(5, 7)}/{sighting.createdAt.substring(0, 4)}</h1>
                   <h1 className="text-center fs-6">

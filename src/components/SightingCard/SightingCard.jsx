@@ -1,14 +1,14 @@
-import { Card, Button, Container, Badge } from "react-bootstrap"
+import { Card, Button, Badge } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import { wasItAddedToday } from "../../utils/sightings.data"
 
-const SightingCard = ({ _id, image, name, createdAt }) => {
+const SightingCard = ({ _id, images, name, createdAt }) => {
 
     return (
         <div className="SightingCard">
             <Card className="m-3" style={{ border: 'none', maxHeight: '500px' }}>
                 <Link to={`/sightings/${_id}`}>
-                    <Card.Img style={{ height: '300px', objectFit: 'cover' }} variant="top" src={image} alt={name} />
+                    <Card.Img style={{ height: '300px', objectFit: 'cover' }} variant="top" src={images[0]} alt={name} />
                 </Link>
                 <Card.Body>
                     <div className='mb-2'>
