@@ -2,15 +2,21 @@ import { useEffect, useState } from "react"
 import { Form, Row, InputGroup, Button, Col, Card } from "react-bootstrap"
 import './NewBeachForm'
 
-const BusStopGroup = ({ index, handleBusStopChange, deleteBusStop }) => {
+const BusStopGroup = ({ index, name, latitude, longitude, lines, handleBusStopChange, deleteBusStop }) => {
 
     const [busStopData, setBusStopData] = useState({
-        name: "",
-        latitude: 0,
-        longitude: 0
+        name: name,
+        latitude: latitude,
+        longitude: longitude
     })
 
     const [linesData, setLinesData] = useState([''])
+
+    useEffect(() => {
+        if (lines) {
+            setLinesData(lines)
+        }
+    }, [])
 
     useEffect(() => {                                                           //cuando se actualicen linesData ( las líneas ) o el busStopData ( la información de la parada )
         const fullStopInfo = { ...busStopData, lines: linesData }               //toda la información de ambos estados se combinan en fullStopInfo y se envían al index

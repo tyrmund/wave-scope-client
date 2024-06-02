@@ -21,19 +21,21 @@ const EditBeachForm = () => {
         beachServices
             .getOneBeach(beachId)
             .then(({ data }) => {
-                data.nearBusStops
+                setBusStops(data.nearBusStops.map(elm => ({
+                    name: elm.name,
+                    latitude: elm.coordinates[1],
+                    longitude: elm.coordinates[0],
+                    lines: elm.lines
+                })))
                 setBeachData({
                     ...data,
                     latitude: data.location.coordinates[1],
                     longitude: data.location.coordinates[0],
-                    // nearBusStop: data.
                 })
                 setIsloading(false)
             })
             .catch(err => console.log(err))
     }
-
-
 
     const [beachData, setBeachData] = useState({
         name: '',
@@ -197,8 +199,10 @@ const EditBeachForm = () => {
                         <Form.Label className="h4">Nearest Bus Stops</Form.Label>
 
                         {
-                            busStops.map((_, idx) => <BusStopGroup
-                                key={idx} index={idx}
+                            busStops.map((elm, idx) => <BusStopGroup
+                                key={idx}
+                                index={idx}
+                                {...elm}
                                 handleBusStopChange={handleBusStopChange}
                                 deleteBusStop={deleteBusStop} />)
                         }
