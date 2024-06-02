@@ -1,8 +1,7 @@
-import { useContext, useState } from "react"
+import { useState } from "react"
 import { Form, Button, Container, Row, Col } from "react-bootstrap"
 import specimenServices from "../../services/specimen.services"
 import { useNavigate } from "react-router-dom"
-import { AuthContext } from "../../contexts/auth.context"
 import { SPECIMEN_HABITAT, SPECIMEN_ISENDEMIC } from "../../data/lists.data"
 import uploadServices from "../../services/upload.services"
 
@@ -23,8 +22,6 @@ const NewSpecimenForm = () => {
 
   const navigate = useNavigate()
 
-  const { authenticateUser } = useContext(AuthContext)
-
   const handleInputChange = e => {
     const { value, name } = e.target
     setSpecimenFormData({ ...specimenFormData, [name]: value })
@@ -44,7 +41,10 @@ const NewSpecimenForm = () => {
     }
 
     uploadServices
-      .uploadImage(formData)                              //le mandamos un formulario que no es real pero que está guardado en memoria con un campo que lleva la imagen y lo mandamos al servicio de subida
+
+      //le mandamos un formulario que no es real pero que está guardado en memoria con un campo que lleva la imagen y lo mandamos al servicio de subida
+
+      .uploadImage(formData)
       .then(({ data }) => {
         setSpecimenFormData({ ...specimenFormData, images: data.cloudinary_urls })
         setLoadingImage(false)

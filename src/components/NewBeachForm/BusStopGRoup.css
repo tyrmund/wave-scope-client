@@ -1,0 +1,4 @@
+.BusStopGroup {
+    --bs-card-bg: linear-gradient(to bottom right, #FBE797, #2AB2D4, ) !important;
+    border-color: #9CE6DE !important;
+}

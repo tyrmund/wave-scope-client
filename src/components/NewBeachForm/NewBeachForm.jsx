@@ -6,12 +6,11 @@ import { BEACH_COMPOSITION } from "../../data/lists.data"
 import BusStopGroup from "./BusStopGroup"
 import { useNavigate } from "react-router-dom"
 import ModalConfirm from '../ModalConfirm/ModalConfirm'
+import uploadServices from "../../services/upload.services"
 
 const NewBeachForm = () => {
 
     const navigate = useNavigate()
-
-    const [modalShow, setModalShow] = useState()
 
     const handleModalClose = () => setModalShow(false)
     const handleModalShow = () => setModalShow(true)
@@ -23,12 +22,16 @@ const NewBeachForm = () => {
         description: '',
         length: '',
         composition: '',
-        sectors: ''
+        sectors: '',
+        images: []
     })
 
     const [busStops, setBusStops] = useState([
         {}
     ])
+
+    const [modalShow, setModalShow] = useState()
+    const [loadingImage, setLoadingImage] = useState(false)
 
     const handleBusStopChange = (idx, busStopInfo) => {
         const busStopsCopy = [...busStops]
@@ -58,6 +61,32 @@ const NewBeachForm = () => {
         })
     }
 
+
+
+    const handleFileUpload = (e) => {
+
+        setLoadingImage(true)
+
+        const formData = new FormData()
+
+        for (let i = 0; i < e.target.files.length; i++) {
+            formData.append('imageData', e.target.files[i])
+        }
+
+        uploadServices
+            .uploadImage(formData)
+            .then(({ data }) => {
+                console.log(data.cloudinary_urls)
+                setBeachData({ ...beachData, images: data.cloudinary_urls })
+                setLoadingImage(false)
+            })
+            .catch(err => {
+                console.log(err)
+                setLoadingImage(false)
+            })
+
+    }
+
     const handleBeachFormSubmit = e => {
 
         e.preventDefault()
@@ -67,8 +96,6 @@ const NewBeachForm = () => {
         beachData.length = Number(beachData.length)
         beachData.sectors = Number(beachData.sectors)
         beachData.nearBusStops = busStops
-
-        //   console.log(beachData)
 
         if (!beachData.name || !beachData.composition || beachData.composition === "Choose a composition" || !beachData.description) {
             handleModalShow()
@@ -186,6 +213,7 @@ const NewBeachForm = () => {
             <InputGroup>
                 <InputGroup.Text>Description</InputGroup.Text>
                 <Form.Control as="textarea"
+                    rows={10}
                     name="description"
                     aria-label="With textarea"
                     value={beachData.description}
@@ -194,10 +222,14 @@ const NewBeachForm = () => {
             </InputGroup>
             <br />
 
-            <Form.Group controlId="ImagesGallery" className="mb-3">
-                <Form.Label>Images</Form.Label>
+            <Form.Group className="mb-3" controlId="image">
+                <Form.Label className="h4">Add a set of pictures of the beach</Form.Label>
+                <Form.Control type="file" multiple onChange={handleFileUpload} />
             </Form.Group>
-            <Button className="custom-color-button mb-3" size="sm" variant="dark" type='submit' onClick={handleBeachFormSubmit}>Add the new beach</Button>
+
+            <Button className="custom-color-button mb-3" size="sm" type='submit' disabled={loadingImage}>
+                {loadingImage ? 'Loading image...' : 'Add the new beach'}
+            </Button>
             <ModalConfirm
                 show={modalShow}
                 handleClose={handleModalClose}

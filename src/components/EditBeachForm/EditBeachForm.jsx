@@ -5,6 +5,7 @@ import { BEACH_COMPOSITION } from "../../data/lists.data"
 import BusStopGroup from "../NewBeachForm/BusStopGroup"
 import { useNavigate, useParams } from "react-router-dom"
 import Loader from "../Loader/Loader"
+import uploadServices from "../../services/upload.services"
 
 
 const EditBeachForm = () => {
@@ -21,19 +22,21 @@ const EditBeachForm = () => {
         beachServices
             .getOneBeach(beachId)
             .then(({ data }) => {
-                data.nearBusStops
+                setBusStops(data.nearBusStops.map(elm => ({
+                    name: elm.name,
+                    latitude: elm.coordinates[1],
+                    longitude: elm.coordinates[0],
+                    lines: elm.lines
+                })))
                 setBeachData({
                     ...data,
                     latitude: data.location.coordinates[1],
                     longitude: data.location.coordinates[0],
-                    // nearBusStop: data.
                 })
                 setIsloading(false)
             })
             .catch(err => console.log(err))
     }
-
-
 
     const [beachData, setBeachData] = useState({
         name: '',
@@ -42,7 +45,8 @@ const EditBeachForm = () => {
         description: '',
         length: 1,
         composition: '',
-        sectors: 1
+        sectors: 1,
+        images: []
     })
 
     const [busStops, setBusStops] = useState([
@@ -74,6 +78,31 @@ const EditBeachForm = () => {
         setBeachData({ ...beachData, [name]: value })
     }
 
+    const [loadingImage, setLoadingImage] = useState(false)
+    const handleFileUpload = (e) => {
+
+        setLoadingImage(true)
+
+        const formData = new FormData()
+
+        for (let i = 0; i < e.target.files.length; i++) {
+            formData.append('imageData', e.target.files[i])
+        }
+
+        uploadServices
+            .uploadImage(formData)
+            .then(({ data }) => {
+                console.log(data.cloudinary_urls)
+                setBeachData({ ...beachData, images: data.cloudinary_urls })
+                setLoadingImage(false)
+            })
+            .catch(err => {
+                console.log(err)
+                setLoadingImage(false)
+            })
+
+    }
+
     const handleBeachFormSubmit = e => {
 
         e.preventDefault()
@@ -90,12 +119,12 @@ const EditBeachForm = () => {
             return
         }
 
-        // beachServices
-        //     .editBeach(beachData)
-        //     .then(() => {
-        //         navigate('/beaches')
-        //     })
-        //     .catch(err => console.log(err))
+        beachServices
+            .editBeach(beachData)
+            .then(() => {
+                navigate('/beaches')
+            })
+            .catch(err => console.log(err))
     }
 
 
@@ -107,7 +136,7 @@ const EditBeachForm = () => {
                     <Loader />
                     :
 
-                    <Form className="NewBeachForm" onSubmit={handleBeachFormSubmit}>
+                    <Form className="NewBeachForm mt-5" onSubmit={handleBeachFormSubmit}>
                         <Form.Group className="mb-3">
                             <Form.Label className="h3">Beach Name</Form.Label>
                             <Form.Control placeholder="Ex. Las Canteras" name="name" value={beachData.name} onChange={handleInputChange} required />
@@ -197,19 +226,20 @@ const EditBeachForm = () => {
                         <Form.Label className="h4">Nearest Bus Stops</Form.Label>
 
                         {
-                            busStops.map((_, idx) => <BusStopGroup
-                                key={idx} index={idx}
+                            busStops.map((elm, idx) => <BusStopGroup
+                                key={idx}
+                                index={idx}
+                                {...elm}
                                 handleBusStopChange={handleBusStopChange}
                                 deleteBusStop={deleteBusStop} />)
                         }
-                        <br />
                         <Button className="custom-color-button mb-3" size="sm" onClick={addNewBusStop}>Add more stops</Button>
                         <br />
 
-                        <Form.Label className="h4">Description</Form.Label>
+                        <Form.Label className="h4 mt-3">Tell us something about the beach</Form.Label>
                         <InputGroup>
                             <InputGroup.Text>Description</InputGroup.Text>
-                            <Form.Control as="textarea"
+                            <Form.Control as="textarea" rows={10}
                                 name="description"
                                 aria-label="With textarea"
                                 value={beachData.description}
@@ -218,10 +248,13 @@ const EditBeachForm = () => {
                         </InputGroup>
                         <br />
 
-                        <Form.Group controlId="ImagesGallery" className="mb-3">
-                            <Form.Label>Images</Form.Label>
+                        <Form.Group className="m-3" controlId="image">
+                            <Form.Label className="h4">Add a set of pictures of the beach</Form.Label>
+                            <Form.Control type="file" multiple onChange={handleFileUpload} />
                         </Form.Group>
-                        <Button className="custom-color-button mb-3" size="sm" variant="dark" type='submit'>Add the new beach</Button>
+                        <Button className="custom-color-button mb-3" size="sm" type='submit' disabled={loadingImage}>
+                            {loadingImage ? 'Loading image...' : 'Add the new beach'}
+                        </Button>
                     </Form>
             }
         </div>
