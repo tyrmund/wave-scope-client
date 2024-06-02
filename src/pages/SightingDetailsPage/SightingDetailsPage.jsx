@@ -57,12 +57,12 @@ const SightingDetailsPage = () => {
                   <h1 className="text-center mt-3 fs-6">
                     Sighting date: {sighting.createdAt.substring(8, 10)}/{sighting.createdAt.substring(5, 7)}/{sighting.createdAt.substring(0, 4)}</h1>
                   <h1 className="text-center fs-6">
-                    At {sighting.location.coordinates[0]}, {sighting.location.coordinates[1]}</h1>
+                    At {sighting.location.coordinates[0].toString().substring(0, 10)}, {sighting.location.coordinates[1].toString().substring(0, 9)}</h1>
                 </Container>
               </Col>
             </Row>
             <Row>
-              <Col md={{ span: 6, offset: 3 }}>
+              <Col md={{ span: 8, offset: 2 }}>
                 <Accordion className="mt-3 mb-5 shadow-lg sand-colored">
                   <Accordion.Item eventKey="0">
                     <Accordion.Header>{sighting.specimen.commonName}&nbsp;<i>({sighting.specimen.scientificName})</i></Accordion.Header>
@@ -90,7 +90,7 @@ const SightingDetailsPage = () => {
                         <div key={busStop._id}>
                           <h3 className="fs-6 mt-3">• {busStop.name}</h3>
                           {busStop.lines.map((line, index) =>
-                            <Badge key={index} bg="primary">{line}</Badge>
+                            <Badge key={index} bg="info">{line}</Badge>
                           )}
                         </div>
                       )}

@@ -17,9 +17,10 @@ const ModalConfirm = ({
             </Modal.Header>
             <Modal.Body>{bodyMessage}</Modal.Body>
             <Modal.Footer>
-                <Button className='custom-color-button' onClick={handleClose}>
-                    Cancel
-                </Button>
+                {handleClose !== handleConfirm &&
+                    <Button className='custom-color-button' onClick={handleClose}>
+                        Cancel
+                    </Button>}
                 <Button className='delete-color-button' onClick={handleConfirm}>
                     {buttonMessage}
                 </Button>
