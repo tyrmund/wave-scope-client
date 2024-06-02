@@ -26,6 +26,7 @@ const EditSpecimenForm = () => {
 
   useEffect(() => {
     loadSpecimenData()
+    loadImagesData()
   }, [])
 
   const loadSpecimenData = () => {
@@ -42,6 +43,12 @@ const EditSpecimenForm = () => {
         setLoadingImage(false)
       })
       .catch(err => console.log(err))
+  }
+
+  const loadImagesData = () => {
+
+    uploadServices
+      .getImages()
   }
 
 
@@ -85,7 +92,7 @@ const EditSpecimenForm = () => {
     }
 
     specimenServices
-      .newSpecimen(fullSpecimen)
+      .editSpecimen(fullSpecimen)
       .then(() => navigate('/marine-life'))
       .catch(err => console.log(err))
   }
