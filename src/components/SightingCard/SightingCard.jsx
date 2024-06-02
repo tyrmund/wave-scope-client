@@ -1,4 +1,4 @@
-import { Card, Button } from "react-bootstrap"
+import { Card, Button, Container, Badge } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import { wasItAddedToday } from "../../utils/sightings.data"
 
@@ -11,7 +11,9 @@ const SightingCard = ({ _id, image, name, createdAt }) => {
                     <Card.Img style={{ height: '300px', objectFit: 'cover' }} variant="top" src={image} alt={name} />
                 </Link>
                 <Card.Body>
-                    <Card.Title className="d-inline">{name}</Card.Title> {wasItAddedToday(createdAt) && <Card.Text className="d-inline" style={{ color: 'green', fontStyle: 'italic' }}>(New!)</Card.Text>}
+                    <div className='mb-2'>
+                        <Card.Title className="d-inline">{name}</Card.Title> {wasItAddedToday(createdAt) && <Badge className="d-inline" bg='info'>New!</Badge>}
+                    </div>
                     <Card.Text>Time of sighting: {createdAt.substring(8, 10)}/{createdAt.substring(5, 7)}/{createdAt.substring(0, 4)}</Card.Text>
                     <Link style={{ textDecoration: 'none' }} to={`/sightings/${_id}`}>
                         <Button className="custom-color-button" variant="secondary">Details</Button>
