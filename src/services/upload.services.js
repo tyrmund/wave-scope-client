@@ -9,8 +9,16 @@ class UploadServices {
     })
   }
 
+  getImages(imageForm) {
+    return this.api.get('/image', imageForm)
+  }
+
   uploadImage(imageForm) {
     return this.api.post('/image', imageForm)
+  }
+
+  reloadImages(imageForm) {
+    return this.api.put('/image', imageForm)
   }
 }
 

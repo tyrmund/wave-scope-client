@@ -1,6 +1,6 @@
 import { useContext, useState } from "react"
 import { Navbar, Nav, Container } from "react-bootstrap"
-import { Link } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 
 import { AuthContext } from "../../contexts/auth.context"
 import "./Navigation.css"
@@ -10,6 +10,7 @@ const Navigation = () => {
 
   const { logout, loggedUser } = useContext(AuthContext)
   const [expanded, setExpanded] = useState(true)
+  const { userId } = useParams()
 
   return (
     <Navbar expand="lg" className="Navbar" expanded={!expanded}>

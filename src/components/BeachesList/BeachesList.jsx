@@ -31,7 +31,7 @@ const BeachesList = () => {
                     ?
                     <Loader />
                     :
-                    <Container className="mt-5">
+                    <Container className="mt-3">
                         <Row>
                             {beaches.map(beach => {
 
