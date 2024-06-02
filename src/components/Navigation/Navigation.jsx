@@ -11,8 +11,6 @@ const Navigation = () => {
   const { logout, loggedUser } = useContext(AuthContext)
   const [expanded, setExpanded] = useState(true)
 
-  console.log(loggedUser)
-
   return (
     <Navbar expand="lg" className="Navbar" expanded={!expanded}>
       <Container>

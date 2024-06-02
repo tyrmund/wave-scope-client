@@ -56,7 +56,7 @@ const LoginForm = () => {
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="password">
-                    <Form.Label>Contraseña</Form.Label>
+                    <Form.Label>Password</Form.Label>
                     <Form.Control type="password" value={loginData.password} onChange={handleInputChange} name="password" />
                 </Form.Group>
 
