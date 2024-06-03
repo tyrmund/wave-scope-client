@@ -35,6 +35,9 @@ const Navigation = () => {
                 </Link>
                 <Link to={'/profile'} className="nav-link" onClick={() => setExpanded(true)}>Profile</Link>
                 <Nav.Link onClick={logout}>Logout</Nav.Link>
+                <Link to="/about-us" className="link" onClick={() => setExpanded(true)}>
+                  <Nav.Link as="span">About Us</Nav.Link>
+                </Link>
               </Nav>
             </Navbar.Collapse>
           </>
