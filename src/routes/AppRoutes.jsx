@@ -23,6 +23,7 @@ import EditUserProfilePage from "../pages/EditUserProfile/EditUserProfile";
 
 import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
 import PrivateRoute from "./PrivateRoute";
+import AboutUs from "../pages/AboutUs/AboutUs";
 
 const AppRoutes = () => {
   return (
@@ -30,6 +31,7 @@ const AppRoutes = () => {
       <Routes>
         <Route path={"/"} element={<StartPage />} />
         <Route path={"/signup"} element={<SignupPage />} />
+        <Route path={"/about-us"} element={<AboutUs />} />
 
         <Route element={<PrivateRoute />}>
 

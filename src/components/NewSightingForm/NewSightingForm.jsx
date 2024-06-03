@@ -138,6 +138,7 @@ const NewSightingForm = () => {
                 <Container>
                     <Form onSubmit={handleSubmitSightingForm} className="mt-5 mb-5">
                         <Row>
+
                             <Form.Group as={Col} xs={{ span: 6, offset: 3 }} md={{ span: 5 }} className="m-3">
                                 <Form.Label>Select sighting place</Form.Label>
                                 <Form.Select

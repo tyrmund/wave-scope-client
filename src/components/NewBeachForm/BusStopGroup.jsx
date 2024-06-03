@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { Form, Row, InputGroup, Button, Col, Card } from "react-bootstrap"
 import './NewBeachForm'
+// import './BusStopGroup.css'
 
 const BusStopGroup = ({ index, name, latitude, longitude, lines, handleBusStopChange, deleteBusStop }) => {
 

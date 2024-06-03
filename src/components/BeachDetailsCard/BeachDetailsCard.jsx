@@ -65,7 +65,7 @@ const BeachDetailsCard = () => {
                             <Link to='/beaches'>
                                 <Button className="custom-color-button">Nearest beaches</Button>
                             </Link>
-                            <Link to='/'>
+                            <Link to='/sightings'>
                                 <Button className="custom-color-button">The fauna today</Button>
                             </Link>
                         </Card.Body>

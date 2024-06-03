@@ -1,9 +1,9 @@
 import { Form, Row, Col, InputGroup, Button } from "react-bootstrap"
 import './NewBeachForm.css'
 import { useState } from "react"
+import BusStopGroup from "./BusStopGroup"
 import beachServices from "../../services/beach.services"
 import { BEACH_COMPOSITION } from "../../data/lists.data"
-import BusStopGroup from "./BusStopGroup"
 import { useNavigate } from "react-router-dom"
 import ModalConfirm from '../ModalConfirm/ModalConfirm'
 import uploadServices from "../../services/upload.services"

@@ -66,18 +66,29 @@ const SightingDetailsPage = () => {
             <Row>
               <Col md={{ span: 8, offset: 2 }}>
                 <Container>
+
                   <Carousel>
-                    {sighting.images.map((image, index) => (
-                      <Carousel.Item key={index}>
+                    {sighting.images.length !== 0 ?
+                      sighting.images.map((image, index) => (
+                        <Carousel.Item key={index}>
+                          <img
+                            className="d-block w-100 img-fluid mt-5 rounded"
+                            style={{ height: 450, objectFit: "cover", objectPosition: "center top" }}
+                            src={image}
+                            alt={sighting.specimen.scientificName} />
+                        </Carousel.Item>
+                      ))
+                      :
+                      <Carousel.Item>
                         <img
                           className="d-block w-100 img-fluid mt-5 rounded"
                           style={{ height: 450, objectFit: "cover", objectPosition: "center top" }}
-                          src={image}
-                          alt={sighting.specimen.scientificName} />
+                          src="https://res.cloudinary.com/dc7ycwd1u/image/upload/v1717428275/Anadir_un_titulo_2_zruph6.png"
+                          alt="pic-not-provided" />
                       </Carousel.Item>
-                    )
-                    )}
+                    }
                   </Carousel>
+
                   <h1 className="text-center mt-3 fs-6">
                     Sighting date: {sighting.createdAt.substring(8, 10)}/{sighting.createdAt.substring(5, 7)}/{sighting.createdAt.substring(0, 4)}</h1>
                   <h1 className="text-center fs-6">
@@ -123,7 +134,9 @@ const SightingDetailsPage = () => {
                   <Accordion.Item eventKey="2">
                     <Accordion.Header>User Input</Accordion.Header>
                     <Accordion.Body>
-                      <i className="mb-3">{sighting.comment}</i>
+                      "{sighting.comment}"
+                      <br />
+                      <i className="mb-3">by {loggedUser.username}</i>
                       <hr />
                       <Row className="Confirmations-Row mb-3">
                         <Col>

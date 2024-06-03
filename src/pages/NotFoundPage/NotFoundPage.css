@@ -1,0 +1,6 @@
+.NotFound {
+    object-fit: cover;
+
+    min-height: 100vh;
+    width: 100%;
+}
