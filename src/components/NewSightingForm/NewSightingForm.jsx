@@ -1,5 +1,5 @@
-import { useEffect, useState, useContext } from "react"
-import { Form, Button, Row, Col, Container } from "react-bootstrap"
+import { useEffect, useState } from "react"
+import { Form, Button, Image, Row, Col, Container } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
 
 import Loader from "../Loader/Loader"
@@ -181,12 +181,28 @@ const NewSightingForm = () => {
                                 xs={{ span: 8, offset: 2 }}
                                 md={{ span: 10, offset: 1 }}
                                 className="m-3">
-                                <Form.Label>Image</Form.Label>
+                                <Form.Label>Upload pictures</Form.Label>
                                 <Form.Control
                                     type="file"
                                     multiple
                                     onChange={handleFileUpload} />
                             </Form.Group>
+                        </Row>
+
+                        <Row className="p-3 d-flex align-items-start">
+                            {
+                                newSighting.images.length > 0 &&
+                                newSighting.images.map((image, index) => (
+                                    <Image
+                                        key={index}
+                                        src={image}
+                                        style={{
+                                            height: '50px',
+                                            width: 'auto',
+                                            objectFit: 'cover'
+                                        }} />
+                                ))
+                            }
                         </Row>
 
                         <Form.Group className="m-3">
@@ -198,7 +214,7 @@ const NewSightingForm = () => {
                                 type="text"
                                 value={newSighting.comment}
                                 onChange={handleFormChange}
-                                placeholder="A brief description or additional info" />
+                                placeholder="Add a brief description or additional info" />
                         </Form.Group>
 
                         <Button

@@ -1,4 +1,4 @@
-import { Form, Row, Col, InputGroup, Button } from "react-bootstrap"
+import { Form, Row, Col, InputGroup, Button, Image } from "react-bootstrap"
 import { useState, useEffect } from "react"
 import beachServices from "../../services/beach.services"
 import { BEACH_COMPOSITION } from "../../data/lists.data"
@@ -31,7 +31,8 @@ const EditBeachForm = () => {
                 setBeachData({
                     ...data,
                     latitude: data.location.coordinates[1],
-                    longitude: data.location.coordinates[0],
+                    longitude: data.location.coordinates[0]
+
                 })
                 setIsloading(false)
             })
@@ -105,14 +106,22 @@ const EditBeachForm = () => {
 
     const handleBeachFormSubmit = e => {
 
+        const fullBeach = {
+            images: beachData.images,
+            name: beachData.name,
+            composition: beachData.composition,
+            description: beachData.description,
+            services: beachData.services,
+            longitude: Number(beachData.longitude),
+            latitude: Number(beachData.latitude),
+            length: Number(beachData.length),
+            sectors: Number(beachData.sectors),
+            nearBusStops: busStops
+        }
+        console.log(fullBeach)
         e.preventDefault()
-        console.log(beachData)
 
-        beachData.longitude = Number(beachData.longitude)
-        beachData.latitude = Number(beachData.latitude)
-        beachData.length = Number(beachData.length)
-        beachData.sectors = Number(beachData.sectors)
-        beachData.nearBusStops = busStops
+
 
         if (!beachData.name || !beachData.composition || beachData.composition === "Choose a composition" || !beachData.description) {
             handleModalShow()
@@ -120,7 +129,7 @@ const EditBeachForm = () => {
         }
 
         beachServices
-            .editBeach(beachData)
+            .editBeach(beachId, fullBeach)
             .then(() => {
                 navigate('/beaches')
             })
@@ -250,10 +259,26 @@ const EditBeachForm = () => {
 
                         <Form.Group className="m-3" controlId="image">
                             <Form.Label className="h4">Add a set of pictures of the beach</Form.Label>
+                            <Form.Label className="h6 mb-3">(your current pictures will disappear)</Form.Label>
                             <Form.Control type="file" multiple onChange={handleFileUpload} />
                         </Form.Group>
+                        <Row className="mb-3 p-3 d-flex align-items-start">
+                            {
+                                beachData.images.length > 0 &&
+                                beachData.images.map((image, index) => (
+                                    <Image
+                                        key={index}
+                                        src={image}
+                                        style={{
+                                            height: '50px',
+                                            width: 'auto',
+                                            objectFit: 'cover'
+                                        }} />
+                                ))
+                            }
+                        </Row>
                         <Button className="custom-color-button mb-3" size="sm" type='submit' disabled={loadingImage}>
-                            {loadingImage ? 'Loading image...' : 'Add the new beach'}
+                            {loadingImage ? 'Loading image...' : 'Apply changes'}
                         </Button>
                     </Form>
             }
