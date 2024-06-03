@@ -58,7 +58,7 @@ const SightingDetailsPage = () => {
                       <Carousel.Item key={index}>
                         <img
                           className="d-block w-100 img-fluid mt-5 rounded"
-                          style={{ height: 450, objectFit: "cover", objectPosition: "center bottom" }}
+                          style={{ height: 450, objectFit: "cover", objectPosition: "center top" }}
                           src={image}
                           alt={sighting.specimen.scientificName} />
                       </Carousel.Item>

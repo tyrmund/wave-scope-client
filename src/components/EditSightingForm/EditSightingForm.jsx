@@ -1,5 +1,5 @@
-import { useEffect, useState, useContext } from "react"
-import { Form, Button, Row, Col, Container } from "react-bootstrap"
+import { useEffect, useState } from "react"
+import { Form, Button, Image, Row, Col, Container } from "react-bootstrap"
 import { useNavigate, useParams } from "react-router-dom"
 
 import Loader from "../Loader/Loader"
@@ -157,7 +157,9 @@ const EditSightingForm = () => {
         <div className="EditSightingForm">
             {(beachesLoading || specimensLoading || sightingLoading) ? <Loader /> :
                 <Container className="pb-5">
+
                     <Form onSubmit={handleSubmitSightingForm} className="mt-3">
+
                         <Row>
                             <Form.Group as={Col} xs={{ span: 6, offset: 3 }} md={{ span: 5 }} className="m-3">
                                 <Form.Label>Select sighting place</Form.Label>
@@ -204,12 +206,28 @@ const EditSightingForm = () => {
                                 xs={{ span: 8, offset: 2 }}
                                 md={{ span: 10, offset: 1 }}
                                 className="m-3">
-                                <Form.Label>Image</Form.Label>
+                                <Form.Label>Reupload pictures (olders ones will be deleted)</Form.Label>
                                 <Form.Control
                                     type="file"
                                     multiple
                                     onChange={handleFileUpload} />
                             </Form.Group>
+                        </Row>
+
+                        <Row className="p-3 d-flex align-items-start">
+                            {
+                                sightingData.images.length > 0 &&
+                                sightingData.images.map((image, index) => (
+                                    <Image
+                                        key={index}
+                                        src={image}
+                                        style={{
+                                            height: '50px',
+                                            width: 'auto',
+                                            objectFit: 'cover'
+                                        }} />
+                                ))
+                            }
                         </Row>
 
                         <Form.Group className="m-3">
@@ -221,7 +239,7 @@ const EditSightingForm = () => {
                                 type="text"
                                 value={sightingData.comment}
                                 onChange={handleFormChange}
-                                placeholder="Cero trolleo por aquí, gracias" />
+                                placeholder="Add a brief description or additional info" />
                         </Form.Group>
 
                         <Button
