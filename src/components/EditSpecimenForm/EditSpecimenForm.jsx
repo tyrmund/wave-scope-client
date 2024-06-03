@@ -1,8 +1,7 @@
-import { useContext, useEffect, useState } from "react"
-import { Form, Button, Container, Row, Col } from "react-bootstrap"
+import { useEffect, useState } from "react"
+import { Form, Button, Container, Row, Col, Image } from "react-bootstrap"
 import specimenServices from "../../services/specimen.services"
 import { useNavigate, useParams } from "react-router-dom"
-import { AuthContext } from "../../contexts/auth.context"
 import { SPECIMEN_HABITAT, SPECIMEN_ISENDEMIC } from "../../data/lists.data"
 import uploadServices from "../../services/upload.services"
 
@@ -26,7 +25,6 @@ const EditSpecimenForm = () => {
 
   useEffect(() => {
     loadSpecimenData()
-    loadImagesData()
   }, [])
 
   const loadSpecimenData = () => {
@@ -34,35 +32,28 @@ const EditSpecimenForm = () => {
     specimenServices
       .getOneSpecimen(specimenId)
       .then(({ data }) => {
-        console.log(data)
         setEditSpecimenData({
           ...data,
           isEndemic: data.isEndemic,
-          habitat: data.habitat
+          habitat: data.habitat,
+          images: data.images
         })
         setLoadingImage(false)
       })
       .catch(err => console.log(err))
   }
 
-  const loadImagesData = () => {
-
-    uploadServices
-      .getImages()
-  }
-
 
   const handleInputChange = e => {
+
     const { value, name } = e.target
     setEditSpecimenData({ ...editSpecimenData, [name]: value })
+
   }
 
   const handleFileUpload = (e) => {
 
     setLoadingImage(true)
-
-    //creando un formulario en la memoria del equipo con new FormData() y puede tener todos los campos que quiera
-    //en esta línea estamos creando un nuevo campo de este nuevo formulario y le estamos dando como target del evento la primera de las files, los inputs de tipo file tienen una propiedad .files dentro de su target (un array con imágenes seleccionadas)
 
     const formData = new FormData()
 
@@ -71,7 +62,7 @@ const EditSpecimenForm = () => {
     }
 
     uploadServices
-      .uploadImage(formData)                              //le mandamos un formulario que no es real pero que está guardado en memoria con un campo que lleva la imagen y lo mandamos al servicio de subida
+      .uploadImage(formData)
       .then(({ data }) => {
         setEditSpecimenData({ ...editSpecimenData, images: data.cloudinary_urls })
         setLoadingImage(false)
@@ -88,11 +79,19 @@ const EditSpecimenForm = () => {
     e.preventDefault()
 
     const fullSpecimen = {
-      ...setEditSpecimenData
+      images: editSpecimenData.images,
+      commonName: editSpecimenData.commonName,
+      scientificName: editSpecimenData.scientificName,
+      mediumSize: editSpecimenData.mediumSize,
+      isEndemic: editSpecimenData.isEndemic,
+      habitat: editSpecimenData.habitat,
+      description: editSpecimenData.description
     }
 
+    console.log(fullSpecimen)
+
     specimenServices
-      .editSpecimen(fullSpecimen)
+      .editSpecimen(specimenId, fullSpecimen)
       .then(() => navigate('/marine-life'))
       .catch(err => console.log(err))
   }
@@ -165,9 +164,24 @@ const EditSpecimenForm = () => {
           <Form.Label>Add a set of pictures of the specimen</Form.Label>
           <Form.Control type="file" multiple onChange={handleFileUpload} />
         </Form.Group>
+        <Row className="p-3 d-flex align-items-start">
+          {
+            editSpecimenData.images.length > 0 &&
+            editSpecimenData.images.map((image, index) => (
+              <Image
+                key={index}
+                src={image}
+                style={{
+                  height: '50px',
+                  width: 'auto',
+                  objectFit: 'cover'
+                }} />
+            ))
+          }
+        </Row>
 
         <Button variant="primary" type="submit" className="mb-5 custom-color-button" disabled={loadingImage}>
-          {loadingImage ? 'Loading image...' : 'Create new specimen'}
+          {loadingImage ? 'Loading image...' : 'Edit this specimen'}
         </Button>
 
 
