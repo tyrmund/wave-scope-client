@@ -1,5 +1,6 @@
 import { Container } from "react-bootstrap"
 import NewBeachForm from "../../components/NewBeachForm/NewBeachForm.jsx"
+import '../../contexts/auth.context.jsx'
 
 const NewBeachPage = () => {
 

@@ -1,4 +1,4 @@
 .BusStopGroup {
-
+    --bs-card-bg: #9CE6DE !important;
     border-color: #9CE6DE !important;
 }
