@@ -8,7 +8,7 @@ const SightingCard = ({ _id, images, name, createdAt }) => {
         <div className="SightingCard">
             <Card className="m-3" style={{ border: 'none', maxHeight: '500px' }}>
                 <Link to={`/sightings/${_id}`}>
-                    <Card.Img style={{ height: '300px', objectFit: 'cover' }} variant="top" src={images[0]} alt={name} />
+                    <Card.Img style={{ height: '300px', objectFit: 'cover' }} variant="top" src={images.length !== 0 ? images[0] : "https://res.cloudinary.com/dc7ycwd1u/image/upload/v1717428275/Anadir_un_titulo_2_zruph6.png"} alt={name} />
                 </Link>
                 <Card.Body>
                     <div className='mb-2'>
