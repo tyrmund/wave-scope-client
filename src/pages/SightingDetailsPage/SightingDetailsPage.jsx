@@ -5,6 +5,8 @@ import { AuthContext } from "../../contexts/auth.context"
 import sightingServices from '../../services/sighting.services'
 import ModalConfirm from "../../components/ModalConfirm/ModalConfirm"
 import './SightingDetailsPage.css'
+import LikeButton from "../../ReactIcons/LikeButton"
+import DislikeButton from "../../ReactIcons/DislikeButton"
 
 const SightingDetailsPage = () => {
 
@@ -15,9 +17,20 @@ const SightingDetailsPage = () => {
   const { sightingId } = useParams()
   const navigate = useNavigate()
 
+  const [liked, setLiked] = useState(false);
+  const [disliked, setDisliked] = useState(false)
+
   useEffect(() => {
     loadSightingDetails()
   }, [])
+
+  const handleClickLike = () => {
+    setLiked(!liked)
+  }
+
+  const handleClickDislike = () => {
+    setDisliked(!disliked)
+  }
 
   const loadSightingDetails = () => {
 
@@ -112,8 +125,22 @@ const SightingDetailsPage = () => {
                     <Accordion.Body>
                       <i className="mb-3">{sighting.comment}</i>
                       <hr />
-                      <p>Confirmations: {sighting.confirmations}</p>
-                      <p>Rejections: {sighting.rejections}</p>
+                      <Row className="Confirmations-Row mb-3">
+                        <Col>
+                          <p>Confirmations: {sighting.confirmations}</p>
+                        </Col>
+                        <Col>
+                          <LikeButton handleClick={handleClickLike} />
+                        </Col>
+                      </Row>
+                      <Row className="Rejections-Row">
+                        <Col>
+                          <p>Rejections: {sighting.rejections}</p>
+                        </Col>
+                        <Col>
+                          <DislikeButton handleClick={handleClickDislike} />
+                        </Col>
+                      </Row>
                     </Accordion.Body>
                   </Accordion.Item>
                   {loggedUser._id === sighting.user._id &&

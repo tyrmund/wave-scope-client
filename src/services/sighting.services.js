@@ -39,6 +39,7 @@ class SightingServices {
     deleteSighting(sightingId) {
         return this.axiosApp.delete(`/${sightingId}`)
     }
+
 }
 
 const sightingServices = new SightingServices()

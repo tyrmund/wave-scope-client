@@ -76,20 +76,20 @@ const NewSpecimenForm = () => {
 
       <Form onSubmit={handleSubmit}>
         <Form.Group className="" >
-          <Form.Label className="mb-3 h5">Common Name</Form.Label>
-          <Form.Control type="text" value={specimenFormData.commonName} onChange={handleInputChange} name='commonName' placeholder="Ex: Correlimos tridáctilo" />
+          <Form.Label className="mb-3 h4">Common Name</Form.Label>
+          <Form.Control className='mb-3' type="text" value={specimenFormData.commonName} onChange={handleInputChange} name='commonName' placeholder="Ex: Correlimos tridáctilo" />
           <br />
         </Form.Group>
 
         <Form.Group className="" >
-          <Form.Label className="mb-3 h5">Scientific Name</Form.Label>
-          <Form.Control type="text" value={specimenFormData.scientificName} onChange={handleInputChange} name='scientificName' placeholder="Ex: Calidris alba" />
+          <Form.Label className="mb-3 h4">Scientific Name</Form.Label>
+          <Form.Control className='mb-3' type="text" value={specimenFormData.scientificName} onChange={handleInputChange} name='scientificName' placeholder="Ex: Calidris alba" />
           <br />
         </Form.Group>
 
         <Form.Group className="" >
-          <Form.Label className="mb-3 h5">Medium size of specimen</Form.Label>
-          <Form.Control type="text" value={specimenFormData.mediumSize} onChange={handleInputChange} name='mediumSize' placeholder="Enter the medium size of the specimen" />
+          <Form.Label className="mb-3 h4">Medium size of specimen</Form.Label>
+          <Form.Control className='mb-3' type="text" value={specimenFormData.mediumSize} onChange={handleInputChange} name='mediumSize' placeholder="Enter the medium size of the specimen" />
           <br />
         </Form.Group>
 
@@ -97,8 +97,9 @@ const NewSpecimenForm = () => {
           <Col >
 
             <Form.Group  >
-              <Form.Label className="mb-3 h5">Is the specimen endemic to the area?</Form.Label>
+              <Form.Label className="mb-3 h4">Is the specimen endemic to the area?</Form.Label>
               <Form.Select
+                className='mb-5'
                 value={specimenFormData.isEndemic}
                 name='isEndemic'
                 onChange={handleInputChange} >
@@ -112,8 +113,9 @@ const NewSpecimenForm = () => {
 
           <Col>
             <Form.Group  >
-              <Form.Label className="mb-3 h5">Select the type of habitat of the specimen</Form.Label>
+              <Form.Label className="mb-3 h4">Select the type of habitat of the specimen</Form.Label>
               <Form.Select
+                className='mb-5'
                 value={specimenFormData.habitat}
                 name='habitat'
                 onChange={handleInputChange} >
@@ -129,17 +131,17 @@ const NewSpecimenForm = () => {
         </Row>
 
         <Form.Group  >
-          <Form.Label className="mb-3 h5">Give a small description of the specimen and its characteristics</Form.Label>
-          <Form.Control type="text" as='textarea' rows='5' value={specimenFormData.description} onChange={handleInputChange} name='description' placeholder="Description of the specimen" />
+          <Form.Label className="mb-3 h4">Give a small description of the specimen and its characteristics</Form.Label>
+          <Form.Control className='mb-3' type="text" as='textarea' rows='5' value={specimenFormData.description} onChange={handleInputChange} name='description' placeholder="Description of the specimen" />
           <br />
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="image">
-          <Form.Label>Add a set of pictures of the specimen</Form.Label>
-          <Form.Control type="file" multiple onChange={handleFileUpload} />
+          <Form.Label className="h4">Add a set of pictures of the specimen</Form.Label>
+          <Form.Control className='mb-3' type="file" multiple onChange={handleFileUpload} />
         </Form.Group>
 
-        <Button variant="primary" type="submit" className="mb-5 custom-color-button" disabled={loadingImage}>
+        <Button variant="primary" type="submit" className="mb-3 custom-color-button" disabled={loadingImage}>
           {loadingImage ? 'Loading image...' : 'Create new specimen'}
         </Button>
 

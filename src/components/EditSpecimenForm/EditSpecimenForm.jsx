@@ -9,6 +9,7 @@ import uploadServices from "../../services/upload.services"
 const EditSpecimenForm = () => {
 
 
+
   const { specimenId } = useParams()
   const navigate = useNavigate()
   const [loadingImage, setLoadingImage] = useState(true)
@@ -64,7 +65,9 @@ const EditSpecimenForm = () => {
     uploadServices
       .uploadImage(formData)
       .then(({ data }) => {
-        setEditSpecimenData({ ...editSpecimenData, images: data.cloudinary_urls })
+        const oldImages = editSpecimenData.images
+        const newImages = data.cloudinary_urls
+        setEditSpecimenData({ ...editSpecimenData, images: [...oldImages, ...newImages] })
         setLoadingImage(false)
       })
       .catch(err => {
@@ -72,6 +75,12 @@ const EditSpecimenForm = () => {
         setLoadingImage(false)
       })
 
+  }
+
+  const handleFileDelete = (_, index) => {
+    const updatedFiles = [...editSpecimenData.images]
+    updatedFiles.splice(index, 1)
+    setEditSpecimenData({ ...editSpecimenData, images: updatedFiles })
   }
 
   const handleSubmit = e => {
@@ -102,19 +111,19 @@ const EditSpecimenForm = () => {
 
       <Form onSubmit={handleSubmit}>
         <Form.Group className="" >
-          <Form.Label className="mb-3 h5">Common Name</Form.Label>
+          <Form.Label className="mb-3 h4">Common Name</Form.Label>
           <Form.Control type="text" value={editSpecimenData.commonName} onChange={handleInputChange} name='commonName' placeholder="Ex: Correlimos tridáctilo" />
           <br />
         </Form.Group>
 
         <Form.Group className="" >
-          <Form.Label className="mb-3 h5">Scientific Name</Form.Label>
+          <Form.Label className="mb-3 h4">Scientific Name</Form.Label>
           <Form.Control type="text" value={editSpecimenData.scientificName} onChange={handleInputChange} name='scientificName' placeholder="Ex: Calidris alba" />
           <br />
         </Form.Group>
 
         <Form.Group className="" >
-          <Form.Label className="mb-3 h5">Medium size of specimen</Form.Label>
+          <Form.Label className="mb-3 h4">Medium size of specimen</Form.Label>
           <Form.Control type="text" value={editSpecimenData.mediumSize} onChange={handleInputChange} name='mediumSize' placeholder="Enter the medium size of the specimen" />
           <br />
         </Form.Group>
@@ -123,7 +132,7 @@ const EditSpecimenForm = () => {
           <Col >
 
             <Form.Group  >
-              <Form.Label className="mb-3 h5">Is the specimen endemic to the area?</Form.Label>
+              <Form.Label className="mb-3 h4">Is the specimen endemic to the area?</Form.Label>
               <Form.Select
                 value={editSpecimenData.isEndemic}
                 name='isEndemic'
@@ -138,7 +147,7 @@ const EditSpecimenForm = () => {
 
           <Col>
             <Form.Group  >
-              <Form.Label className="mb-3 h5">Select the type of habitat of the specimen</Form.Label>
+              <Form.Label className="mb-3 h4">Select the type of habitat of the specimen</Form.Label>
               <Form.Select
                 value={editSpecimenData.habitat}
                 name='habitat'
@@ -161,7 +170,7 @@ const EditSpecimenForm = () => {
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="image">
-          <Form.Label>Add a set of pictures of the specimen</Form.Label>
+          <Form.Label className="h4">Add a set of pictures of the specimen</Form.Label>
           <Form.Control type="file" multiple onChange={handleFileUpload} />
         </Form.Group>
         <Row className="p-3 d-flex align-items-start">
@@ -175,13 +184,15 @@ const EditSpecimenForm = () => {
                   height: '50px',
                   width: 'auto',
                   objectFit: 'cover'
-                }} />
+                }}
+                onClick={(event) => handleFileDelete(event, index)}
+              />
             ))
           }
         </Row>
 
         <Button variant="primary" type="submit" className="mb-5 custom-color-button" disabled={loadingImage}>
-          {loadingImage ? 'Loading image...' : 'Edit this specimen'}
+          {loadingImage ? 'Loading image...' : '🖫 Save Changes'}
         </Button>
 
 
