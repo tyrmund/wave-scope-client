@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Form, Button, Image, Row, Col, Container } from "react-bootstrap"
+import { Form, Button, Image, Row, Col, Container, CloseButton } from "react-bootstrap"
 import { useNavigate, useParams } from "react-router-dom"
 
 import Loader from "../Loader/Loader"
@@ -15,10 +15,12 @@ const EditSightingForm = () => {
     const [specimensLoading, setSpecimensLoading] = useState(true)
     const [sightingLoading, setSightingLoading] = useState(true)
     const [loadingImage, setLoadingImage] = useState(false)
+
     const [beaches, setBeaches] = useState()
     const [specimens, setSpecimens] = useState()
     const [onSite, setOnsite] = useState(false)
     const [modalShow, setModalShow] = useState(false)
+    const [hoveredImageIndex, setHoveredImageIndex] = useState(null)
 
     const { sightingId } = useParams()
     const navigate = useNavigate()
@@ -98,7 +100,9 @@ const EditSightingForm = () => {
         uploadServices
             .uploadImage(formData)
             .then(({ data }) => {
-                setSightingData({ ...sightingData, images: data.cloudinary_urls })
+                const oldImages = sightingData.images
+                const newImages = data.cloudinary_urls
+                setSightingData({ ...sightingData, images: [...oldImages, ...newImages] })
                 setLoadingImage(false)
             })
             .catch(err => {
@@ -106,6 +110,12 @@ const EditSightingForm = () => {
                 setLoadingImage(false)
             })
 
+    }
+
+    const handleFileDelete = (_, index) => {
+        const updatedFiles = [...sightingData.images]
+        updatedFiles.splice(index, 1)
+        setSightingData({ ...sightingData, images: updatedFiles })
     }
 
     const handleModalClose = () => setModalShow(false)
@@ -161,8 +171,8 @@ const EditSightingForm = () => {
                     <Form onSubmit={handleSubmitSightingForm} className="mt-3">
 
                         <Row>
-                            <Form.Group as={Col} xs={{ span: 6, offset: 3 }} md={{ span: 5 }} className="m-3">
-                                <Form.Label>Select sighting place</Form.Label>
+                            <Form.Group as={Col} xs={{ span: 11 }} md={{ span: 4, offset: 2 }} className="m-3">
+                                <Form.Label className="h6">Select sighting place</Form.Label>
                                 <Form.Select
                                     required
                                     name="beach"
@@ -176,8 +186,8 @@ const EditSightingForm = () => {
                                 </Form.Select>
                             </Form.Group>
 
-                            <Form.Group as={Col} xs={{ span: 6, offset: 3 }} md={{ span: 5 }} className="m-3">
-                                <Form.Label>Select creature sighted</Form.Label>
+                            <Form.Group as={Col} xs={{ span: 11 }} md={{ span: 4 }} className="m-3">
+                                <Form.Label className="h6">Select creature sighted</Form.Label>
                                 <Form.Select
                                     required
                                     name="specimen"
@@ -193,7 +203,7 @@ const EditSightingForm = () => {
                         </Row>
 
                         <Form.Check
-                            className="m-3"
+                            className="m-3 h6"
                             type="switch"
                             id="custom-switch"
                             label="I'm reporting on site"
@@ -203,10 +213,8 @@ const EditSightingForm = () => {
                         <Row>
                             <Form.Group
                                 as={Col}
-                                xs={{ span: 8, offset: 2 }}
-                                md={{ span: 10, offset: 1 }}
                                 className="m-3">
-                                <Form.Label>Reupload pictures (olders ones will be deleted)</Form.Label>
+                                <Form.Label className="h6">Upload pictures</Form.Label>
                                 <Form.Control
                                     type="file"
                                     multiple
@@ -218,20 +226,38 @@ const EditSightingForm = () => {
                             {
                                 sightingData.images.length > 0 &&
                                 sightingData.images.map((image, index) => (
-                                    <Image
-                                        key={index}
-                                        src={image}
+                                    <Col
+                                        md={{ span: 1 }}
                                         style={{
-                                            height: '50px',
-                                            width: 'auto',
-                                            objectFit: 'cover'
-                                        }} />
+                                            position: 'relative'
+                                        }}
+                                        key={index}
+                                        onMouseEnter={() => setHoveredImageIndex(index)}
+                                        onMouseLeave={() => setHoveredImageIndex(null)}>
+                                        <Image
+                                            src={image}
+                                            style={{
+                                                height: '50px',
+                                                width: 'auto',
+                                                objectFit: 'cover',
+                                            }} />
+                                        {hoveredImageIndex === index &&
+                                            <CloseButton
+                                                style={{
+                                                    position: "absolute",
+                                                    top: "5px",
+                                                    left: "15px"
+                                                }}
+                                                className="bg-danger"
+                                                onClick={(event) => handleFileDelete(event, index)}
+                                            />}
+                                    </Col>
                                 ))
                             }
                         </Row>
 
                         <Form.Group className="m-3">
-                            <Form.Label>Comment</Form.Label>
+                            <Form.Label className="h6">Comment</Form.Label>
                             <Form.Control
                                 as="textarea"
                                 rows="5"
@@ -247,7 +273,7 @@ const EditSightingForm = () => {
                             disabled={loadingImage}
                             variant="primary"
                             type="submit">
-                            {loadingImage ? 'Loading image...' : 'Edit sighting'}
+                            {loadingImage ? 'Loading image...' : '🖫 Save changes'}
                         </Button>
 
                         <ModalConfirm
