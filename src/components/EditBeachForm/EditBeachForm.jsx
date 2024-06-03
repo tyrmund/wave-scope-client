@@ -24,8 +24,8 @@ const EditBeachForm = () => {
             .then(({ data }) => {
                 setBusStops(data.nearBusStops.map(elm => ({
                     name: elm.name,
-                    latitude: elm.coordinates[1],
-                    longitude: elm.coordinates[0],
+                    latitude: elm.latitude,
+                    longitude: elm.longitude,
                     lines: elm.lines
                 })))
                 setBeachData({
@@ -78,6 +78,11 @@ const EditBeachForm = () => {
         const { name, value } = event.target
         setBeachData({ ...beachData, [name]: value })
     }
+    const handleFileDelete = (_, index) => {
+        const updatedFiles = [...beachData.images]
+        updatedFiles.splice(index, 1)
+        setBeachData({ ...beachData, images: updatedFiles })
+    }
 
     const [loadingImage, setLoadingImage] = useState(false)
     const handleFileUpload = (e) => {
@@ -94,7 +99,10 @@ const EditBeachForm = () => {
             .uploadImage(formData)
             .then(({ data }) => {
                 console.log(data.cloudinary_urls)
-                setBeachData({ ...beachData, images: data.cloudinary_urls })
+                const oldImages = beachData.images
+                const newImages = data.cloudinary_urls
+
+                setBeachData({ ...beachData, images: [...oldImages, ...newImages] })
                 setLoadingImage(false)
             })
             .catch(err => {
@@ -259,7 +267,6 @@ const EditBeachForm = () => {
 
                         <Form.Group className="m-3" controlId="image">
                             <Form.Label className="h4">Add a set of pictures of the beach</Form.Label>
-                            <Form.Label className="h6 mb-3">(your current pictures will disappear)</Form.Label>
                             <Form.Control type="file" multiple onChange={handleFileUpload} />
                         </Form.Group>
                         <Row className="mb-3 p-3 d-flex align-items-start">
@@ -269,11 +276,13 @@ const EditBeachForm = () => {
                                     <Image
                                         key={index}
                                         src={image}
+                                        onClick={(event) => handleFileDelete(event, index)}
                                         style={{
                                             height: '50px',
                                             width: 'auto',
                                             objectFit: 'cover'
-                                        }} />
+                                        }}
+                                    />
                                 ))
                             }
                         </Row>

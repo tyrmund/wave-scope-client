@@ -10,11 +10,15 @@ const BeachesPage = () => {
   console.log(loggedUser)
   return (
     <div className="BeachesPage">
-      <div className="text-center">
-        <Link to='/beaches/new'>
-          <Button className="custom-color-button mb-3 mt-3">New Beach</Button>
-        </Link>
-      </div>
+      {
+        loggedUser.role === "admin" &&
+        <div className="text-center">
+
+          <Link to='/beaches/new'>
+            <Button className="custom-color-button mb-3 mt-3">New Beach</Button>
+          </Link>
+        </div>
+      }
       <BeachesList />
     </div>
   )
