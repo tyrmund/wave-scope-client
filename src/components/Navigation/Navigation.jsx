@@ -12,9 +12,9 @@ const Navigation = () => {
   const [expanded, setExpanded] = useState(true)
 
   return (
-    <Navbar expand="lg" className="Navbar m-auto" expanded={!expanded}>
+    <Navbar expand="lg" className="Navbar m-auto align-items-center" expanded={!expanded}>
       <Container>
-        <Navbar.Brand href="/welcome" >WaveScope</Navbar.Brand>
+        <Navbar.Brand href="/welcome" style={{ marginRight: '50px' }}>WaveScope</Navbar.Brand>
         {
           loggedUser
           &&
@@ -22,7 +22,7 @@ const Navigation = () => {
             <Navbar.Toggle aria-controls="basic-navbar-nav" className="Navicon" onClick={() => setExpanded(!expanded)} />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
-                <Navbar.Text as="span" style={{ marginRight: '20px', marginLeft: '20px', color: '#FFFBEB' }}>Welcome, {loggedUser.username}!</Navbar.Text>
+                <Navbar.Text as="span" style={{ marginRight: '20px', color: '#FFFBEB' }}>Welcome, {loggedUser.username}!</Navbar.Text>
                 <Link to="/beaches" className="link" onClick={() => setExpanded(true)}>
                   <Nav.Link as="span">Beaches</Nav.Link>
                 </Link>
@@ -40,7 +40,7 @@ const Navigation = () => {
                 </Link>
 
                 <Link to={'/profile'} className="nav-link" onClick={() => setExpanded(true)}>
-                  <Image src={loggedUser.profilePic} style={{ width: '30px' }} roundedCircle />
+                  <Image src={loggedUser.profilePic} style={{ width: '25px' }} roundedCircle />
                 </Link>
 
               </Nav>

@@ -4,7 +4,6 @@ import { Button, } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import { AuthContext } from "../../contexts/auth.context"
 import Search from "../../components/Search/Search"
-import Loader from "../../components/Loader/Loader"
 
 const BeachesPage = () => {
 
@@ -13,16 +12,17 @@ const BeachesPage = () => {
   return (
     <div className="BeachesPage">
       <Search />
-      <h2 className="mt-3 text-center"> Beaches</h2>
+      <h1 className="mt-3 text-center"> Beaches</h1>
       {
-        loggedUser && loggedUser.role === "admin" &&
+        loggedUser.role === "admin" &&
 
         <div className="text-center">
           <Link to='/beaches/new'>
-            <Button className="custom-color-button mb-3 mt-3">New Beach</Button>
+            <Button className="custom-color-button mb-3 mt-3">Add a new beach</Button>
           </Link>
         </div>
       }
+
       <BeachesList />
     </div>
   )

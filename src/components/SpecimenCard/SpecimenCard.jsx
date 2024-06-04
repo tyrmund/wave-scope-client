@@ -4,15 +4,15 @@ import { Link } from "react-router-dom"
 const SpecimenCard = ({ images, commonName, scientificName, _id }) => {
 
   return (
-    <Container className="SpecimenCard mt-3 mb-3" >
-
+    <div className="SpecimenCard mt-3 mb-3" >
+      div
       <Card style={{ border: '0px' }}>
 
         <Link to={`/marine-life/${_id}`}>
           <Card.Img
             variant="top"
             src={images.length !== 0 ? images[0] : "https://res.cloudinary.com/dc7ycwd1u/image/upload/v1717428275/Anadir_un_titulo_2_zruph6.png"}
-            style={{ height: '200px', objectFit: 'cover' }}
+            style={{ height: '300px', objectFit: 'cover' }}
           />
         </Link>
 
@@ -25,7 +25,7 @@ const SpecimenCard = ({ images, commonName, scientificName, _id }) => {
         </Card.Body>
 
       </Card>
-    </Container>
+    </div>
   )
 }
 

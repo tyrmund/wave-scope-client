@@ -69,7 +69,7 @@ const SightingDetailsPage = () => {
               <Col md={{ span: 8, offset: 2 }}>
                 <Container>
 
-                  <Carousel>
+                  <Carousel className="mb-5">
                     {sighting.images.length !== 0 ?
                       sighting.images.map((image, index) => (
                         <Carousel.Item key={index}>
@@ -91,7 +91,12 @@ const SightingDetailsPage = () => {
                     }
                   </Carousel>
 
-                  <CustomMap zoom={16} center={sighting.location} markers={sighting.location} type={'sighting'} />
+                  <CustomMap
+                    zoom={18}
+                    center={sighting.location}
+                    markers={sighting.location}
+                    type={'sighting'}
+                  />
 
                 </Container>
               </Col>
