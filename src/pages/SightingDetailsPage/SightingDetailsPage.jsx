@@ -161,12 +161,12 @@ const SightingDetailsPage = () => {
                       <Accordion.Header>Options</Accordion.Header>
                       <Accordion.Body>
                         <Row>
-                          <Col md={{ span: 2 }}>
+                          <Col xs={{ span: 2, offset: 2 }} md={{ span: 4 }} lg={{ span: 4 }}>
                             <Link to={`/sightings/edit/${sighting._id}`}>
                               <Button className="custom-color-button">Edit</Button>
                             </Link>
                           </Col>
-                          <Col md={{ span: 2, offset: 1 }}>
+                          <Col xs={{ span: 2, offset: 2 }} md={{ span: 4, offset: 1 }} lg={{ span: 4, offset: 2 }}>
                             <Button
                               className="delete-color-button"
                               onClick={handleModalShow}>

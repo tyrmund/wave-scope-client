@@ -11,7 +11,7 @@ const PrivateRoute = ({ onlyAdmin }) => {
     return <Loader />
   }
 
-  if (loggedUser.role != "admin" && onlyAdmin === true) {
+  if (loggedUser && loggedUser.role != "admin" && onlyAdmin === true) {
     return <Navigate to='/' />
   }
 

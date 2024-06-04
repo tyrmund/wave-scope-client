@@ -7,13 +7,13 @@ import { AuthContext } from "../../contexts/auth.context"
 const BeachesPage = () => {
 
   const { loggedUser } = useContext(AuthContext)
-  console.log(loggedUser)
+
   return (
     <div className="BeachesPage">
       {
-        loggedUser.role === "admin" &&
-        <div className="text-center">
+        loggedUser && loggedUser.role === "admin" &&
 
+        <div className="text-center">
           <Link to='/beaches/new'>
             <Button className="custom-color-button mb-3 mt-3">New Beach</Button>
           </Link>

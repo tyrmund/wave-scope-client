@@ -25,6 +25,9 @@ import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
 import PrivateRoute from "./PrivateRoute";
 import AboutUs from "../pages/AboutUs/AboutUs";
 
+
+import CustomMap from "../components/CustomMap/CustomMap";
+
 const AppRoutes = () => {
   return (
     <div className="AppRoutes">
@@ -32,6 +35,7 @@ const AppRoutes = () => {
         <Route path={"/"} element={<StartPage />} />
         <Route path={"/signup"} element={<SignupPage />} />
         <Route path={"/about-us"} element={<AboutUs />} />
+        <Route path={"/custom-map"} element={<CustomMap />} />
 
         <Route element={<PrivateRoute />}>
 
