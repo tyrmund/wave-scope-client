@@ -4,7 +4,7 @@ import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 function CustomMap() {
 
     const { isLoaded } = useJsApiLoader({
-        googleMapsApiKey: "AIzaSyAaqy3xWgV3AXQiCkloMkoz05O7AYjJf14"
+        googleMapsApiKey: `${import.meta.env.GOOGLE_MAPS_API_KEY}`
     })
 
     const [map, setMap] = useState(null)
