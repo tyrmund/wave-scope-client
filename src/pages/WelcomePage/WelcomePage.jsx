@@ -1,49 +1,66 @@
-import { Button, Container } from "react-bootstrap"
-import { useState } from "react"
-import { useEffect } from "react"
-import Loader from '../../components/Loader/Loader'
-import beachServices from '../../services/beach.services'
+import { useEffect, useState } from "react"
+import sightingServices from "../../services/sighting.services"
+import Loader from "../../components/Loader/Loader"
+import { Container, Row, Col } from "react-bootstrap"
+import SightingCard from "../../components/SightingCard/SightingCard"
 import { useContext } from "react"
 import { AuthContext } from "../../contexts/auth.context"
 
+const WelcomePage = ({ user }) => {
 
-const WelcomePage = () => {
-
-    const [isLoading, setIsloading] = useState(true)
-    const [beaches, setBeaches] = useState([])
-
-    useEffect(() => {
-        loadBeaches()
-    }, [])
-
+    const [sightings, setSighting] = useState()
+    const [isLoading, setIsLoading] = useState(true)
     const { loggedUser, logout } = useContext(AuthContext)
 
-    const loadBeaches = () => {
-        beachServices
-            .getAllBeaches('/beaches')
+    useEffect(() => {
+        loadSightingUserList(user)
+    }, [user])
+
+    const loadSightingUserList = () => {
+
+        sightingServices
+            .getAllSightings(user)
             .then(({ data }) => {
-                setBeaches(data)
-                setIsloading(false)
+                setSighting(data.slice(0, 3))
+                setIsLoading(false)
             })
             .catch(err => console.log(err))
     }
 
     return (
-        <Container className="WelcomePage mt-3" >
+        <Container className="WelcomePage mx-auto mt-3">
 
-            <div>
-                <h2>{`Welcome ${loggedUser.username}!`}</h2>
+            <div >
+                <h2 className="m2-3">{`Welcome ${loggedUser.username}`}</h2>
                 <br />
-                <h3>Choose a beach in the Wave Scope</h3>
+                <h3>Sightings</h3>
                 {
+                    isLoading
+                        ?
+                        <Loader />
+                        :
+                        <Container className="SightingsList mb-5">
 
+                            <Row className="mt-5 mb-3">
+                                {
+                                    sightings.map(sighting =>
+                                        <Col
+                                            key={sighting._id}
+                                            xs={{ span: 12 }}
+                                            md={{ span: 6 }}
+                                            lg={{ span: 4 }}
+                                        >
+                                            <SightingCard
+                                                name={sighting.specimen.commonName}
+                                                user={sighting.user.username}
+                                                {...sighting} />
+                                        </Col>
+                                    )
+                                }
+                            </Row>
+                        </Container>
                 }
             </div>
-
-            <h2>Your Sightings</h2>
-
-
-
         </Container>
     )
 }

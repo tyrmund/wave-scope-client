@@ -117,9 +117,6 @@ const BeachDetailsPage = () => {
                   <Link to='/beaches'>
                     <Button className="custom-color-button mb-3">Nearest beaches</Button>
                   </Link>
-                  <Link to='/'>
-                    <Button className="custom-color-button">The fauna today</Button>
-                  </Link>
                 </Card.Body>
               </Card>
               <Row className='mx-auto'>
