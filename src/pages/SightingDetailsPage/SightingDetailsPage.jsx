@@ -136,7 +136,7 @@ const SightingDetailsPage = () => {
                     <Accordion.Body>
                       "{sighting.comment}"
                       <br />
-                      <i className="mb-3">by {loggedUser.username}</i>
+                      <i className="mb-3">by {sighting.user.username}</i>
                       <br />
                       <h1 className="text-center mt-3 fs-6">
                         Sighting date: {sighting.createdAt.substring(8, 10)}/{sighting.createdAt.substring(5, 7)}/{sighting.createdAt.substring(0, 4)}</h1>
@@ -159,23 +159,31 @@ const SightingDetailsPage = () => {
                       </Row>
                     </Accordion.Body>
                   </Accordion.Item>
-                  {loggedUser._id === sighting.user._id &&
+                  {(loggedUser._id === sighting.user._id || loggedUser.role === 'admin') &&
                     <Accordion.Item eventKey="3">
                       <Accordion.Header>Options</Accordion.Header>
                       <Accordion.Body>
+
                         <Row>
-                          <Col xs={{ span: 2, offset: 2 }} md={{ span: 4 }} lg={{ span: 4 }}>
+                          <Col
+                            xs={{ span: 3, offset: 3 }}
+                            md={{ span: 4 }}
+                            lg={{ span: 4 }}>
                             <Link to={`/sightings/edit/${sighting._id}`}>
-                              <Button className="custom-color-button button-margin m-2">Edit</Button>
+                              <Button className="custom-color-button button-margin mt-2 mb-2">Edit</Button>
                             </Link>
                           </Col>
-                          <Col md={{ span: 2 }}>
+                          <Col
+                            xs={{ span: 3 }}
+                            md={{ span: 4 }}
+                            lg={{ span: 4 }}>
                             <Button
-                              className="delete-color-button m-2"
+                              className="delete-color-button mt-2 mb-2"
                               onClick={handleModalShow}>
                               Delete</Button>
                           </Col>
                         </Row>
+
                       </Accordion.Body>
                     </Accordion.Item>
                   }

@@ -148,11 +148,16 @@ const EditSightingForm = () => {
 
             navigator.geolocation.getCurrentPosition(showPos, showErr)
 
-        } else {
+        }
 
-            const selectedBeach = beaches.find(beach => beach._id = sightingData.beach)
-            sightingData.latitude = selectedBeach.location.coordinates[0]
-            sightingData.longitude = selectedBeach.location.coordinates[1]
+        //  if (!onSite ||
+        //       (sightingData.latitude === 0 || sightingData.longitude === 0)) {
+
+        else {
+
+            const selectedBeach = beaches.find(beach => beach._id === sightingData.beach)
+            sightingData.latitude = selectedBeach.location.coordinates[1]
+            sightingData.longitude = selectedBeach.location.coordinates[0]
 
         }
 
@@ -280,7 +285,7 @@ const EditSightingForm = () => {
                         </Form.Group>
 
                         <Button
-                            className="mt-5 d-block mx-auto custom-color-button"
+                            className="d-block mx-auto custom-color-button"
                             disabled={loadingImage}
                             variant="primary"
                             type="submit">

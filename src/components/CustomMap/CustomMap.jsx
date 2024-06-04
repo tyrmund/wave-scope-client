@@ -35,7 +35,7 @@ function CustomMap({ zoom, center, markers, type }) {
                 <>
                     <Marker position={{ lat: center.coordinates[1], lng: center.coordinates[0] }} icon={'http://maps.google.com/mapfiles/ms/icons/red-dot.png'} />
                     {markers.map((stop, index) =>
-                        <Marker key={index} position={{ lat: Number(stop.latitude), lng: Number(stop.longitude) }} icon={'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'} />
+                        <Marker key={index} position={{ lat: Number(stop.latitude), lng: Number(stop.longitude) }} icon={'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'} title={stop.name} />
                     )}
                 </>
             }

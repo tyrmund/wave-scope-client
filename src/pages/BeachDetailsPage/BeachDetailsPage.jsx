@@ -83,7 +83,11 @@ const BeachDetailsPage = () => {
                     }
                   </Carousel>
 
-                  <CustomMap zoom={2} center={beach.location} markers={beach.nearBusStops} type={'beach'} />
+                  <CustomMap
+                    zoom={12}
+                    center={beach.location}
+                    markers={beach.nearBusStops}
+                    type={'beach'} />
 
                 </Card.Body>
                 <Card.Body>
