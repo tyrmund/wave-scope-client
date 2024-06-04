@@ -1,22 +1,11 @@
-<<<<<<< HEAD
-.delete-color-button:hover {
-    background-color: #023047 !important;
-    border: #023047 !important;
-    color: #FFFBEB !important
-}
-
-.delete-color-button {
-    background-color: #FFE63F !important;
-    border: #FFE63F !important;
-    color: #023047 !important
-}
-
-=======
->>>>>>> 5f4096691a4d65071e3ca83eee369ab1d9d847a5
 .BeachDetailsCard {
     width: 90%;
     margin: auto auto;
     margin-top: 10px;
     margin-bottom: 10px;
     --bs-card-border-radius: 50px !important
+}
+
+.button-margin {
+    margin-right: 10px;
 }

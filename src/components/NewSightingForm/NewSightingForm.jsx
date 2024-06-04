@@ -133,9 +133,9 @@ const NewSightingForm = () => {
     }
 
     return (
-        <div className="NewSightingForm">
+        <div >
             {(beachesLoading || specimensLoading) ? <Loader /> :
-                <Container>
+                <Container className="NewSightingForm mb-5">
                     <Form onSubmit={handleSubmitSightingForm} className="mt-5 mb-5">
                         <Row>
 
@@ -219,7 +219,7 @@ const NewSightingForm = () => {
                         </Form.Group>
 
                         <Button
-                            className="m-5 d-block mx-auto custom-color-button"
+                            className="m-5 custom-color-button"
                             disabled={loadingImage}
                             variant="primary"
                             type="submit">

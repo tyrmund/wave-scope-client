@@ -56,13 +56,13 @@ const SightingDetailsPage = () => {
   }
 
   return (
-    <div className="SightingDetailsPage">
+    <div>
       {
         isLoading
           ?
           <Spinner animation="grow" variant="dark" />
           :
-          <Container>
+          <Container className="SightingDetailsPage">
             <Row>
               <Col md={{ span: 8, offset: 2 }}>
                 <Container>
@@ -161,14 +161,14 @@ const SightingDetailsPage = () => {
                       <Accordion.Header>Options</Accordion.Header>
                       <Accordion.Body>
                         <Row>
-                          <Col md={{ span: 2 }}>
+                          <Col xs={{ span: 2, offset: 2 }} md={{ span: 4 }} lg={{ span: 4 }}>
                             <Link to={`/sightings/edit/${sighting._id}`}>
-                              <Button className="custom-color-button">Edit</Button>
+                              <Button className="custom-color-button button-margin m-2">Edit</Button>
                             </Link>
                           </Col>
-                          <Col md={{ span: 2, offset: 1 }}>
+                          <Col md={{ span: 2 }}>
                             <Button
-                              className="delete-color-button"
+                              className="delete-color-button m-2"
                               onClick={handleModalShow}>
                               Delete</Button>
                           </Col>

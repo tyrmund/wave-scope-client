@@ -46,3 +46,19 @@ img {
   border: #023047 !important;
   color: #FFFBEB !important;
 }
+
+.container .StartPage,
+.AboutUs,
+.BeachesPage,
+.BeachDetailsPage,
+.EditSightingPage,
+.EditMarineLifePage,
+.NewSightingPage,
+.NewSightingForm,
+.SightingDetailsPage {
+  margin-bottom: 50px !important;
+}
+
+.button-margin {
+  margin-right: 10px;
+}

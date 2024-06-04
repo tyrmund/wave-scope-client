@@ -1,4 +1,4 @@
-import { Button, Card, Carousel, CardBody, Badge } from 'react-bootstrap'
+import { Button, Card, Carousel, CardBody, Badge, Container, Row, Col } from 'react-bootstrap'
 import './BeachDetailsPage.css'
 import { useState, useEffect } from 'react'
 import ModalConfirm from '../../components/ModalConfirm/ModalConfirm'
@@ -49,75 +49,82 @@ const BeachDetailsPage = () => {
   }
 
   return (
-    <div>
-      {
-        isLoading
-          ?
-          <Loader />
-          :
-          <>
-            <Card className="BeachDetailsCard">
-              <Card.Body>
+    <Container className='BeachDetailsPage mt-5'>
 
-                <Carousel>
-                  {beach.images.map((image, index) => (
-                    <Carousel.Item key={index}>
-                      <img className="d-block w-100 img-fluid" style={{ height: 450, objectFit: "cover", objectPosition: "center bottom" }}
-                        src={image}
-                        alt={beach.name} />
-                    </Carousel.Item>
-                  )
-                  )}
-                </Carousel>
-              </Card.Body>
-              <Card.Body>
-                <Card.Title>{`${beach.name}`}</Card.Title>
-                <Card.Text>
-                  {`Location: ${beach.location.coordinates[0]}, ${beach.location.coordinates[1]} `}
-                </Card.Text>
-              </Card.Body>
-              <Card.Body>
-                <Card.Text className="Description">
-                  {beach.description}
-                </Card.Text>
-              </Card.Body>
-              <Card.Body>
-                <Card.Text className='h6'>
-                  Nearest Bus Stops
-                </Card.Text>
+      <div>
+        {
+          isLoading
+            ?
+            <Loader />
+            :
+            <>
+              <Card className="BeachDetailsCard">
+                <Card.Body>
 
-                {beach.nearBusStops.map((busStop, index) =>
-                  <div key={busStop._id}>
-                    <h3 className="fs-6 mt-3">• {busStop.name}</h3>
-                    {busStop.lines.map((line, index) =>
-                      <Badge key={index} bg="info">{line}</Badge>
+                  <Carousel>
+                    {beach.images.map((image, index) => (
+                      <Carousel.Item key={index}>
+                        <img className="d-block w-100 img-fluid" style={{ height: 450, objectFit: "cover", objectPosition: "center bottom" }}
+                          src={image}
+                          alt={beach.name} />
+                      </Carousel.Item>
+                    )
                     )}
-                  </div>
-                )}
+                  </Carousel>
+                </Card.Body>
+                <Card.Body>
+                  <Card.Title>{`${beach.name}`}</Card.Title>
+                  <Card.Text>
+                    {`Location: ${beach.location.coordinates[0]}, ${beach.location.coordinates[1]} `}
+                  </Card.Text>
+                </Card.Body>
+                <Card.Body>
+                  <Card.Text className="Description">
+                    {beach.description}
+                  </Card.Text>
+                </Card.Body>
+                <Card.Body>
+                  <Card.Text className='h6'>
+                    Nearest Bus Stops
+                  </Card.Text>
 
-              </Card.Body>
+                  {beach.nearBusStops.map((busStop, index) =>
+                    <div key={busStop._id}>
+                      <h3 className="fs-6 mt-3">• {busStop.name}</h3>
+                      {busStop.lines.map((line, index) =>
+                        <Badge key={index} bg="info">{line}</Badge>
+                      )}
+                    </div>
+                  )}
 
-              <Card.Body>
-                <Link to='/beaches'>
-                  <Button className="custom-color-button">Nearest beaches</Button>
-                </Link>
-                <Link to='/'>
-                  <Button className="custom-color-button">The fauna today</Button>
-                </Link>
-              </Card.Body>
-            </Card>
-            <Button className='delete-color-button mb-3' onClick={showConfirmModal}> Delete this beach</Button>
-            <Link to={`/beaches/edit/${beachId}`}>
-              <Button className="custom-color-button mb-3">Edit this beach </Button>
-            </Link>
-            <ModalConfirm show={show}
-              handleClose={handleClose}
-              handleConfirm={deleteThisBeach}
-              bodyMessage={'You will delete this beach'}
-              buttonMessage={'Confirm'} />
-          </>
-      }
-    </div>
+                </Card.Body>
+
+                <Card.Body>
+                  <Link to='/beaches'>
+                    <Button className="custom-color-button mb-3">Nearest beaches</Button>
+                  </Link>
+                  <Link to='/'>
+                    <Button className="custom-color-button">The fauna today</Button>
+                  </Link>
+                </Card.Body>
+              </Card>
+              <Row className='mx-auto'>
+                <Col md={{ span: 6 }} className='m-5'>
+                  <Button className='delete-color-button button-margin' onClick={showConfirmModal}> Delete this beach</Button>
+                  <Link to={`/beaches/edit/${beachId}`}>
+                    <Button className="custom-color-button">Edit this beach </Button>
+                  </Link>
+                </Col>
+              </Row>
+              <ModalConfirm show={show}
+                handleClose={handleClose}
+                handleConfirm={deleteThisBeach}
+                bodyMessage={'You will delete this beach'}
+                buttonMessage={'Confirm'} />
+            </>
+        }
+      </div>
+    </Container>
   )
 }
 

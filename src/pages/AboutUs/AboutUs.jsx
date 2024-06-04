@@ -10,7 +10,7 @@ const AboutUs = () => {
     return (
 
 
-        <Container>
+        <Container className="AboutUs mb-5">
 
             <Row>
                 <Col md={{ span: 4 }}>
