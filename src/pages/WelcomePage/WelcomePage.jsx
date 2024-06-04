@@ -1,22 +1,26 @@
-import { Button, Container, Row, Col } from "react-bootstrap"
-import { useState, useContext, useEffect } from "react"
+import { Button, Container } from "react-bootstrap"
+import { useState } from "react"
+import { useEffect } from "react"
+import Loader from '../../components/Loader/Loader'
+import beachServices from '../../services/beach.services'
+import { useContext } from "react"
 import { AuthContext } from "../../contexts/auth.context"
-import Loader from "../../components/Loader/Loader"
-import beachServices from "../../services/beach.services"
-import BeachCard from "../../components/BeachCard/BeachCard"
+
 
 const WelcomePage = () => {
-    const [beaches, setBeaches] = useState([])
+
     const [isLoading, setIsloading] = useState(true)
-    const { loggedUser } = useContext(AuthContext)
+    const [beaches, setBeaches] = useState([])
 
     useEffect(() => {
         loadBeaches()
     }, [])
 
+    const { loggedUser, logout } = useContext(AuthContext)
+
     const loadBeaches = () => {
         beachServices
-            .getOneBeach('/beaches')
+            .getAllBeaches('/beaches')
             .then(({ data }) => {
                 setBeaches(data)
                 setIsloading(false)
@@ -26,69 +30,20 @@ const WelcomePage = () => {
 
     return (
         <Container className="WelcomePage mt-3" >
+
             <div>
+                <h2>{`Welcome ${loggedUser.username}!`}</h2>
+                <br />
+                <h3>Choose a beach in the Wave Scope</h3>
                 {
-                    isLoading
-                        ?
-                        <Loader />
-                        :
-                        <Row>
-                            {beaches.map(beach => {
-
-                                return (
-                                    <Col md={{ span: 4 }} className="mb-5" key={beach._id}>
-
-                                        <BeachCard {...beach} />
-
-                                    </Col>
-                                )
-                            })
-                            }
-                        </Row>
 
                 }
-                {
-                    isLoading
-                        ?
-                        <Loader />
-                        :
-                        <Row>
-                            {beaches.map(beach => {
-
-                                return (
-                                    <Col md={{ span: 12 }} className="mb-5" key={beach._id}>
-
-                                        <BeachCard {...beach} />
-
-                                    </Col>
-                                )
-                            })
-                            }
-                        </Row>
-
-                }
-                {
-                    isLoading
-                        ?
-                        <Loader />
-                        :
-                        <Row>
-                            {beaches.map(beach => {
-
-                                return (
-                                    <Col md={{ span: 12 }} className="mb-5" key={beach._id}>
-
-                                        <BeachCard {...beach} />
-
-                                    </Col>
-                                )
-                            })
-                            }
-                        </Row>
-
-                }
-
             </div>
+
+            <h2>Your Sightings</h2>
+
+
+
         </Container>
     )
 }
