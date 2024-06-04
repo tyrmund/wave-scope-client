@@ -72,7 +72,7 @@ const NewSpecimenForm = () => {
 
 
   return (
-    <Container className="NewSpecimenForm">
+    <Container className="NewSpecimenForm mb-5">
 
       <Form onSubmit={handleSubmit}>
         <Form.Group className="" >
