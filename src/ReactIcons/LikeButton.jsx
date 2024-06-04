@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { AiFillLike } from 'react-icons/ai'
 
-function LikeButton() {
+const LikeButton = () => {
 
   const [liked, setLiked] = useState(false)
   const handleClick = () => {

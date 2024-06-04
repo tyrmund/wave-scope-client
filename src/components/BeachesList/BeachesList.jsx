@@ -1,6 +1,7 @@
 import { Row, Col, Container } from "react-bootstrap"
 import BeachCard from "../BeachCard/BeachCard"
 import Loader from "../Loader/Loader"
+import CustomMap from "../CustomMap/CustomMap"
 import { useContext, useEffect, useState } from "react"
 import beachServices from "../../services/beach.services"
 import { AuthContext } from "../../contexts/auth.context"
@@ -34,11 +35,24 @@ const BeachesList = () => {
                     <Loader />
                     :
                     <Container className="mt-3">
+
+                        <CustomMap
+                            zoom={2}
+                            center={beaches[0].location}
+                            markers={beaches}
+                            type={'beaches'}
+                        />
+
                         <Row>
                             {beaches.map(beach => {
 
                                 return (
-                                    <Col md={{ span: 6 }} className="mb-5" key={beach._id}>
+                                    <Col
+                                        className="mb-5"
+                                        key={beach._id}
+                                        md={{ span: 6 }}
+                                        lg={{ span: 4 }}
+                                    >
 
                                         <BeachCard {...beach} />
 

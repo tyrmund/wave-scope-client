@@ -5,6 +5,7 @@ import ModalConfirm from '../../components/ModalConfirm/ModalConfirm'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import Loader from "../../components/Loader/Loader"
 import beachServices from "../../services/beach.services"
+import CustomMap from '../../components/CustomMap/CustomMap'
 
 
 const BeachDetailsPage = () => {
@@ -62,15 +63,28 @@ const BeachDetailsPage = () => {
                 <Card.Body>
 
                   <Carousel>
-                    {beach.images.map((image, index) => (
-                      <Carousel.Item key={index}>
-                        <img className="d-block w-100 img-fluid" style={{ height: 450, objectFit: "cover", objectPosition: "center bottom" }}
-                          src={image}
-                          alt={beach.name} />
-                      </Carousel.Item>
-                    )
-                    )}
+                    {
+                      beach.images.length !== 0 ?
+                        beach.images.map((image, index) => (
+                          <Carousel.Item key={index}>
+                            <img className="d-block w-100 img-fluid" style={{ height: 450, objectFit: "cover", objectPosition: "center bottom" }}
+                              src={image}
+                              alt={beach.name} />
+                          </Carousel.Item>
+                        ))
+                        :
+                        <Carousel.Item>
+                          <img
+                            className="d-block w-100 img-fluid mt-5 rounded"
+                            style={{ height: 450, objectFit: "cover", objectPosition: "center top" }}
+                            src="https://res.cloudinary.com/dc7ycwd1u/image/upload/v1717428275/Anadir_un_titulo_2_zruph6.png"
+                            alt="pic-not-provided" />
+                        </Carousel.Item>
+                    }
                   </Carousel>
+
+                  <CustomMap zoom={2} center={beach.location} markers={beach.nearBusStops} type={'beach'} />
+
                 </Card.Body>
                 <Card.Body>
                   <Card.Title>{`${beach.name}`}</Card.Title>
