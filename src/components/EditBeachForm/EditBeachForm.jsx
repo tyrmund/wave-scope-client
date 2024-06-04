@@ -1,4 +1,4 @@
-import { Form, Row, Col, InputGroup, Button, Image } from "react-bootstrap"
+import { Form, Row, Col, InputGroup, Button, Image, CloseButton } from "react-bootstrap"
 import { useState, useEffect } from "react"
 import beachServices from "../../services/beach.services"
 import { BEACH_COMPOSITION } from "../../data/lists.data"
@@ -13,6 +13,7 @@ const EditBeachForm = () => {
     const { beachId } = useParams()
     const navigate = useNavigate()
     const [isLoading, setIsloading] = useState(true)
+    const [hoveredImageIndex, setHoveredImageIndex] = useState(null)
 
     useEffect(() => {
         loadFormData()
@@ -145,6 +146,7 @@ const EditBeachForm = () => {
     }
 
 
+
     return (
         <div>
             {
@@ -153,10 +155,12 @@ const EditBeachForm = () => {
                     <Loader />
                     :
 
-                    <Form className="NewBeachForm mt-5" onSubmit={handleBeachFormSubmit}>
+
+                    <Form className="NewBeachForm mt-5 mb-5" onSubmit={handleBeachFormSubmit}>
                         <Form.Group className="mb-3">
                             <Form.Label className="h3">Beach Name</Form.Label>
                             <Form.Control placeholder="Ex. Las Canteras" name="name" value={beachData.name} onChange={handleInputChange} required />
+
                         </Form.Group>
                         <br />
 
@@ -269,25 +273,45 @@ const EditBeachForm = () => {
                             <Form.Label className="h4">Add a set of pictures of the beach</Form.Label>
                             <Form.Control type="file" multiple onChange={handleFileUpload} />
                         </Form.Group>
+
                         <Row className="mb-3 p-3 d-flex align-items-start">
                             {
                                 beachData.images.length > 0 &&
                                 beachData.images.map((image, index) => (
-                                    <Image
-                                        key={index}
-                                        src={image}
-                                        onClick={(event) => handleFileDelete(event, index)}
+
+                                    <Col
+                                        md={{ span: 1 }}
                                         style={{
-                                            height: '50px',
-                                            width: 'auto',
-                                            objectFit: 'cover'
+                                            position: 'relative'
                                         }}
-                                    />
+                                        key={index}
+                                        onMouseEnter={() => setHoveredImageIndex(index)}
+                                        onMouseLeave={() => setHoveredImageIndex(null)}>
+                                        <Image
+                                            src={image}
+                                            style={{
+                                                height: '50px',
+                                                width: 'auto',
+                                                objectFit: 'cover',
+                                            }}
+                                        />
+                                        {hoveredImageIndex === index &&
+                                            <CloseButton
+                                                style={{
+                                                    position: "absolute",
+                                                    top: "5px",
+                                                    left: "15px"
+                                                }}
+                                                className="bg-danger"
+                                                onClick={(event) => handleFileDelete(event, index)}
+                                            />}
+                                    </Col>
+
                                 ))
                             }
                         </Row>
                         <Button className="custom-color-button mb-3" size="sm" type='submit' disabled={loadingImage}>
-                            {loadingImage ? 'Loading image...' : 'Apply changes'}
+                            {loadingImage ? 'Loading image...' : '🖫 Save changes'}
                         </Button>
                     </Form>
             }

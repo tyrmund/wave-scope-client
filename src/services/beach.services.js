@@ -39,6 +39,10 @@ class BeachServices {
     deleteBeach(beachId) {
         return this.axiosApp.delete(`/${beachId}`)
     }
+
+    searchBeaches(searchParams) {
+        return this.axiosApp.get('/search', { params: searchParams })
+    }
 }
 
 const beachServices = new BeachServices()
