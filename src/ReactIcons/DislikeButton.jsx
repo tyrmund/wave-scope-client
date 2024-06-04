@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { AiFillDislike } from 'react-icons/ai'
 
-function DislikeButton() {
+const DislikeButton = () => {
 
   const [disliked, setDisliked] = useState(false)
   const handleClick = () => {

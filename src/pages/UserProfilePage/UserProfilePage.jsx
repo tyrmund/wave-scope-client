@@ -1,27 +1,28 @@
 import { useContext } from "react"
-import { Container, Card, Image, Row, Col } from "react-bootstrap"
+import { Container, Card, Image, Row, Col, Button } from "react-bootstrap"
 import { AuthContext } from "../../contexts/auth.context"
 import WorldIcon from "../../ReactIcons/WorldIcon"
 import UserIcon from "../../ReactIcons/UserIcon"
 import EmailIcon from "../../ReactIcons/EmailIcon"
 import PostalCodeIcon from "../../ReactIcons/PostalCodeIcon"
+import { Link } from "react-router-dom"
 
 
 const UserProfilePage = () => {
 
-  const { loggedUser } = useContext(AuthContext)
+  const { loggedUser, logout } = useContext(AuthContext)
 
   console.log(loggedUser)
 
   return (
-    <Container className="UserProfilePage mt-3 mb-3">
+    <Container className="UserProfilePage mt-3 mb-3" style={{ paddingLeft: '20px', paddingRight: '20px' }}>
 
-      <Card style={{ backgroundColor: '#F7F0D3' }}>
-        <Row style={{ marginBottom: '30px' }}>
-          <Col md={{ span: 5 }}>
-            <Image className="d-block mx-auto mt-5" src={loggedUser.profilePic} style={{ objectFit: 'cover', width: '250px' }} roundedCircle />
+      <Card style={{ backgroundColor: '#F7F0D3', color: '#023047', marginBottom: '75px' }}>
+        <Row className="align-items-center" style={{ marginBottom: '30px' }}>
+          <Col className="mt-5" md={{ span: 5 }}>
+            <Image className="d-block mx-auto" src={loggedUser.profilePic} style={{ objectFit: 'cover', width: '250px' }} roundedCircle />
           </Col>
-          <Col className="mt-3">
+          <Col className="mt-5" md={{ span: 5 }}>
             <Card.Body>
               <Card.Title><UserIcon /> Username</Card.Title>
               <Card.Text>{loggedUser.username}</Card.Text>
@@ -34,7 +35,14 @@ const UserProfilePage = () => {
             </Card.Body>
           </Col>
         </Row>
+
+        <Row className="text-center mb-3">
+          <Link>
+            <Button className='custom-color-button mb-3' onClick={logout}>Logout</Button>
+          </Link>
+        </Row>
       </Card>
+
 
     </Container>
   )

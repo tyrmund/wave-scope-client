@@ -8,49 +8,54 @@ import { AuthContext } from "../../contexts/auth.context"
 
 const BeachesList = () => {
 
-    const [beaches, setBeaches] = useState([])
-    const [isLoading, setIsloading] = useState(true)
-    const { loggedUser } = useContext(AuthContext)
+  const [beaches, setBeaches] = useState([])
+  const [isLoading, setIsloading] = useState(true)
+  const { loggedUser } = useContext(AuthContext)
 
-    useEffect(() => {
-        loadBeaches()
-    }, [])
+  useEffect(() => {
+    loadBeaches()
+  }, [])
 
-    const loadBeaches = () => {
-        beachServices
-            .getAllBeaches('/beaches')
-            .then(({ data }) => {
-                setBeaches(data)
-                setIsloading(false)
-            })
-            .catch(err => console.log(err))
-    }
+  const loadBeaches = () => {
+    beachServices
+      .getAllBeaches('/beaches')
+      .then(({ data }) => {
+        setBeaches(data)
+        setIsloading(false)
+      })
+      .catch(err => console.log(err))
+  }
 
-    return (
-        <div>
-            {
-                isLoading
-                    ?
-                    <Loader />
-                    :
-                    <Container className="mt-3">
-                        <Row>
-                            {beaches.map(beach => {
+  return (
+    <div>
+      {
+        isLoading
+          ?
+          <Loader />
+          :
+          <Container className="mt-3">
+            <Row>
+              {beaches.map(beach => {
 
-                                return (
-                                    <Col md={{ span: 6 }} className="mb-5" key={beach._id}>
+                return (
+                  <Col
+                    className="mb-5"
+                    key={beach._id}
+                    md={{ span: 6 }}
+                    lg={{ span: 4 }}
+                  >
 
-                                        <BeachCard {...beach} />
+                    <BeachCard {...beach} />
 
-                                    </Col>
-                                )
-                            })
-                            }
-                        </Row>
-                    </Container>
-            }
-        </div>
-    )
+                  </Col>
+                )
+              })
+              }
+            </Row>
+          </Container>
+      }
+    </div>
+  )
 }
 
 export default BeachesList
