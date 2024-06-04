@@ -1,14 +1,16 @@
 import { Row, Col, Container } from "react-bootstrap"
 import BeachCard from "../BeachCard/BeachCard"
 import Loader from "../Loader/Loader"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import beachServices from "../../services/beach.services"
+import { AuthContext } from "../../contexts/auth.context"
 
 
 const BeachesList = () => {
 
     const [beaches, setBeaches] = useState([])
     const [isLoading, setIsloading] = useState(true)
+    const { loggedUser } = useContext(AuthContext)
 
     useEffect(() => {
         loadBeaches()

@@ -3,22 +3,30 @@ import BeachesList from "../../components/BeachesList/BeachesList"
 import { Button } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import { AuthContext } from "../../contexts/auth.context"
+import Loader from "../../components/Loader/Loader"
 
 const BeachesPage = () => {
 
-  const { loggedUser } = useContext(AuthContext)
+  const { loggedUser, isLoading } = useContext(AuthContext)
   console.log(loggedUser)
+
+  if (isLoading) {
+    return <Loader />
+  }
+
   return (
     <div className="BeachesPage">
-      {
-        loggedUser.role === "admin" &&
-        <div className="text-center">
+      {loggedUser && (
+        <>
+          {loggedUser.role === "admin" &&
+            <div className="text-center">
 
-          <Link to='/beaches/new'>
-            <Button className="custom-color-button mb-3 mt-3">New Beach</Button>
-          </Link>
-        </div>
-      }
+              <Link to='/beaches/new'>
+                <Button className="custom-color-button mb-3 mt-3">New Beach</Button>
+              </Link>
+            </div>}
+        </>
+      )}
       <BeachesList />
     </div>
   )

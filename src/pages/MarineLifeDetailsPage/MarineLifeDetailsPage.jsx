@@ -19,12 +19,15 @@ const MarineLifeDetailsPage = () => {
     images: []
   })
 
-  const [isLoading, setIsLoading] = useState(true)
+  const [loading, setLoading] = useState(true)
   const [modalShow, setModalShow] = useState(false)
   const { specimenId } = useParams()
-  const { loggedUser } = useContext(AuthContext)
+  const { loggedUser, isLoading } = useContext(AuthContext)
   const navigate = useNavigate()
 
+  if (isLoading) {
+    return <Loader />
+  }
 
   useEffect(() => {
     loadSpecimenDetails()
@@ -36,7 +39,7 @@ const MarineLifeDetailsPage = () => {
       .getOneSpecimen(specimenId)
       .then(({ data }) => {
         setSpecimen(data)
-        setIsLoading(false)
+        setLoading(false)
       })
       .catch(err => console.log(err))
   }
@@ -56,7 +59,7 @@ const MarineLifeDetailsPage = () => {
   return (
     <>
       {
-        isLoading
+        loading
           ?
           <Loader />
           :
@@ -80,23 +83,25 @@ const MarineLifeDetailsPage = () => {
                 <Card.Text className="Description">{specimen.description}</Card.Text>
               </Card.Body>
             </Card>
+            {
+              loggedUser.role === 'admin' &&
+              <>
+                <Link to={`/marine-life/edit/${specimenId}`}>
+                  <Button className="custom-color-button mb-3" style={{ marginLeft: '10px' }}>Edit this specimen</Button>
+                </Link>
 
-            <>
-              <Link to={`/marine-life/edit/${specimenId}`}>
-                <Button className="custom-color-button mb-3" style={{ marginLeft: '10px' }}>Edit this specimen</Button>
-              </Link>
+                <Button className="custom-color-button mb-3" onClick={handleModalShow} style={{ marginLeft: '10px' }}>Delete this specimen</Button>
 
-              <Button className="custom-color-button mb-3" onClick={handleModalShow} style={{ marginLeft: '10px' }}>Delete this specimen</Button>
-
-              <ModalConfirm
-                show={modalShow}
-                handleClose={handleModalClose}
-                handleConfirm={handleDeleteSpecimen}
-                titleMessage={'Confirm deletion'}
-                bodyMessage={'This will remove the current specimen.'}
-                buttonMessage={'Confirm'}
-              />
-            </>
+                <ModalConfirm
+                  show={modalShow}
+                  handleClose={handleModalClose}
+                  handleConfirm={handleDeleteSpecimen}
+                  titleMessage={'Confirm deletion'}
+                  bodyMessage={'This will remove the current specimen.'}
+                  buttonMessage={'Confirm'}
+                />
+              </>
+            }
           </Container >
       }
     </>

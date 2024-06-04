@@ -26,14 +26,19 @@ const Navigation = () => {
                 <Link to="/beaches" className="link" onClick={() => setExpanded(true)}>
                   <Nav.Link as="span">Beaches</Nav.Link>
                 </Link>
+
                 <Link to="/marine-life" className="link" onClick={() => setExpanded(true)}>
                   <Nav.Link as="span">Marine Life</Nav.Link>
                 </Link>
+
                 <Link to="/sightings" className="link" onClick={() => setExpanded(true)}>
                   <Nav.Link as="span">Sightings</Nav.Link>
                 </Link>
+
                 <Link to={'/profile'} className="nav-link" onClick={() => setExpanded(true)}>Profile</Link>
+
                 <Nav.Link onClick={logout}>Logout</Nav.Link>
+
                 <Link to="/about-us" className="link" onClick={() => setExpanded(true)}>
                   <Nav.Link as="span">About Us</Nav.Link>
                 </Link>
