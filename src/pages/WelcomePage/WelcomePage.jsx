@@ -7,21 +7,32 @@ import { useContext } from "react"
 import { AuthContext } from "../../contexts/auth.context"
 
 const WelcomePage = ({ user }) => {
-
-    const [sightings, setSighting] = useState()
+    const [sightings, setSightings] = useState([])
     const [isLoading, setIsLoading] = useState(true)
-    const { loggedUser, logout } = useContext(AuthContext)
+    const { loggedUser } = useContext(AuthContext)
+
+
+    const [sightingData, setSightingData] = useState({
+        user: user,
+    })
 
     useEffect(() => {
-        loadSightingUserList(user)
-    }, [user])
+        if (loggedUser) {
+            loadSightingUserList();
+        }
+    }, [])
+
+    useEffect(() => {
+        const fullSightingInfo = { ...sightingData, user: loggedUser }
+    }, [sightingData])
+
 
     const loadSightingUserList = () => {
-
         sightingServices
-            .getAllSightings(user)
+            .getAllSightings()
             .then(({ data }) => {
-                setSighting(data.slice(0, 3))
+                const userSightings = data.filter(elm => elm.user === loggedUser._id)
+                setSightings(userSightings)
                 setIsLoading(false)
             })
             .catch(err => console.log(err))
@@ -31,9 +42,10 @@ const WelcomePage = ({ user }) => {
         <Container className="WelcomePage mx-auto mt-3">
 
             <div >
-                <h2 className="m2-3">{`Welcome ${loggedUser.username}`}</h2>
+                <h2 className="m2-3">{`Welcome to the wave${loggedUser.username}`}</h2>
                 <br />
                 <h3>Sightings</h3>
+
                 {
                     isLoading
                         ?
@@ -52,7 +64,6 @@ const WelcomePage = ({ user }) => {
                                         >
                                             <SightingCard
                                                 name={sighting.specimen.commonName}
-                                                user={sighting.user.username}
                                                 {...sighting} />
                                         </Col>
                                     )
