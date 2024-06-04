@@ -28,7 +28,7 @@ const MarineLifeList = () => {
   }
 
   return (
-    <Container className="MarineLifeList">
+    <Container className="MarineLifeList mb-5">
       {
         isLoading ? <Loader /> :
           <Row>

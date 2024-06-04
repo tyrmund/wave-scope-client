@@ -5,7 +5,7 @@ import Loader from "../components/Loader/Loader"
 
 const PrivateRoute = ({ onlyAdmin }) => {
 
-  const { loggedUser, isLoading } = useContext(AuthContext)
+  const { logout, loggedUser, isLoading } = useContext(AuthContext)
 
   if (isLoading) {
     return <Loader />

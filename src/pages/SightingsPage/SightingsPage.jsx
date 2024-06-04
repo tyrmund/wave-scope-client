@@ -4,7 +4,7 @@ const SightingsPage = () => {
 
   return (
     <div className="SightingsPage">
-      <h1 className="mb-3 mt-3 text-center">All Sightings</h1>
+      <h1 className="m-3 text-center">All Sightings</h1>
       <SightingsList />
     </div>
   )

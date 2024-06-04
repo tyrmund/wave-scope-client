@@ -35,7 +35,7 @@ const BeachDetailsCard = () => {
                     ?
                     <Loader />
                     :
-                    <Card className="BeachDetailsCard">
+                    <Card className="BeachDetailsCard mb-5">
                         <Card.Body>
 
                             <Carousel>

@@ -113,7 +113,7 @@ const NewBeachForm = () => {
 
     return (
 
-        <Form className="NewBeachForm" onSubmit={handleBeachFormSubmit}>
+        <Form className="NewBeachForm mb-5" onSubmit={handleBeachFormSubmit}>
             <Form.Group className="mb-3">
                 <Form.Label className="h3">Beach Name</Form.Label>
                 <Form.Control placeholder="Ex. Las Canteras" name="name" value={beachData.name} onChange={handleInputChange} required />

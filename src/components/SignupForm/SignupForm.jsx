@@ -35,13 +35,13 @@ const SignupForm = () => {
 
         <Form onSubmit={handleForSubmit}>
             <Row>
-                <Col>
+                <Col xs={{ span: 12 }} md={{ span: 6 }} lg={{ span: 6 }}>
                     <Form.Group className="mb-3" controlId="email">
                         <Form.Label>Email</Form.Label>
                         <Form.Control type="text" value={signupData.email} onChange={handleInputChange} name="email" />
                     </Form.Group>
                 </Col>
-                <Col>
+                <Col xs={{ span: 12 }} md={{ span: 6 }} lg={{ span: 6 }}>
                     <Form.Group className="mb-3" controlId="password">
                         <Form.Label>Password</Form.Label>
                         <Form.Control type="password" value={signupData.password} onChange={handleInputChange} name="password" />
@@ -50,19 +50,19 @@ const SignupForm = () => {
             </Row>
 
             <Row>
-                <Col>
+                <Col xs={{ span: 12 }} md={{ span: 4 }} lg={{ span: 4 }}>
                     <Form.Group className="mb-3" controlId="username">
                         <Form.Label>User name</Form.Label>
                         <Form.Control type="text" value={signupData.username} onChange={handleInputChange} name="username" />
                     </Form.Group>
                 </Col>
-                <Col>
+                <Col xs={{ span: 6 }} md={{ span: 4 }} lg={{ span: 4 }}>
                     <Form.Group className="mb-3" controlId="postalCode">
                         <Form.Label>Postal Code</Form.Label>
                         <Form.Control type="text" value={signupData.postalCode} onChange={handleInputChange} name="postalCode" />
                     </Form.Group>
                 </Col>
-                <Col>
+                <Col xs={{ span: 6 }} md={{ span: 4 }} lg={{ span: 4 }}>
                     <Form.Group className="mb-3" controlId="country">
                         <Form.Label>Country</Form.Label>
                         <Form.Control type="text" value={signupData.country} onChange={handleInputChange} name="country" />

@@ -27,9 +27,9 @@ const SightingsList = () => {
     }
 
     return (
-        <div className="SightingsList">
+        <div >
             {isLoading ? <Loader /> :
-                <Container>
+                <Container className="SightingsList mb-5">
                     <Link to={'/sightings/new'} style={{ textDecoration: 'none' }}>
                         <Button className="custom-color-button d-block mx-auto">Add your own</Button>
                     </Link>
