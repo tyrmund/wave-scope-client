@@ -55,7 +55,8 @@ img {
 .EditMarineLifePage,
 .NewSightingPage,
 .NewSightingForm,
-.SightingDetailsPage {
+.SightingDetailsPage,
+.WelcomePage {
   margin-bottom: 50px !important;
 }
 

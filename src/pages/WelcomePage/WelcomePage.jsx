@@ -1,93 +1,76 @@
-import { Button, Container, Row, Col } from "react-bootstrap"
-import { useState, useContext, useEffect } from "react"
-import { AuthContext } from "../../contexts/auth.context"
+import { useEffect, useState } from "react"
+import sightingServices from "../../services/sighting.services"
 import Loader from "../../components/Loader/Loader"
-import beachServices from "../../services/beach.services"
-import BeachCard from "../../components/BeachCard/BeachCard"
+import { Container, Row, Col } from "react-bootstrap"
+import SightingCard from "../../components/SightingCard/SightingCard"
+import { useContext } from "react"
+import { AuthContext } from "../../contexts/auth.context"
 
-const WelcomePage = () => {
-    const [beaches, setBeaches] = useState([])
-    const [isLoading, setIsloading] = useState(true)
+const WelcomePage = ({ user }) => {
+    const [sightings, setSightings] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
     const { loggedUser } = useContext(AuthContext)
 
+
+    const [sightingData, setSightingData] = useState({
+        user: user,
+    })
+
     useEffect(() => {
-        loadBeaches()
+        if (loggedUser) {
+            loadSightingUserList();
+        }
     }, [])
 
-    const loadBeaches = () => {
-        beachServices
-            .getOneBeach('/beaches')
+    useEffect(() => {
+        const fullSightingInfo = { ...sightingData, user: loggedUser }
+    }, [sightingData])
+
+
+    const loadSightingUserList = () => {
+        sightingServices
+            .getAllSightings()
             .then(({ data }) => {
-                setBeaches(data)
-                setIsloading(false)
+                const userSightings = data.filter(elm => elm.user === loggedUser._id)
+                setSightings(userSightings)
+                setIsLoading(false)
             })
             .catch(err => console.log(err))
     }
 
     return (
-        <Container className="WelcomePage mt-3" >
-            <div>
+        <Container className="WelcomePage mx-auto mt-3">
+
+            <div >
+                <h2 className="m2-3">{`Welcome to the wave${loggedUser.username}`}</h2>
+                <br />
+                <h3>Sightings</h3>
+
                 {
                     isLoading
                         ?
                         <Loader />
                         :
-                        <Row>
-                            {beaches.map(beach => {
+                        <Container className="SightingsList mb-5">
 
-                                return (
-                                    <Col md={{ span: 4 }} className="mb-5" key={beach._id}>
-
-                                        <BeachCard {...beach} />
-
-                                    </Col>
-                                )
-                            })
-                            }
-                        </Row>
-
+                            <Row className="mt-5 mb-3">
+                                {
+                                    sightings.map(sighting =>
+                                        <Col
+                                            key={sighting._id}
+                                            xs={{ span: 12 }}
+                                            md={{ span: 6 }}
+                                            lg={{ span: 4 }}
+                                        >
+                                            <SightingCard
+                                                name={sighting.specimen.commonName}
+                                                {...sighting} />
+                                        </Col>
+                                    )
+                                }
+                            </Row>
+                        </Container>
                 }
-                {
-                    isLoading
-                        ?
-                        <Loader />
-                        :
-                        <Row>
-                            {beaches.map(beach => {
-
-                                return (
-                                    <Col md={{ span: 12 }} className="mb-5" key={beach._id}>
-
-                                        <BeachCard {...beach} />
-
-                                    </Col>
-                                )
-                            })
-                            }
-                        </Row>
-
-                }
-                {
-                    isLoading
-                        ?
-                        <Loader />
-                        :
-                        <Row>
-                            {beaches.map(beach => {
-
-                                return (
-                                    <Col md={{ span: 12 }} className="mb-5" key={beach._id}>
-
-                                        <BeachCard {...beach} />
-
-                                    </Col>
-                                )
-                            })
-                            }
-                        </Row>
-
-                }
-
             </div>
         </Container>
     )

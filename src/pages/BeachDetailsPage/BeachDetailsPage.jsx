@@ -84,10 +84,12 @@ const BeachDetailsPage = () => {
                   </Carousel>
 
                   <CustomMap
-                    zoom={12}
+                    zoom={13}
                     center={beach.location}
+                    centerName={beach.name}
                     markers={beach.nearBusStops}
-                    type={'beach'} />
+                    type={'beach'}
+                  />
 
                 </Card.Body>
                 <Card.Body>
@@ -120,9 +122,6 @@ const BeachDetailsPage = () => {
                 <Card.Body>
                   <Link to='/beaches'>
                     <Button className="custom-color-button mb-3">Nearest beaches</Button>
-                  </Link>
-                  <Link to='/'>
-                    <Button className="custom-color-button">The fauna today</Button>
                   </Link>
                 </Card.Body>
               </Card>
