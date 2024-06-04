@@ -171,7 +171,11 @@ const EditSightingForm = () => {
                     <Form onSubmit={handleSubmitSightingForm} className="mt-3">
 
                         <Row>
-                            <Form.Group as={Col} xs={{ span: 11 }} md={{ span: 4, offset: 2 }} className="m-3">
+                            <Form.Group
+                                as={Col}
+                                xs={{ span: 12 }}
+                                sm={{ span: 6 }}
+                                className="mt-3 mb-3">
                                 <Form.Label className="h6">Select sighting place</Form.Label>
                                 <Form.Select
                                     required
@@ -186,7 +190,11 @@ const EditSightingForm = () => {
                                 </Form.Select>
                             </Form.Group>
 
-                            <Form.Group as={Col} xs={{ span: 11 }} md={{ span: 4 }} className="m-3">
+                            <Form.Group
+                                as={Col}
+                                xs={{ span: 12 }}
+                                sm={{ span: 6 }}
+                                className="mt-3 mb-3">
                                 <Form.Label className="h6">Select creature sighted</Form.Label>
                                 <Form.Select
                                     required
@@ -203,7 +211,7 @@ const EditSightingForm = () => {
                         </Row>
 
                         <Form.Check
-                            className="m-3 h6"
+                            className="mt-3 mb-3 h6"
                             type="switch"
                             id="custom-switch"
                             label="I'm reporting on site"
@@ -213,7 +221,10 @@ const EditSightingForm = () => {
                         <Row>
                             <Form.Group
                                 as={Col}
-                                className="m-3">
+                                xs={{ span: 12 }}
+                                sm={{ span: 8, offset: 2 }}
+                                md={{ span: 8, offset: 2 }}
+                                className="mt-3 mb-3">
                                 <Form.Label className="h6">Upload pictures</Form.Label>
                                 <Form.Control
                                     type="file"
@@ -256,7 +267,7 @@ const EditSightingForm = () => {
                             }
                         </Row>
 
-                        <Form.Group className="m-3">
+                        <Form.Group className="mt-3 mb-3">
                             <Form.Label className="h6">Comment</Form.Label>
                             <Form.Control
                                 as="textarea"

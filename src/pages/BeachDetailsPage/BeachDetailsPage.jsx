@@ -5,6 +5,7 @@ import ModalConfirm from '../../components/ModalConfirm/ModalConfirm'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import Loader from "../../components/Loader/Loader"
 import beachServices from "../../services/beach.services"
+import CustomMap from '../../components/CustomMap/CustomMap'
 
 
 const BeachDetailsPage = () => {
@@ -71,6 +72,9 @@ const BeachDetailsPage = () => {
                     )
                     )}
                   </Carousel>
+
+                  <CustomMap zoom={2} center={beach.location} markers={beach.nearBusStops} type={'beach'} />
+
                 </Card.Body>
                 <Card.Body>
                   <Card.Title>{`${beach.name}`}</Card.Title>

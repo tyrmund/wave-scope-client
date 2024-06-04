@@ -5,16 +5,20 @@ const StartPage = () => {
 
   return (
 
-    <Container className="StartPage" >
+    <div className="StartPage m-5">
       <Container className="d-flex justify-content-center">
-        <img style={{ maxHeight: '350px', objectFit: 'cover' }} src="https://res.cloudinary.com/du8mlfcf9/image/upload/v1716900017/Wave%20Scope/pixel1_m5ue4w.png" alt="Logo Wave Scope" />
+        <img
+          className="mb-5"
+          style={{ maxHeight: '100px', width: 'auto' }}
+          src='https://res.cloudinary.com/dc7ycwd1u/image/upload/v1717497196/Entry-logo_mzxain.png'
+          alt="Logo Wave Scope" />
       </Container>
 
-      <h1>Welcome!</h1>
+      <h1 className="text-center mb-3">Welcome!</h1>
 
       <LoginForm />
 
-    </Container>
+    </div>
 
   )
 }

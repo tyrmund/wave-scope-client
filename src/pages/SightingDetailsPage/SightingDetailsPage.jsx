@@ -3,10 +3,12 @@ import { useContext, useEffect, useState } from "react"
 import { useParams, Link, useNavigate } from "react-router-dom"
 import { AuthContext } from "../../contexts/auth.context"
 import sightingServices from '../../services/sighting.services'
+
+import CustomMap from "../../components/CustomMap/CustomMap"
 import ModalConfirm from "../../components/ModalConfirm/ModalConfirm"
-import './SightingDetailsPage.css'
 import LikeButton from "../../ReactIcons/LikeButton"
 import DislikeButton from "../../ReactIcons/DislikeButton"
+import './SightingDetailsPage.css'
 
 const SightingDetailsPage = () => {
 
@@ -89,10 +91,8 @@ const SightingDetailsPage = () => {
                     }
                   </Carousel>
 
-                  <h1 className="text-center mt-3 fs-6">
-                    Sighting date: {sighting.createdAt.substring(8, 10)}/{sighting.createdAt.substring(5, 7)}/{sighting.createdAt.substring(0, 4)}</h1>
-                  <h1 className="text-center fs-6">
-                    At {sighting.location.coordinates[0].toString().substring(0, 10)}, {sighting.location.coordinates[1].toString().substring(0, 9)}</h1>
+                  <CustomMap zoom={16} center={sighting.location} markers={sighting.location} type={'sighting'} />
+
                 </Container>
               </Col>
             </Row>
@@ -137,6 +137,9 @@ const SightingDetailsPage = () => {
                       "{sighting.comment}"
                       <br />
                       <i className="mb-3">by {loggedUser.username}</i>
+                      <br />
+                      <h1 className="text-center mt-3 fs-6">
+                        Sighting date: {sighting.createdAt.substring(8, 10)}/{sighting.createdAt.substring(5, 7)}/{sighting.createdAt.substring(0, 4)}</h1>
                       <hr />
                       <Row className="Confirmations-Row mb-3">
                         <Col>
