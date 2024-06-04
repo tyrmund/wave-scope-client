@@ -27,6 +27,9 @@ import AboutUs from "../pages/AboutUs/AboutUs";
 
 
 import CustomMap from "../components/CustomMap/CustomMap";
+// import MapReact from "../components/MapReact/MapReact";
+{/* <Route path={"/google-map"} element={<MapReact />} /> */ }
+
 
 const AppRoutes = () => {
   return (
@@ -55,13 +58,16 @@ const AppRoutes = () => {
           <Route path={"/profile"} element={<UserProfilePage />} />
           <Route path={"/profile/edit"} element={<EditUserProfilePage />} />
 
-
         </Route>
+
         <Route element={<PrivateRoute onlyAdmin={true} />}>
-          <Route path={"/beaches/edit/:beachId"} element={<EditBeachPage />} />
-          <Route path={"/marine-life/edit/:specimenId"} element={<EditMarineLifePage />} />
+
           <Route path={"/beaches/new"} element={<NewBeachForm />} />
           <Route path={"/marine-life/new"} element={<NewMarineLifePage />} />
+
+          <Route path={"/beaches/edit/:beachId"} element={<EditBeachPage />} />
+          <Route path={"/marine-life/edit/:specimenId"} element={<EditMarineLifePage />} />
+
         </Route>
 
 

@@ -31,11 +31,7 @@ const SightingsList = () => {
       {isLoading ? <Loader /> :
         <Container className="SightingsList mb-5">
 
-          <Link to={'/sightings/new'} style={{ textDecoration: 'none' }}>
-            <Button className="custom-color-button d-block mx-auto">Add your own</Button>
-          </Link>
-
-          <Row className="mt-5 mb-3">
+          <Row className="mt-3 mb-3">
             {
               sightings.map(sighting =>
                 <Col
