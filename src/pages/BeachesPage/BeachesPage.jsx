@@ -1,9 +1,8 @@
 import { useContext } from "react"
 import BeachesList from "../../components/BeachesList/BeachesList"
-import { Button, Container } from "react-bootstrap"
+import { Button } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import { AuthContext } from "../../contexts/auth.context"
-import Loader from "../../components/Loader/Loader"
 
 const BeachesPage = () => {
 

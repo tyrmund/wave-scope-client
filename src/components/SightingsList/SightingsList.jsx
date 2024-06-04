@@ -7,45 +7,53 @@ import SightingCard from "../SightingCard/SightingCard"
 
 const SightingsList = () => {
 
-    const [sightings, setSightings] = useState()
-    const [isLoading, setIsLoading] = useState(true)
+  const [sightings, setSightings] = useState()
+  const [isLoading, setIsLoading] = useState(true)
 
-    useEffect(() => {
-        loadAllSightings()
-    }, [])
+  useEffect(() => {
+    loadAllSightings()
+  }, [])
 
-    const loadAllSightings = () => {
+  const loadAllSightings = () => {
 
-        sightingServices
-            .getAllSightings()
-            .then(({ data }) => {
-                setSightings(data)
-                setIsLoading(false)
-            })
-            .catch(err => console.log(err))
+    sightingServices
+      .getAllSightings()
+      .then(({ data }) => {
+        setSightings(data)
+        setIsLoading(false)
+      })
+      .catch(err => console.log(err))
 
-    }
+  }
 
-    return (
-        <div >
-            {isLoading ? <Loader /> :
-                <Container className="SightingsList mb-5">
-                    <Link to={'/sightings/new'} style={{ textDecoration: 'none' }}>
-                        <Button className="custom-color-button d-block mx-auto">Add your own</Button>
-                    </Link>
-                    <Row className="mt-5 mb-3">
-                        {sightings.map(sighting =>
-                            <Col key={sighting._id} md={{ span: 6 }} lg={{ span: 4 }} >
-                                <SightingCard
-                                    name={sighting.specimen.commonName}
-                                    {...sighting} />
-                            </Col>
-                        )}
-                    </Row>
-                </Container>
+  return (
+    <div >
+      {isLoading ? <Loader /> :
+        <Container className="SightingsList mb-5">
+
+          <Link to={'/sightings/new'} style={{ textDecoration: 'none' }}>
+            <Button className="custom-color-button d-block mx-auto">Add your own</Button>
+          </Link>
+
+          <Row className="mt-5 mb-3">
+            {
+              sightings.map(sighting =>
+                <Col
+                  key={sighting._id}
+                  md={{ span: 6 }}
+                  lg={{ span: 4 }}
+                >
+                  <SightingCard
+                    name={sighting.specimen.commonName}
+                    {...sighting} />
+                </Col>
+              )
             }
-        </div>
-    )
+          </Row>
+        </Container>
+      }
+    </div>
+  )
 
 }
 

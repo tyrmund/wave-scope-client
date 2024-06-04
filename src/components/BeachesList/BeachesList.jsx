@@ -47,7 +47,12 @@ const BeachesList = () => {
                             {beaches.map(beach => {
 
                                 return (
-                                    <Col md={{ span: 6 }} className="mb-5" key={beach._id}>
+                                    <Col
+                                        className="mb-5"
+                                        key={beach._id}
+                                        md={{ span: 6 }}
+                                        lg={{ span: 4 }}
+                                    >
 
                                         <BeachCard {...beach} />
 

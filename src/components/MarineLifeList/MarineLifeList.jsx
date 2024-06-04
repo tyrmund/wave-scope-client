@@ -37,9 +37,11 @@ const MarineLifeList = () => {
 
                 return (
 
-                  <Col key={specimen._id}
-
-                    md={{ span: 4 }}>
+                  <Col
+                    key={specimen._id}
+                    md={{ span: 6 }}
+                    lg={{ span: 4 }}
+                  >
 
                     <SpecimenCard {...specimen} />
 

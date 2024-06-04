@@ -65,12 +65,23 @@ const MarineLifeDetailsPage = () => {
           :
           <Container className="SpecimenDetailsPage mt-3 mb-5">
             <Carousel className="specimen-carousel">
-              {specimen.images.map((image, index) => (
-                <Carousel.Item key={index}>
-                  <img className="carousel-image" src={image}
-                    alt={specimen.commonName} />
-                </Carousel.Item>
-              ))}
+              {
+                specimen.images.length !== 0 ?
+                  specimen.images.map((image, index) => (
+                    <Carousel.Item key={index}>
+                      <img className="carousel-image" src={image}
+                        alt={specimen.commonName} />
+                    </Carousel.Item>
+                  ))
+                  :
+                  <Carousel.Item>
+                    <img
+                      className="d-block w-100 img-fluid mt-5 rounded"
+                      style={{ height: 450, objectFit: "cover", objectPosition: "center top" }}
+                      src="https://res.cloudinary.com/dc7ycwd1u/image/upload/v1717428275/Anadir_un_titulo_2_zruph6.png"
+                      alt="pic-not-provided" />
+                  </Carousel.Item>
+              }
 
             </Carousel>
 

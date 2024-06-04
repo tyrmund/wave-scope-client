@@ -11,8 +11,9 @@ const BeachCard = ({ name, images, length, composition, _id }) => {
             <Card className="shadow-sm border-0 ">
                 <Link to={`/beaches/${_id}`}>
                     <Card.Img variant="top"
-                        src={images[0]}
+                        src={images.length !== 0 ? images[0] : "https://res.cloudinary.com/dc7ycwd1u/image/upload/v1717428275/Anadir_un_titulo_2_zruph6.png"}
                         className="rounded-top equal-aspect-ratio"
+                        style={{ objectFit: 'cover' }}
                     />
                 </Link>
                 <Card.Body >

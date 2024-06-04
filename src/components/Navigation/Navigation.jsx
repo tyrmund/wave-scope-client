@@ -1,5 +1,5 @@
 import { useContext, useState } from "react"
-import { Navbar, Nav, Container } from "react-bootstrap"
+import { Navbar, Nav, Container, Image } from "react-bootstrap"
 import { Link } from "react-router-dom"
 
 import { AuthContext } from "../../contexts/auth.context"
@@ -8,11 +8,11 @@ import "./Navigation.css"
 
 const Navigation = () => {
 
-  const { logout, loggedUser } = useContext(AuthContext)
+  const { loggedUser } = useContext(AuthContext)
   const [expanded, setExpanded] = useState(true)
 
   return (
-    <Navbar expand="lg" className="Navbar" expanded={!expanded}>
+    <Navbar expand="lg" className="Navbar m-auto" expanded={!expanded}>
       <Container>
         <Navbar.Brand href="/welcome" >WaveScope</Navbar.Brand>
         {
@@ -35,13 +35,14 @@ const Navigation = () => {
                   <Nav.Link as="span">Sightings</Nav.Link>
                 </Link>
 
-                <Link to={'/profile'} className="nav-link" onClick={() => setExpanded(true)}>Profile</Link>
-
-                <Nav.Link onClick={logout}>Logout</Nav.Link>
-
                 <Link to="/about-us" className="link" onClick={() => setExpanded(true)}>
                   <Nav.Link as="span">About Us</Nav.Link>
                 </Link>
+
+                <Link to={'/profile'} className="nav-link" onClick={() => setExpanded(true)}>
+                  <Image src={loggedUser.profilePic} style={{ width: '30px' }} roundedCircle />
+                </Link>
+
               </Nav>
             </Navbar.Collapse>
           </>
