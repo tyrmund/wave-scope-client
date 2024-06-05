@@ -34,7 +34,6 @@ const SightingUserList = ({ user }) => {
             <div >
                 <br />
                 <h3>Your Sightings</h3>
-
                 {
                     isLoading
                         ?

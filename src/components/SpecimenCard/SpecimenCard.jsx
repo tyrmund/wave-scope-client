@@ -5,10 +5,6 @@ const SpecimenCard = ({ images, commonName, scientificName, _id }) => {
 
   return (
     <div className="SpecimenCard mt-3 mb-3" >
-<<<<<<< HEAD
-=======
-
->>>>>>> 7a5d105e3c13e4a140cab6cf023db7addf893bec
       <Card style={{ border: '0px' }}>
 
         <Link to={`/marine-life/${_id}`}>
