@@ -12,14 +12,13 @@ import './SightingDetailsPage.css'
 
 const SightingDetailsPage = () => {
 
-  const { loggedUser } = useContext(AuthContext)
-  const [isLoading, setIsLoading] = useState(true)
   const [sighting, setSighting] = useState({})
-  const [modalShow, setModalShow] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
+  const { loggedUser } = useContext(AuthContext)
   const { sightingId } = useParams()
   const navigate = useNavigate()
 
-
+  const [modalShow, setModalShow] = useState(false)
   const handleModalClose = () => setModalShow(false)
   const handleModalShow = () => setModalShow(true)
 
@@ -46,6 +45,51 @@ const SightingDetailsPage = () => {
       .deleteSighting(sighting._id)
       .then(navigate('/sightings'))
       .catch(err => console.log(err))
+
+  }
+
+  const increaseConfirmations = () => {
+
+    const updatedConfirmations = [...sighting.confirmations, loggedUser._id]
+    const updatedSighting = { ...sighting, confirmations: updatedConfirmations }
+    setSighting(updatedSighting)
+
+  }
+
+  const decreaseConfirmations = () => {
+
+    const userIndex = sighting.confirmations.indexOf(loggedUser._id)
+    const updatedConfirmations = sighting.confirmations
+
+    if (userIndex !== -1) {
+      updatedConfirmations.splice(userIndex, 1)
+    }
+
+    const updatedSighting = { ...sighting, confirmations: updatedConfirmations }
+    setSighting(updatedSighting)
+
+  }
+
+
+  const increaseRejections = () => {
+
+    const updatedRejections = [...sighting.rejections, loggedUser._id]
+    const updatedSighting = { ...sighting, rejections: updatedRejections }
+    setSighting(updatedSighting)
+
+  }
+
+  const decreaseRejections = () => {
+
+    const userIndex = sighting.rejections.indexOf(loggedUser._id)
+    const updatedRejections = sighting.rejections
+
+    if (userIndex !== -1) {
+      updatedRejections.splice(userIndex, 1)
+    }
+
+    const updatedSighting = { ...sighting, rejections: updatedRejections }
+    setSighting(updatedSighting)
 
   }
 
@@ -140,23 +184,20 @@ const SightingDetailsPage = () => {
                       <hr />
                       <Row className="Confirmations-Row mb-3">
                         <Col>
-                          <p>Confirmations: {sighting.confirmations}</p>
+                          <p>Confirmations: {sighting.confirmations.length}</p>
                         </Col>
 
                         <Col>
-                          <LikeButton
-                            sightingConfirmation={sighting.confirmations}
-                            userId={loggedUser._id}
-                            sightingId={sightingId} />
+                          <LikeButton sightingConfirmations={sighting.confirmations} userId={loggedUser._id} sightingId={sightingId} increaseConfirmations={increaseConfirmations} decreaseConfirmations={decreaseConfirmations} />
                         </Col>
 
                       </Row>
                       <Row className="Rejections-Row">
                         <Col>
-                          <p>Rejections: {sighting.rejections}</p>
+                          <p>Rejections: {sighting.rejections.length}</p>
                         </Col>
                         <Col>
-                          <DislikeButton />
+                          <DislikeButton sightingRejections={sighting.rejections} userId={loggedUser._id} sightingId={sightingId} increaseRejections={increaseRejections} decreaseRejections={decreaseRejections} />
                         </Col>
                       </Row>
                     </Accordion.Body>

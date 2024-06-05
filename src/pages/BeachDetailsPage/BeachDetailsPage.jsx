@@ -6,6 +6,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom'
 import Loader from "../../components/Loader/Loader"
 import beachServices from "../../services/beach.services"
 import CustomMap from '../../components/CustomMap/CustomMap'
+import SightingsByBeach from '../../components/SightingsByBeach/SightingsByBeach'
 
 
 const BeachDetailsPage = () => {
@@ -66,7 +67,9 @@ const BeachDetailsPage = () => {
                       beach.images.length !== 0 ?
                         beach.images.map((image, index) => (
                           <Carousel.Item key={index}>
-                            <img className="d-block w-100 img-fluid" style={{ height: 450, objectFit: "cover", objectPosition: "center bottom" }}
+                            <img
+                              className="d-block w-100 img-fluid"
+                              style={{ height: 450, objectFit: "cover", objectPosition: "center bottom" }}
                               src={image}
                               alt={beach.name} />
                           </Carousel.Item>
@@ -131,6 +134,9 @@ const BeachDetailsPage = () => {
                     <Button className="custom-color-button">Edit this beach </Button>
                   </Link>
                 </Col>
+              </Row>
+              <Row>
+                <SightingsByBeach beach={beachId} />
               </Row>
               <ModalConfirm show={show}
                 handleClose={handleClose}

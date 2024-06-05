@@ -3,7 +3,6 @@ import { Container, Row, Col } from "react-bootstrap"
 import SightingUserList from "../../components/SightingUserList/SightingUserList"
 import { useContext } from "react"
 import { AuthContext } from "../../contexts/auth.context"
-import RecentSightings from "../../components/SightingsByBeach/SightingsByBeach"
 import { useState, useEffect } from "react"
 import Loader from "../../components/Loader/Loader"
 import sightingServices from "../../services/sighting.services"
@@ -38,8 +37,9 @@ const WelcomePage = () => {
 
     return (
         <Container className="WelcomePage mx-auto mt-3">
-            <h1 className="m-3">{`Welcome to the wave, ${loggedUser.username}`}</h1>
+            <h1 className="m-5">{`Welcome to the wave, ${loggedUser.username}`}</h1>
             <Row>
+                <h3>Your Sightings</h3>
                 <SightingUserList />
             </Row>
             <h3>Recent Sightings</h3>
@@ -48,7 +48,7 @@ const WelcomePage = () => {
                     ?
                     <Loader />
                     :
-                    <Row className="mt-5 mb-3">
+                    <Row className="mt-3 mb-3">
                         {
                             sightings.map(sighting =>
                                 <Col
@@ -59,6 +59,7 @@ const WelcomePage = () => {
                                 >
                                     <SightingCard
                                         name={sighting.specimen.commonName}
+                                        username={sighting.user.username}
                                         {...sighting} />
                                 </Col>
                             )

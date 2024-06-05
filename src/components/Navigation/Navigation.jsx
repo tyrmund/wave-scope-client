@@ -22,7 +22,6 @@ const Navigation = () => {
             <Navbar.Toggle aria-controls="basic-navbar-nav" className="Navicon" onClick={() => setExpanded(!expanded)} />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
-                <Navbar.Text as="span" style={{ marginRight: '20px', color: '#FFFBEB' }}>Welcome, {loggedUser.username}!</Navbar.Text>
                 <Link to="/beaches" className="link" onClick={() => setExpanded(true)}>
                   <Nav.Link as="span">Beaches</Nav.Link>
                 </Link>
