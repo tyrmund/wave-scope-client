@@ -20,8 +20,10 @@ class SightingServices {
         })
     }
 
-    getAllSightings() {
-        return this.axiosApp.get('/')
+    getAllSightings(options) {
+        return this.axiosApp.get('/', {
+            params: options
+        })
     }
 
     getOneSighting(sightingId) {

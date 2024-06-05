@@ -39,7 +39,7 @@ const BeachesList = () => {
             <Row>
               <Col md={{ span: 8, offset: 2 }}>
                 <CustomMap
-                  zoom={2}
+                  zoom={1}
                   center={beaches[0].location}
                   markers={beaches}
                   type={'beaches'}
