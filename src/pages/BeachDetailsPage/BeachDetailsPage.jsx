@@ -1,21 +1,21 @@
-import { Button, Card, Carousel, CardBody, Badge, Container, Row, Col } from 'react-bootstrap'
 import './BeachDetailsPage.css'
-import { useState, useEffect } from 'react'
+import { Button, Card, Carousel, CardBody, Badge, Container, Row, Col } from 'react-bootstrap'
+import { useState, useEffect, useContext } from 'react'
 import ModalConfirm from '../../components/ModalConfirm/ModalConfirm'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import Loader from "../../components/Loader/Loader"
 import beachServices from "../../services/beach.services"
 import CustomMap from '../../components/CustomMap/CustomMap'
 import SightingsByBeach from '../../components/SightingsByBeach/SightingsByBeach'
+import { AuthContext } from '../../contexts/auth.context'
 
 
 const BeachDetailsPage = () => {
 
+  const { loggedUser } = useContext(AuthContext)
 
   const [show, setShow] = useState(false)
-
   const handleClose = () => setShow(false)
-
   const showConfirmModal = () => setShow(true)
 
   const [isLoading, setIsLoading] = useState(true)
@@ -125,6 +125,7 @@ const BeachDetailsPage = () => {
                   <Link to='/beaches'>
                     <Button className="custom-color-button mb-3">Nearest beaches</Button>
                   </Link>
+
                 </Card.Body>
               </Card>
               <Row className='mx-auto'>
@@ -137,6 +138,13 @@ const BeachDetailsPage = () => {
               </Row>
               <Row>
                 <SightingsByBeach beach={beachId} />
+                {
+                  loggedUser.role === 'admin' &&
+
+                  < Link to={'/sightings/new'} style={{ textDecoration: 'none' }}>
+                    <Button className="custom-color-button d-block mx-auto mb-5">Add your own sighting</Button>
+                  </Link>
+                }
               </Row>
               <ModalConfirm show={show}
                 handleClose={handleClose}

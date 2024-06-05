@@ -42,13 +42,13 @@ const WelcomePage = () => {
                 <h3>Your Sightings</h3>
                 <SightingUserList />
             </Row>
-            <h3>Recent Sightings</h3>
+            <h3>Recent Sightings of Wave Scope Community</h3>
             {
                 isLoading
                     ?
                     <Loader />
                     :
-                    <Row className="mt-3 mb-3">
+                    <Row className="mt-3">
                         {
                             sightings.map(sighting =>
                                 <Col

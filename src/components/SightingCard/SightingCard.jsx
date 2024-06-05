@@ -20,20 +20,16 @@ const SightingCard = ({ _id, images, name, createdAt, username }) => {
 
         <Card.Body>
 
-          <div>
-
-            <Card.Title className="d-inline">{name}</Card.Title>
-            {
-              wasItAddedToday(createdAt) &&
-              <Badge
-                style={{ marginLeft: '10px' }}
-                className="d-inline"
-                bg='info'>
-                New!
-              </Badge>
-            }
-
-          </div>
+          <Card.Title className="d-inline">{name}</Card.Title>
+          {
+            wasItAddedToday(createdAt) &&
+            <Badge
+              style={{ marginLeft: '10px' }}
+              className="d-inline"
+              bg='info'>
+              New!
+            </Badge>
+          }
 
           <Card.Text className="mt-3">Time of sighting: {createdAt.substring(8, 10)}/{createdAt.substring(5, 7)}/{createdAt.substring(0, 4)}</Card.Text>
 
