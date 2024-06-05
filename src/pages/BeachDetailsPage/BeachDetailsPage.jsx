@@ -61,7 +61,6 @@ const BeachDetailsPage = () => {
             <>
               <Card className="BeachDetailsCard">
                 <Card.Body>
-
                   <Carousel>
                     {
                       beach.images.length !== 0 ?
@@ -82,7 +81,7 @@ const BeachDetailsPage = () => {
                         </Carousel.Item>
                     }
                   </Carousel>
-
+                  <br />
                   <CustomMap
                     zoom={13}
                     center={beach.location}

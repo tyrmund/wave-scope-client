@@ -12,26 +12,17 @@ const WelcomePage = ({ user }) => {
     const { loggedUser } = useContext(AuthContext)
 
 
-    const [sightingData, setSightingData] = useState({
-        user: user,
-    })
-
     useEffect(() => {
-        if (loggedUser) {
-            loadSightingUserList();
-        }
-    }, [])
-
-    useEffect(() => {
-        const fullSightingInfo = { ...sightingData, user: loggedUser }
-    }, [sightingData])
+        loadSightingUserList();
+    }, [user])
 
 
     const loadSightingUserList = () => {
         sightingServices
             .getAllSightings()
             .then(({ data }) => {
-                const userSightings = data.filter(elm => elm.user === loggedUser._id)
+                console.log(data)
+                const userSightings = data.filter(elm => elm.user._id === loggedUser._id)
                 setSightings(userSightings)
                 setIsLoading(false)
             })
@@ -40,11 +31,10 @@ const WelcomePage = ({ user }) => {
 
     return (
         <Container className="WelcomePage mx-auto mt-3">
-
             <div >
                 <h2 className="m2-3">{`Welcome to the wave${loggedUser.username}`}</h2>
                 <br />
-                <h3>Sightings</h3>
+                <h3>Your Sightings</h3>
 
                 {
                     isLoading
@@ -63,7 +53,7 @@ const WelcomePage = ({ user }) => {
                                             lg={{ span: 4 }}
                                         >
                                             <SightingCard
-                                                name={sighting.specimen.commonName}
+                                                name={sighting.user._id}
                                                 {...sighting} />
                                         </Col>
                                     )
