@@ -1,12 +1,29 @@
 import React, { useState } from 'react'
 import { AiFillLike } from 'react-icons/ai'
+import sightingServices from '../services/sighting.services'
 
-const LikeButton = () => {
+const LikeButton = ({ sightingConfirmation, userId, sightingId }) => {
 
-  const [liked, setLiked] = useState(false)
+  const [liked, setLiked] = useState(sightingConfirmation.includes(userId))
+
   const handleClick = () => {
-    setLiked(!liked)
+
+    if (!sightingConfirmation.includes(userId)) {
+
+      sightingServices
+        .confirmSighting(sightingId)
+        .then(() => setLiked(true))
+        .catch(err => console.log(err))
+
+    } else {
+
+      sightingServices
+        .removeSightingConfirmation(sightingId)
+        .then(() => setLiked(false))
+        .catch(err => console.log(err))
+    }
   }
+
 
   if (liked)
     return (<AiFillLike

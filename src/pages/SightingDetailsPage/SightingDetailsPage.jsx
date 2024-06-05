@@ -142,9 +142,14 @@ const SightingDetailsPage = () => {
                         <Col>
                           <p>Confirmations: {sighting.confirmations}</p>
                         </Col>
+
                         <Col>
-                          <LikeButton />
+                          <LikeButton
+                            sightingConfirmation={sighting.confirmations}
+                            userId={loggedUser._id}
+                            sightingId={sightingId} />
                         </Col>
+
                       </Row>
                       <Row className="Rejections-Row">
                         <Col>
