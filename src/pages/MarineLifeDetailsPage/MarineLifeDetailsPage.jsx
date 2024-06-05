@@ -64,29 +64,29 @@ const MarineLifeDetailsPage = () => {
           <Loader />
           :
           <Container className="SpecimenDetailsPage mt-3 mb-5">
-            <Carousel className="specimen-carousel">
-              {
-                specimen.images.length !== 0 ?
-                  specimen.images.map((image, index) => (
-                    <Carousel.Item key={index}>
-                      <img className="carousel-image" src={image}
-                        alt={specimen.commonName} />
-                    </Carousel.Item>
-                  ))
-                  :
-                  <Carousel.Item>
-                    <img
-                      className="d-block w-100 img-fluid mt-5 rounded"
-                      style={{ height: 450, objectFit: "cover", objectPosition: "center top" }}
-                      src="https://res.cloudinary.com/dc7ycwd1u/image/upload/v1717428275/Anadir_un_titulo_2_zruph6.png"
-                      alt="pic-not-provided" />
-                  </Carousel.Item>
-              }
-
-            </Carousel>
 
             <Card className="mb-3" style={{ marginLeft: '10px', marginRight: '10px' }}>
               <Card.Body>
+                <Carousel className="specimen-carousel">
+                  {
+                    specimen.images.length !== 0 ?
+                      specimen.images.map((image, index) => (
+                        <Carousel.Item key={index}>
+                          <img className="carousel-image" src={image}
+                            alt={specimen.commonName} />
+                        </Carousel.Item>
+                      ))
+                      :
+                      <Carousel.Item>
+                        <img
+                          className="d-block w-100 img-fluid mt-5 rounded"
+                          style={{ height: 450, objectFit: "cover", objectPosition: "center top" }}
+                          src="https://res.cloudinary.com/dc7ycwd1u/image/upload/v1717428275/Anadir_un_titulo_2_zruph6.png"
+                          alt="pic-not-provided" />
+                      </Carousel.Item>
+                  }
+
+                </Carousel>
                 <Card.Title className="text-center mt-3">{specimen.commonName}</Card.Title>
                 <Card.Subtitle className="mb-5 text-muted text-center">{specimen.scientificName}</Card.Subtitle>
                 <Card.Text className="Description">Medium size: {specimen.mediumSize} | Endemic: {specimen.isEndemic} | Usual habitat: {specimen.habitat}</Card.Text>

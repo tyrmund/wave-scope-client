@@ -66,7 +66,9 @@ const BeachDetailsPage = () => {
                       beach.images.length !== 0 ?
                         beach.images.map((image, index) => (
                           <Carousel.Item key={index}>
-                            <img className="d-block w-100 img-fluid" style={{ height: 450, objectFit: "cover", objectPosition: "center bottom" }}
+                            <img
+                              className="d-block w-100 img-fluid"
+                              style={{ height: 450, objectFit: "cover", objectPosition: "center bottom" }}
                               src={image}
                               alt={beach.name} />
                           </Carousel.Item>
