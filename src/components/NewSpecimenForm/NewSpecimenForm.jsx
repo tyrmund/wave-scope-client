@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Form, Button, Container, Row, Col } from "react-bootstrap"
+import { Form, Button, Container, Row, Col, Image } from "react-bootstrap"
 import specimenServices from "../../services/specimen.services"
 import { useNavigate } from "react-router-dom"
 import { SPECIMEN_HABITAT, SPECIMEN_ISENDEMIC } from "../../data/lists.data"
@@ -54,6 +54,12 @@ const NewSpecimenForm = () => {
         setLoadingImage(false)
       })
 
+  }
+
+  const handleFileDelete = (_, index) => {
+    const updatedFiles = [...specimenFormData.images]
+    updatedFiles.splice(index, 1)
+    setSpecimenFormData({ ...specimenFormData, images: updatedFiles })
   }
 
   const handleSubmit = e => {
@@ -140,6 +146,23 @@ const NewSpecimenForm = () => {
           <Form.Label className="h4">Add a set of pictures of the specimen</Form.Label>
           <Form.Control className='mb-3' type="file" multiple onChange={handleFileUpload} />
         </Form.Group>
+        <Row className="p-3 d-flex align-items-start">
+          {
+            specimenFormData.images.length > 0 &&
+            specimenFormData.images.map((image, index) => (
+              <Image
+                key={index}
+                src={image}
+                style={{
+                  height: '50px',
+                  width: 'auto',
+                  objectFit: 'cover'
+                }}
+                onClick={(event) => handleFileDelete(event, index)}
+              />
+            ))
+          }
+        </Row>
 
         <Button variant="primary" type="submit" className="mb-3 custom-color-button" disabled={loadingImage}>
           {loadingImage ? 'Loading image...' : 'Create new specimen'}

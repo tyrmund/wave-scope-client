@@ -45,3 +45,10 @@
 
     --bs-border-width: #FFE63F !important;
 }
+
+.fixed-right {
+    display: flex !important;
+    align-items: center !important;
+    gap: 5rem;
+    flex-grow: 4;
+}

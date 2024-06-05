@@ -8,7 +8,7 @@ const BeachCard = ({ name, images, length, composition, _id }) => {
   return (
     <div className="BeachCard mx-auto">
 
-      <Card className="shadow-sm border-0 m-3">
+      <Card className="shadow-sm border-0 mt-3 mb-3">
 
         <Link to={`/beaches/${_id}`}>
           <Card.Img variant="top"

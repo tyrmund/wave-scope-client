@@ -4,8 +4,8 @@ import { Link } from "react-router-dom"
 const SpecimenCard = ({ images, commonName, scientificName, _id }) => {
 
   return (
-    <div className="SpecimenCard mt-3 mb-3" >
-      <Card style={{ border: '0px' }}>
+    <div className="SpecimenCard" >
+      <Card className="mt-3 mb-3" style={{ border: '0px' }}>
 
         <Link to={`/marine-life/${_id}`}>
           <Card.Img
@@ -16,8 +16,8 @@ const SpecimenCard = ({ images, commonName, scientificName, _id }) => {
         </Link>
 
         <Card.Body>
-          <Card.Title className="mt-3" style={{ color: '#023047' }}>{commonName}</Card.Title>
-          <Card.Subtitle className="text-muted" style={{ color: '#023047' }}>{scientificName}</Card.Subtitle>
+          <Card.Title style={{ color: '#023047' }}>{commonName}</Card.Title>
+          <Card.Subtitle className="text-muted mb-3" style={{ color: '#023047' }}>{scientificName}</Card.Subtitle>
           <Link to={`/marine-life/${_id}`}>
             <Button className="custom-color-button mt-3">More info</Button>
           </Link>

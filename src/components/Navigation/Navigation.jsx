@@ -21,33 +21,36 @@ const Navigation = () => {
           <>
             <Navbar.Toggle aria-controls="basic-navbar-nav" className="Navicon" onClick={() => setExpanded(!expanded)} />
             <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className="me-auto">
-                <Link to="/beaches" className="link" onClick={() => setExpanded(true)}>
-                  <Nav.Link as="span">Beaches</Nav.Link>
-                </Link>
+              <div className="fixed-right">
 
-                <Link to="/marine-life" className="link" onClick={() => setExpanded(true)}>
-                  <Nav.Link as="span">Marine Life</Nav.Link>
-                </Link>
+                <Nav className="me-auto">
+                  <Link to="/beaches" className="link" onClick={() => setExpanded(true)}>
+                    <Nav.Link as="span">Beaches</Nav.Link>
+                  </Link>
 
-                <Link to="/sightings" className="link" onClick={() => setExpanded(true)}>
-                  <Nav.Link as="span">Sightings</Nav.Link>
-                </Link>
+                  <Link to="/marine-life" className="link" onClick={() => setExpanded(true)}>
+                    <Nav.Link as="span">Marine Life</Nav.Link>
+                  </Link>
 
-                <Link to="/about-us" className="link" onClick={() => setExpanded(true)}>
-                  <Nav.Link as="span">About Us</Nav.Link>
-                </Link>
+                  <Link to="/sightings" className="link" onClick={() => setExpanded(true)}>
+                    <Nav.Link as="span">Sightings</Nav.Link>
+                  </Link>
 
-                <Link to={'/profile'} className="nav-link" onClick={() => setExpanded(true)}>
-                  <Image src={loggedUser.profilePic} style={{ width: '25px' }} roundedCircle />
-                </Link>
+                  <Link to="/about-us" className="link" onClick={() => setExpanded(true)}>
+                    <Nav.Link as="span">About Us</Nav.Link>
+                  </Link>
 
-              </Nav>
+                  <Link to={'/profile'} className="nav-link" onClick={() => setExpanded(true)}>
+                    <Image src={loggedUser.profilePic} style={{ width: '25px' }} roundedCircle />
+                  </Link>
+
+                </Nav>
+              </div>
             </Navbar.Collapse>
           </>
         }
       </Container>
-    </Navbar>
+    </Navbar >
   )
 }
 

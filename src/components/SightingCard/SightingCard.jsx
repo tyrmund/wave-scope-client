@@ -6,7 +6,7 @@ const SightingCard = ({ _id, images, name, createdAt, username }) => {
 
   return (
     <div className="SightingCard">
-      <Card className="m-3" style={{ border: 'none', maxHeight: '500px' }}>
+      <Card className="mt-3 mb-3" style={{ border: 'none', maxHeight: '500px' }}>
 
         <Link to={`/sightings/${_id}`}>
 
