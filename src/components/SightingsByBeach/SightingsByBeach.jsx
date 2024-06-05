@@ -5,23 +5,24 @@ import { Container, Row, Col } from "react-bootstrap"
 import SightingCard from "../SightingCard/SightingCard"
 
 
-const RecentSightings = ({ beach }) => {
+const SightingsByBeach = ({ beach }) => {
 
     const [sightings, setSightings] = useState([])
     const [isLoading, setIsLoading] = useState(true)
 
 
     useEffect(() => {
-        loadSightingUserList();
+        loadSightingsBeachList();
     }, [beach])
-    console.log(beach)
 
-    const loadSightingUserList = () => {
+
+    const loadSightingsBeachList = () => {
         sightingServices
             .getAllSightings()
             .then(({ data }) => {
                 console.log(data)
-                const sightingsByBeach = data.filter(elm => elm.beach.name)
+                const sightingsByBeach = data.filter(elm => elm.beach._id === beach)
+                console.log(beach._id)
                 setSightings(sightingsByBeach)
                 setIsLoading(false)
             })
@@ -32,7 +33,7 @@ const RecentSightings = ({ beach }) => {
         <Container className="WelcomePage mx-auto mt-3">
             <div >
                 <br />
-                <h3>Your Sightings</h3>
+                <h3>Sightings in this beach</h3>
 
                 {
                     isLoading
@@ -52,6 +53,7 @@ const RecentSightings = ({ beach }) => {
                                         >
                                             <SightingCard
                                                 name={sighting.specimen.commonName}
+                                                username={sighting.user.username}
                                                 {...sighting} />
                                         </Col>
                                     )
@@ -64,4 +66,4 @@ const RecentSightings = ({ beach }) => {
     )
 }
 
-export default RecentSightings
+export default SightingsByBeach

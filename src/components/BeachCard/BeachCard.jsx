@@ -23,7 +23,7 @@ const BeachCard = ({ name, images, length, composition, _id }) => {
           <Card.Title>{name}</Card.Title>
 
           <Row>
-            <Col md="5" className="mb-3">
+            <Col md="12" className="mb-3">
               <Card.Text >
                 Longitude: {length} m
               </Card.Text>
@@ -31,7 +31,7 @@ const BeachCard = ({ name, images, length, composition, _id }) => {
           </Row>
 
           <Row>
-            <Col md="6" className="mb-3">
+            <Col md="12" className="mb-3">
               <Card.Text >
                 Texture: {composition}
               </Card.Text>

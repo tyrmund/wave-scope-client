@@ -6,6 +6,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom'
 import Loader from "../../components/Loader/Loader"
 import beachServices from "../../services/beach.services"
 import CustomMap from '../../components/CustomMap/CustomMap'
+import SightingsByBeach from '../../components/SightingsByBeach/SightingsByBeach'
 
 
 const BeachDetailsPage = () => {
@@ -133,6 +134,9 @@ const BeachDetailsPage = () => {
                     <Button className="custom-color-button">Edit this beach </Button>
                   </Link>
                 </Col>
+              </Row>
+              <Row>
+                <SightingsByBeach beach={beachId} />
               </Row>
               <ModalConfirm show={show}
                 handleClose={handleClose}

@@ -33,7 +33,6 @@ const SightingUserList = ({ user }) => {
         <Container className="WelcomePage mx-auto mt-3">
             <div >
                 <br />
-                <h3>Your Sightings</h3>
                 {
                     isLoading
                         ?
@@ -52,6 +51,7 @@ const SightingUserList = ({ user }) => {
                                         >
                                             <SightingCard
                                                 name={sighting.specimen.commonName}
+                                                username={sighting.user.username}
                                                 {...sighting} />
                                         </Col>
                                     )
