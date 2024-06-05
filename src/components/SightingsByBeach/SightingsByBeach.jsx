@@ -3,27 +3,26 @@ import sightingServices from "../../services/sighting.services"
 import Loader from "../Loader/Loader"
 import { Container, Row, Col } from "react-bootstrap"
 import SightingCard from "../SightingCard/SightingCard"
+import { useParams } from "react-router-dom"
 
 
 const SightingsByBeach = ({ beach }) => {
 
     const [sightings, setSightings] = useState([])
     const [isLoading, setIsLoading] = useState(true)
+    const { beachId } = useParams()
 
 
     useEffect(() => {
         loadSightingsBeachList();
-    }, [beach])
+    }, [])
 
 
     const loadSightingsBeachList = () => {
         sightingServices
-            .getAllSightings()
+            .getAllSightingsByBeach(beachId)
             .then(({ data }) => {
-                console.log(data)
-                const sightingsByBeach = data.filter(elm => elm.beach._id === beach)
-                console.log(beach._id)
-                setSightings(sightingsByBeach)
+                setSightings(data)
                 setIsLoading(false)
             })
             .catch(err => console.log(err))
