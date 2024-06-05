@@ -19,20 +19,14 @@ const SightingDetailsPage = () => {
   const { sightingId } = useParams()
   const navigate = useNavigate()
 
-  const [liked, setLiked] = useState(false)
-  const [disliked, setDisliked] = useState(false)
+
+  const handleModalClose = () => setModalShow(false)
+  const handleModalShow = () => setModalShow(true)
+
 
   useEffect(() => {
     loadSightingDetails()
   }, [])
-
-  const handleClickLike = () => {
-    setLiked(!liked)
-  }
-
-  const handleClickDislike = () => {
-    setDisliked(!disliked)
-  }
 
   const loadSightingDetails = () => {
 
@@ -45,8 +39,6 @@ const SightingDetailsPage = () => {
       .catch(err => console.log(err))
   }
 
-  const handleModalClose = () => setModalShow(false)
-  const handleModalShow = () => setModalShow(true)
 
   const deleteSighting = () => {
 
@@ -151,7 +143,7 @@ const SightingDetailsPage = () => {
                           <p>Confirmations: {sighting.confirmations}</p>
                         </Col>
                         <Col>
-                          <LikeButton handleClick={handleClickLike} />
+                          <LikeButton />
                         </Col>
                       </Row>
                       <Row className="Rejections-Row">
@@ -159,7 +151,7 @@ const SightingDetailsPage = () => {
                           <p>Rejections: {sighting.rejections}</p>
                         </Col>
                         <Col>
-                          <DislikeButton handleClick={handleClickDislike} />
+                          <DislikeButton />
                         </Col>
                       </Row>
                     </Accordion.Body>
@@ -184,8 +176,10 @@ const SightingDetailsPage = () => {
                             lg={{ span: 4 }}>
                             <Button
                               className="delete-color-button mt-2 mb-2"
-                              onClick={handleModalShow}>
-                              Delete</Button>
+                              onClick={handleModalShow}
+                            >
+                              Delete
+                            </Button>
                           </Col>
                         </Row>
 
