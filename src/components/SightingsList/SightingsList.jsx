@@ -41,6 +41,7 @@ const SightingsList = () => {
                 >
                   <SightingCard
                     name={sighting.specimen.commonName}
+                    username={sighting.user.username}
                     {...sighting} />
                 </Col>
               )

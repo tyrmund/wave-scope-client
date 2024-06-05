@@ -24,14 +24,14 @@ const NewSightingForm = () => {
 
     const [newSighting, setNewSighting] = useState({
         images: [],
-        latitude: 0,
-        longitude: 0,
+        latitude: '',
+        longitude: '',
         beach: '',
         specimen: '',
         user: '',
         comment: '',
-        confirmations: 0,
-        rejections: 0
+        confirmations: [],
+        rejections: []
     })
 
     useEffect(() => {
@@ -101,13 +101,16 @@ const NewSightingForm = () => {
     const showErr = err => {
 
         console.log("GetCurrentPosition couldn't retrieve data:", err)
+        console.log("Retriving coordinates from chosen beach.")
     }
 
     const showPos = (pos) => {
 
-        const updatedSighting = newSighting
-        updatedSighting.latitude = pos.coords.latitude
-        updatedSighting.longitude = pos.coords.longitude
+        const updatedSighting = {
+            ...newSighting,
+            latitude: pos.coords.latitude.toString(),
+            longitude: pos.coords.longitude.toString()
+        }
 
         setNewSighting(updatedSighting)
     }
@@ -126,21 +129,16 @@ const NewSightingForm = () => {
 
         if (onSite) navigator.geolocation.getCurrentPosition(showPos, showErr)
 
-        //if (!onSite ||
-        //    (newSighting.latitude === 0 || newSighting.longitude === 0)) {
-
-        else {
+        if (!onSite || newSighting.latitude === '' || newSighting.longitude === '') {
 
             const selectedBeach = beaches.find(beach => beach._id === newSighting.beach)
             const updatedSighting = newSighting
-            updatedSighting.latitude = selectedBeach.location.coordinates[1]
-            updatedSighting.longitude = selectedBeach.location.coordinates[0]
+            updatedSighting.latitude = selectedBeach.location.coordinates[1].toString()
+            updatedSighting.longitude = selectedBeach.location.coordinates[0].toString()
 
             setNewSighting(updatedSighting)
 
         }
-
-        console.log(newSighting)
 
         sightingServices
             .newSighting(newSighting)

@@ -18,7 +18,7 @@ const BeachCard = ({ name, images, length, composition, _id }) => {
           />
         </Link>
 
-        <Card.Body >
+        <Card.Body style={{ maxHeight: '600px' }}>
 
           <Card.Title>{name}</Card.Title>
 

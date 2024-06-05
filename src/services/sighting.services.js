@@ -42,6 +42,22 @@ class SightingServices {
         return this.axiosApp.delete(`/${sightingId}`)
     }
 
+    confirmSighting(sightingId) {
+        return this.axiosApp.post(`/${sightingId}/confirmation`)
+    }
+
+    removeSightingConfirmation(sightingId) {
+        return this.axiosApp.delete(`/${sightingId}/confirmation`)
+    }
+
+    rejectSighting(sightingId) {
+        return this.axiosApp.post(`/${sightingId}/rejection`)
+    }
+
+    removeSightingRejection(sightingId) {
+        return this.axiosApp.delete(`/${sightingId}/rejection`)
+    }
+
 }
 
 const sightingServices = new SightingServices()
