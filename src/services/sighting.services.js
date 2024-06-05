@@ -26,6 +26,10 @@ class SightingServices {
         })
     }
 
+    getAllSightingsByBeach(beachId) {
+        return this.axiosApp.get(`/sightingsByBeach/${beachId}`)
+    }
+
     getOneSighting(sightingId) {
         return this.axiosApp.get(`/${sightingId}`)
     }
