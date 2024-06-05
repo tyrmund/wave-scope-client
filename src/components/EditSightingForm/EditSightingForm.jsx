@@ -33,8 +33,8 @@ const EditSightingForm = () => {
         specimen: '',
         user: '',
         comment: '',
-        confirmations: 0,
-        rejections: 0
+        confirmations: [],
+        rejections: []
     })
 
     useEffect(() => {
@@ -128,8 +128,13 @@ const EditSightingForm = () => {
 
     const showPos = (pos) => {
 
-        sightingData.latitude = pos.coords.latitude
-        sightingData.longitude = pos.coords.longitude
+        const updatedSighting = {
+            ...sightingData,
+            latitude: pos.coords.latitude.toString(),
+            longitude: pos.coords.longitude.toString()
+        }
+
+        setSightingData(updatedSighting)
     }
 
     const handleSubmitSightingForm = e => {
@@ -150,14 +155,14 @@ const EditSightingForm = () => {
 
         }
 
-        //  if (!onSite ||
-        //       (sightingData.latitude === 0 || sightingData.longitude === 0)) {
-
-        else {
+        if (!onSite || sightingData.latitude === '' || sightingData.longitude === '') {
 
             const selectedBeach = beaches.find(beach => beach._id === sightingData.beach)
-            sightingData.latitude = selectedBeach.location.coordinates[1]
-            sightingData.longitude = selectedBeach.location.coordinates[0]
+            const updatedSighting = sightingData
+            updatedSighting.latitude = selectedBeach.location.coordinates[1].toString()
+            updatedSighting.longitude = selectedBeach.location.coordinates[0].toString()
+
+            setSightingData(updatedSighting)
 
         }
 

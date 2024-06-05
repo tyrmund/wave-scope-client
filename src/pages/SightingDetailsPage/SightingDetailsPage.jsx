@@ -19,7 +19,7 @@ const SightingDetailsPage = () => {
   const { sightingId } = useParams()
   const navigate = useNavigate()
 
-  const [liked, setLiked] = useState(false);
+  const [liked, setLiked] = useState(false)
   const [disliked, setDisliked] = useState(false)
 
   useEffect(() => {

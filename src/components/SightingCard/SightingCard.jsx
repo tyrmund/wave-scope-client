@@ -2,7 +2,7 @@ import { Card, Button, Badge } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import { wasItAddedToday } from "../../utils/sightings.data"
 
-const SightingCard = ({ _id, images, name, createdAt }) => {
+const SightingCard = ({ _id, images, name, createdAt, username }) => {
 
   return (
     <div className="SightingCard">
@@ -20,19 +20,24 @@ const SightingCard = ({ _id, images, name, createdAt }) => {
 
         <Card.Body>
 
-          <div className='mb-2'>
+          <div>
 
             <Card.Title className="d-inline">{name}</Card.Title>
             {
               wasItAddedToday(createdAt) &&
-              <Badge className="d-inline" bg='info'>
+              <Badge
+                style={{ marginLeft: '10px' }}
+                className="d-inline"
+                bg='info'>
                 New!
               </Badge>
             }
 
           </div>
 
-          <Card.Text>Time of sighting: {createdAt.substring(8, 10)}/{createdAt.substring(5, 7)}/{createdAt.substring(0, 4)}</Card.Text>
+          <Card.Text className="mt-3">Time of sighting: {createdAt.substring(8, 10)}/{createdAt.substring(5, 7)}/{createdAt.substring(0, 4)}</Card.Text>
+
+          <Card.Text className="mb-4">By {username}</Card.Text>
 
           <Link style={{ textDecoration: 'none' }} to={`/sightings/${_id}`}>
             <Button className="custom-color-button" variant="secondary">Details</Button>
