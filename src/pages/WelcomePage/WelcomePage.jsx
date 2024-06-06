@@ -23,7 +23,6 @@ const WelcomePage = () => {
 
   useEffect(() => {
     loadAllSightings()
-    loadBeaches()
   }, [])
 
   const loadAllSightings = () => {
@@ -37,6 +36,11 @@ const WelcomePage = () => {
       .catch(err => console.log(err))
 
   }
+
+
+  useEffect(() => {
+    loadBeaches()
+  }, [])
 
 
   const loadBeaches = () => {
