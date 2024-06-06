@@ -60,13 +60,13 @@ const SignupForm = () => {
     <Form onSubmit={handleForSubmit}>
       <Row>
         <Col xs={{ span: 12 }} md={{ span: 6 }} lg={{ span: 6 }}>
-          <Form.Group className="mb-3" controlId="email">
+          <Form.Group className="mb-3 h6" controlId="email">
             <Form.Label>Email</Form.Label>
             <Form.Control type="text" value={signupData.email} onChange={handleInputChange} name="email" />
           </Form.Group>
         </Col>
         <Col xs={{ span: 12 }} md={{ span: 6 }} lg={{ span: 6 }}>
-          <Form.Group className="mb-3" controlId="password">
+          <Form.Group className="mb-3 h6" controlId="password">
             <Form.Label>Password</Form.Label>
             <Form.Control type="password" value={signupData.password} onChange={handleInputChange} name="password" />
           </Form.Group>
@@ -75,19 +75,19 @@ const SignupForm = () => {
 
       <Row>
         <Col xs={{ span: 12 }} md={{ span: 4 }} lg={{ span: 4 }}>
-          <Form.Group className="mb-3" controlId="username">
+          <Form.Group className="mb-3 h6" controlId="username">
             <Form.Label>User name</Form.Label>
             <Form.Control type="text" value={signupData.username} onChange={handleInputChange} name="username" />
           </Form.Group>
         </Col>
         <Col xs={{ span: 6 }} md={{ span: 4 }} lg={{ span: 4 }}>
-          <Form.Group className="mb-3" controlId="postalCode">
+          <Form.Group className="mb-3 h6" controlId="postalCode">
             <Form.Label>Postal Code</Form.Label>
             <Form.Control type="text" value={signupData.postalCode} onChange={handleInputChange} name="postalCode" />
           </Form.Group>
         </Col>
         <Col xs={{ span: 6 }} md={{ span: 4 }} lg={{ span: 4 }}>
-          <Form.Group className="mb-3" controlId="country">
+          <Form.Group className="mb-3 h6" controlId="country">
             <Form.Label>Country</Form.Label>
             <Form.Control type="text" value={signupData.country} onChange={handleInputChange} name="country" />
           </Form.Group>
@@ -96,7 +96,7 @@ const SignupForm = () => {
 
       <Row>
         <Col>
-          <Form.Group className="mb-3" controlId="image">
+          <Form.Group className="mb-3 h6" controlId="image">
             <Form.Label>Choose your profile picture</Form.Label>
             <Form.Control className='mb-3' type="file" onChange={handleFileUpload} />
           </Form.Group>
