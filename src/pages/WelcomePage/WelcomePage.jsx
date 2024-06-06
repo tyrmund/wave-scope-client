@@ -56,16 +56,17 @@ const WelcomePage = () => {
 
   return (
     <Container className="WelcomePage mx-auto mt-3">
-      <h1 className="m-5">{`Welcome to the wave, ${loggedUser.username}`}</h1>
+      <h1 className="m-5 text-center">{`Welcome to the wave, ${loggedUser.username}`}</h1>
       <Row>
-        <h3>Your Sightings</h3>
+        <h3 style={{ marginLeft: '0.75rem' }}>Your Sightings</h3>
         <SightingUserList />
       </Row>
 
       <Row>
         <Card.Body className="p-2 MapCard" >
           <Card.Title className="m-5">
-            <h2> Your visited coastal sites</h2>
+            <h2 className="text-center"
+              style={{ color: '#023047' }}> Your visited coastal sites</h2>
           </Card.Title>
           {
             isBeachesLoading

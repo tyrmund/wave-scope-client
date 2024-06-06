@@ -63,7 +63,7 @@ const MarineLifeDetailsPage = () => {
           ?
           <Loader />
           :
-          <Container className="SpecimenDetailsPage mt-3 mb-5">
+          <Container className="SpecimenDetailsPage mt-3">
 
             <Card className="mb-3" style={{ marginLeft: '10px', marginRight: '10px' }}>
               <Card.Body>
