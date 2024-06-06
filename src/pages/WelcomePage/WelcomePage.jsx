@@ -22,6 +22,7 @@ const WelcomePage = () => {
 
   useEffect(() => {
     loadAllSightings()
+    loadBeaches()
   }, [])
 
   const loadAllSightings = () => {
@@ -35,11 +36,6 @@ const WelcomePage = () => {
       .catch(err => console.log(err))
 
   }
-
-
-  useEffect(() => {
-    loadBeaches()
-  }, [])
 
 
   const loadBeaches = () => {
@@ -83,19 +79,23 @@ const WelcomePage = () => {
 
       <h3 className="mt-5">Recent Sightings of Wave Scope Community</h3>
       {
-        sightings.map(sighting =>
-          <Col
-            key={sighting._id}
-            xs={{ span: 12 }}
-            md={{ span: 6 }}
-            lg={{ span: 4 }}
-          >
-            <SightingCard
-              name={sighting.specimen.commonName}
-              username={sighting.user.username}
-              {...sighting} />
-          </Col>
-        )
+        isLoading
+          ?
+          <Loader />
+          :
+          sightings.map(sighting =>
+            <Col
+              key={sighting._id}
+              xs={{ span: 12 }}
+              md={{ span: 6 }}
+              lg={{ span: 4 }}
+            >
+              <SightingCard
+                name={sighting.specimen.commonName}
+                username={sighting.user.username}
+                {...sighting} />
+            </Col>
+          )
       }
 
     </Container >
