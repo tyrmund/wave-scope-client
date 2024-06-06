@@ -11,66 +11,68 @@ import SightingCard from "../../components/SightingCard/SightingCard"
 
 
 const WelcomePage = () => {
-    const { loggedUser } = useContext(AuthContext)
+  const { loggedUser } = useContext(AuthContext)
 
-    const [sightings, setSightings] = useState()
-    const [isLoading, setIsLoading] = useState(true)
+  const [sightings, setSightings] = useState()
+  const [isLoading, setIsLoading] = useState(true)
 
-    useEffect(() => {
-        loadAllSightings()
-    }, [])
+  useEffect(() => {
+    loadAllSightings()
+  }, [])
 
-    const loadAllSightings = () => {
+  const loadAllSightings = () => {
 
-        sightingServices
-            .getAllSightings({ totalItems: 3 })
-            .then(({ data }) => {
-                setSightings(data);
-                setIsLoading(false)
-            })
-            .catch(err => console.log(err))
+    sightingServices
+      .getAllSightings({ totalItems: 3 })
+      .then(({ data }) => {
+        setSightings(data);
+        setIsLoading(false)
+      })
+      .catch(err => console.log(err))
 
-    }
-
-
+  }
 
 
-    return (
-        <Container className="WelcomePage mx-auto mt-3">
-            <h1 className="m-5">{`Welcome to the wave, ${loggedUser.username}`}</h1>
-            <Row>
-                <h3>Your Sightings</h3>
-                <SightingUserList />
-            </Row>
-            <h3>Recent Sightings of Wave Scope Community</h3>
+
+
+  return (
+    <Container className="WelcomePage mx-auto mt-3" style={{ padding: '0px' }}>
+      <h1 style={{ marginTop: '60px', marginLeft: '15px' }}>{`Welcome to the wave, ${loggedUser.username}`}</h1>
+      <h3 style={{ marginTop: '60px', marginLeft: '15px' }}>Your Sightings</h3>
+      <Row>
+        <SightingUserList />
+      </Row>
+      <h3 className="m-3">Recent Sightings of Wave Scope Community</h3>
+      {
+        isLoading
+          ?
+          <Loader />
+          :
+
+          <Row className="mt-5 mb-5 mx-auto">
+
             {
-                isLoading
-                    ?
-                    <Loader />
-                    :
-                    <Row className="mt-3">
-                        {
-                            sightings.map(sighting =>
-                                <Col
-                                    key={sighting._id}
-                                    xs={{ span: 12 }}
-                                    md={{ span: 6 }}
-                                    lg={{ span: 4 }}
-                                >
-                                    <SightingCard
-                                        name={sighting.specimen.commonName}
-                                        username={sighting.user.username}
-                                        {...sighting} />
-                                </Col>
-                            )
-                        }
-                    </Row>
+              sightings.map(sighting =>
+                <Col
+                  key={sighting._id}
+                  xs={{ span: 12 }}
+                  md={{ span: 6 }}
+                  lg={{ span: 4 }}
+                >
+                  <SightingCard
+                    name={sighting.specimen.commonName}
+                    username={sighting.user.username}
+                    {...sighting} />
+                </Col>
+              )
             }
-            <Row>
+          </Row>
+      }
+      <Row>
 
-            </Row>
-        </Container>
-    )
+      </Row>
+    </Container>
+  )
 }
 
 export default WelcomePage

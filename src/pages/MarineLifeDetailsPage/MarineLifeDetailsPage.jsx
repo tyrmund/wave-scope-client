@@ -101,7 +101,7 @@ const MarineLifeDetailsPage = () => {
                   <Button className="custom-color-button mb-3" style={{ marginLeft: '10px' }}>Edit this specimen</Button>
                 </Link>
 
-                <Button className="custom-color-button mb-3" onClick={handleModalShow} style={{ marginLeft: '10px' }}>Delete this specimen</Button>
+                <Button className="delete-color-button mb-3" onClick={handleModalShow} style={{ marginLeft: '10px' }}>Delete this specimen</Button>
 
                 <ModalConfirm
                   show={modalShow}

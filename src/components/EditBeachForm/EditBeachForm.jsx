@@ -99,7 +99,6 @@ const EditBeachForm = () => {
         uploadServices
             .uploadImage(formData)
             .then(({ data }) => {
-                console.log(data.cloudinary_urls)
                 const oldImages = beachData.images
                 const newImages = data.cloudinary_urls
 
@@ -127,10 +126,8 @@ const EditBeachForm = () => {
             sectors: Number(beachData.sectors),
             nearBusStops: busStops
         }
-        console.log(fullBeach)
+
         e.preventDefault()
-
-
 
         if (!beachData.name || !beachData.composition || beachData.composition === "Choose a composition" || !beachData.description) {
             handleModalShow()

@@ -128,23 +128,26 @@ const BeachDetailsPage = () => {
 
                 </Card.Body>
               </Card>
-              <Row className='mx-auto'>
-                <Col md={{ span: 6 }} className='m-5'>
-                  <Button className='delete-color-button button-margin' onClick={showConfirmModal}> Delete this beach</Button>
-                  <Link to={`/beaches/edit/${beachId}`}>
-                    <Button className="custom-color-button">Edit this beach </Button>
-                  </Link>
-                </Col>
-              </Row>
-              <Row>
-                <SightingsByBeach beach={beachId} />
-                {
-                  loggedUser.role === 'admin' &&
+              {
+                loggedUser.role === 'admin' &&
 
-                  < Link to={'/sightings/new'} style={{ textDecoration: 'none' }}>
-                    <Button className="custom-color-button d-block mx-auto mb-5">Add your own sighting</Button>
-                  </Link>
-                }
+                <Row className=''>
+                  <Col md={{ span: 6 }} className='m-3'>
+                    <Link to={`/beaches/edit/${beachId}`}>
+                      <Button className="custom-color-button">Edit this beach </Button>
+                    </Link>
+                    <Button className='delete-color-button button-margin' style={{ marginLeft: '10px' }} onClick={showConfirmModal}> Delete this beach</Button>
+
+                  </Col>
+                </Row>
+
+              }
+              <Row>
+                <SightingsByBeach />
+
+                < Link to={'/sightings/new'} style={{ textDecoration: 'none' }}>
+                  <Button className="custom-color-button d-block mx-auto mb-5">Add your own sighting</Button>
+                </Link>
               </Row>
               <ModalConfirm show={show}
                 handleClose={handleClose}

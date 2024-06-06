@@ -6,62 +6,62 @@ import './Search.css'
 
 
 const Search = () => {
-    const [beachQuery, setBeachQuery] = useState('')
-    const [filteredBeaches, setFilteredBeaches] = useState([])
+  const [beachQuery, setBeachQuery] = useState('')
+  const [filteredBeaches, setFilteredBeaches] = useState([])
 
-    const handleBeachQuery = event => {
-        const { value: query } = event.target
-        query === '' ? resetFilter() : triggerSearch(query)
-    }
+  const handleBeachQuery = event => {
+    const { value: query } = event.target
+    query === '' ? resetFilter() : triggerSearch(query)
+  }
 
-    const resetFilter = () => {
-        setFilteredBeaches([])
-        setBeachQuery('')
-    }
+  const resetFilter = () => {
+    setFilteredBeaches([])
+    setBeachQuery('')
+  }
 
-    const triggerSearch = query => {
-        setBeachQuery(query)
-        getFilteredBeaches(query)
-    }
+  const triggerSearch = query => {
+    setBeachQuery(query)
+    getFilteredBeaches(query)
+  }
 
-    const getFilteredBeaches = query => {
-        beachServices
-            .searchBeaches({ name: query })
-            .then(({ data }) => {
-                console.log('API response:', data)
-                setFilteredBeaches(data)
-            })
-            .catch(err => console.log(err))
-    }
+  const getFilteredBeaches = query => {
+    beachServices
+      .searchBeaches({ name: query })
+      .then(({ data }) => {
+        setFilteredBeaches(data)
+      })
+      .catch(err => console.log(err))
+  }
 
 
-    return (
-        <div className='Search' >
-            <Form.Control
-                type="text"
-                placeholder="search a beach"
-                value={beachQuery}
-                onChange={handleBeachQuery}
-            />
+  return (
+    <div className='Search mt-5 mb-5 d-flex justify-content-center' >
+      <Form.Control
+        type="text"
+        placeholder="Search a beach"
+        value={beachQuery}
+        onChange={handleBeachQuery}
+        style={{ width: '350px', display: 'flex', alignItems: 'center' }}
+      />
+      {
+        (
+          <ListGroup style={{ position: 'absolute', zIndex: 1000, marginTop: '37px', width: '350px' }}>
             {
-                (
-                    <ListGroup style={{ position: 'absolute', zIndex: 1000 }}>
-                        {
-                            filteredBeaches.map(beach => {
-                                return (
-                                    <ListGroup.Item key={beach._id}>
-                                        <Link to={`/beaches/${beach._id}`}>
-                                            <p className='beachName'> {beach.name} </p>
-                                        </Link>
-                                    </ListGroup.Item>
-                                )
-                            })
-                        }
-                    </ListGroup>
+              filteredBeaches.map(beach => {
+                return (
+                  <ListGroup.Item key={beach._id}>
+                    <Link to={`/beaches/${beach._id}`}>
+                      <p className='beachName'> {beach.name} </p>
+                    </Link>
+                  </ListGroup.Item>
                 )
+              })
             }
-        </div>
-    )
+          </ListGroup>
+        )
+      }
+    </div>
+  )
 }
 
 export default Search

@@ -97,8 +97,6 @@ const EditSpecimenForm = () => {
       description: editSpecimenData.description
     }
 
-    console.log(fullSpecimen)
-
     specimenServices
       .editSpecimen(specimenId, fullSpecimen)
       .then(() => navigate('/marine-life'))

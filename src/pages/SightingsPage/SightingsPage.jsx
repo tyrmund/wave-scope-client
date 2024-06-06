@@ -10,15 +10,12 @@ const SightingsPage = () => {
 
   return (
     <div className="SightingsPage">
+
       <h1 className="text-center mt-3 mb-3">All Sightings</h1>
 
-      {
-        loggedUser.role === 'admin' &&
-
-        < Link to={'/sightings/new'} style={{ textDecoration: 'none' }}>
-          <Button className="custom-color-button d-block mx-auto">Add your own sighting</Button>
-        </Link>
-      }
+      < Link to={'/sightings/new'} style={{ textDecoration: 'none' }}>
+        <Button className="custom-color-button d-block mx-auto">Add your own sighting</Button>
+      </Link>
 
       <SightingsList />
     </div >

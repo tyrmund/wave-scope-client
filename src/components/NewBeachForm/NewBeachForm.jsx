@@ -76,7 +76,6 @@ const NewBeachForm = () => {
         uploadServices
             .uploadImage(formData)
             .then(({ data }) => {
-                console.log(data.cloudinary_urls)
                 setBeachData({ ...beachData, images: data.cloudinary_urls })
                 setLoadingImage(false)
             })
