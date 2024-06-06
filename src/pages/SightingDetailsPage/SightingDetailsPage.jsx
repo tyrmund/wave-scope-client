@@ -100,41 +100,37 @@ const SightingDetailsPage = () => {
           ?
           <Spinner animation="grow" variant="dark" />
           :
-          <Container className="SightingDetailsPage">
+          <Container className="SightingDetailsPage mb-5">
             <Row>
               <Col md={{ span: 8, offset: 2 }}>
-                <Container>
-
-                  <Carousel className="mb-5">
-                    {sighting.images.length !== 0 ?
-                      sighting.images.map((image, index) => (
-                        <Carousel.Item key={index}>
-                          <img
-                            className="d-block w-100 img-fluid mt-5 rounded"
-                            style={{ height: 450, objectFit: "cover", objectPosition: "center top" }}
-                            src={image}
-                            alt={sighting.specimen.scientificName} />
-                        </Carousel.Item>
-                      ))
-                      :
-                      <Carousel.Item>
+                <Carousel className="mb-5">
+                  {sighting.images.length !== 0 ?
+                    sighting.images.map((image, index) => (
+                      <Carousel.Item key={index}>
                         <img
                           className="d-block w-100 img-fluid mt-5 rounded"
                           style={{ height: 450, objectFit: "cover", objectPosition: "center top" }}
-                          src="https://res.cloudinary.com/dc7ycwd1u/image/upload/v1717428275/Anadir_un_titulo_2_zruph6.png"
-                          alt="pic-not-provided" />
+                          src={image}
+                          alt={sighting.specimen.scientificName} />
                       </Carousel.Item>
-                    }
-                  </Carousel>
+                    ))
+                    :
+                    <Carousel.Item>
+                      <img
+                        className="d-block w-100 img-fluid mt-5 rounded"
+                        style={{ height: 450, objectFit: "cover", objectPosition: "center top" }}
+                        src="https://res.cloudinary.com/dc7ycwd1u/image/upload/v1717428275/Anadir_un_titulo_2_zruph6.png"
+                        alt="pic-not-provided" />
+                    </Carousel.Item>
+                  }
+                </Carousel>
 
-                  <CustomMap
-                    zoom={18}
-                    center={sighting.location}
-                    markers={sighting.location}
-                    type={'sighting'}
-                  />
-
-                </Container>
+                <CustomMap
+                  zoom={18}
+                  center={sighting.location}
+                  markers={sighting.location}
+                  type={'sighting'}
+                />
               </Col>
             </Row>
 

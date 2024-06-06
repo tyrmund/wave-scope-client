@@ -11,3 +11,7 @@
   height: 450px;
   object-fit: cover;
 }
+
+.SpecimenDetailsPage {
+  margin-bottom: 70px !important;
+}
