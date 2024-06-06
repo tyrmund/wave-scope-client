@@ -17,7 +17,8 @@ const WelcomePage = () => {
   const { loggedUser } = useContext(AuthContext)
 
   const [sightings, setSightings] = useState()
-  const [isLoading, setIsLoading] = useState(true)
+  const [isSightingsLoading, setSightingsLoading] = useState(true)
+  const [isBeachesLoading, setBeachesLoading] = useState(true)
   const [beaches, setBeaches] = useState([])
 
   useEffect(() => {
@@ -31,7 +32,7 @@ const WelcomePage = () => {
       .getAllSightings({ totalItems: 3 })
       .then(({ data }) => {
         setSightings(data);
-        setIsLoading(false)
+        setSightingsLoading(false)
       })
       .catch(err => console.log(err))
 
@@ -43,7 +44,7 @@ const WelcomePage = () => {
       .getAllBeaches('/beaches')
       .then(({ data }) => {
         setBeaches(data)
-        setIsloading(false)
+        setBeachesLoading(false)
       })
       .catch(err => console.log(err))
   }
@@ -63,7 +64,7 @@ const WelcomePage = () => {
             <h2> Your visited coastal sites</h2>
           </Card.Title>
           {
-            isLoading
+            isBeachesLoading
               ?
               <Loader />
               :
@@ -79,23 +80,27 @@ const WelcomePage = () => {
 
       <h3 className="mt-5">Recent Sightings of Wave Scope Community</h3>
       {
-        isLoading
+        isSightingsLoading
           ?
           <Loader />
           :
-          sightings.map(sighting =>
-            <Col
-              key={sighting._id}
-              xs={{ span: 12 }}
-              md={{ span: 6 }}
-              lg={{ span: 4 }}
-            >
-              <SightingCard
-                name={sighting.specimen.commonName}
-                username={sighting.user.username}
-                {...sighting} />
-            </Col>
-          )
+          <Row>
+            {
+              sightings.map(sighting =>
+                <Col
+                  key={sighting._id}
+                  xs={{ span: 12 }}
+                  md={{ span: 6 }}
+                  lg={{ span: 4 }}
+                >
+                  <SightingCard
+                    name={sighting.specimen.commonName}
+                    username={sighting.user.username}
+                    {...sighting} />
+                </Col>
+              )
+            }
+          </Row>
       }
 
     </Container >
