@@ -137,9 +137,11 @@ const SightingDetailsPage = () => {
                 </Container>
               </Col>
             </Row>
+
             <Row>
               <Col md={{ span: 8, offset: 2 }}>
                 <Accordion className="mt-3 mb-5 shadow-lg sand-colored">
+
                   <Accordion.Item eventKey="0">
                     <Accordion.Header>{sighting.specimen.commonName}&nbsp;<i>({sighting.specimen.scientificName})</i></Accordion.Header>
                     <Accordion.Body>
@@ -151,6 +153,7 @@ const SightingDetailsPage = () => {
                       <p>Usual Habitat: {sighting.specimen.habitat}</p>
                     </Accordion.Body>
                   </Accordion.Item>
+
                   <Accordion.Item eventKey="1">
                     <Accordion.Header>Region Info</Accordion.Header>
                     <Accordion.Body>
@@ -162,16 +165,24 @@ const SightingDetailsPage = () => {
                       <p>Coast Length: {sighting.beach.length} m</p>
                       <p>Soil Composition: {sighting.beach.composition}</p>
                       <h2 className="fs-6">Nearby Bus Stops</h2>
+
                       {sighting.beach.nearBusStops.map((busStop, index) =>
                         <div key={busStop._id}>
                           <h3 className="fs-6 mt-3">• {busStop.name}</h3>
                           {busStop.lines.map((line, index) =>
-                            <Badge key={index} bg="info">{line}</Badge>
+                            <Badge
+                              key={index}
+                              bg="info"
+                              style={{ marginRight: '2px' }}>
+                              {line}
+                            </Badge>
                           )}
                         </div>
                       )}
+
                     </Accordion.Body>
                   </Accordion.Item>
+
                   <Accordion.Item eventKey="2">
                     <Accordion.Header>User Input</Accordion.Header>
                     <Accordion.Body>
@@ -202,6 +213,7 @@ const SightingDetailsPage = () => {
                       </Row>
                     </Accordion.Body>
                   </Accordion.Item>
+
                   {(loggedUser._id === sighting.user._id || loggedUser.role === 'admin') &&
                     <Accordion.Item eventKey="3">
                       <Accordion.Header>Options</Accordion.Header>
@@ -235,6 +247,7 @@ const SightingDetailsPage = () => {
                 </Accordion>
               </Col>
             </Row>
+
             <ModalConfirm
               show={modalShow}
               handleClose={handleModalClose}
@@ -242,6 +255,7 @@ const SightingDetailsPage = () => {
               titleMessage={'Confirm deletion'}
               bodyMessage={'This will remove the current sighting.'}
               buttonMessage={'Confirm'} />
+
           </Container>
       }
     </div>
