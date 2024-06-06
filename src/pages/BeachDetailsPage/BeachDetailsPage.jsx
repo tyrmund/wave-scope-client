@@ -114,7 +114,12 @@ const BeachDetailsPage = () => {
                     <div key={busStop._id}>
                       <h3 className="fs-6 mt-3">• {busStop.name}</h3>
                       {busStop.lines.map((line, index) =>
-                        <Badge key={index} bg="info">{line}</Badge>
+                        <Badge
+                          key={index}
+                          bg="info"
+                          style={{ marginRight: '2px' }}>
+                          {line}
+                        </Badge>
                       )}
                     </div>
                   )}
@@ -152,7 +157,8 @@ const BeachDetailsPage = () => {
               <ModalConfirm show={show}
                 handleClose={handleClose}
                 handleConfirm={deleteThisBeach}
-                bodyMessage={'You will delete this beach'}
+                titleMessage={'Confirm deletion'}
+                bodyMessage={'This will remove the current beach.'}
                 buttonMessage={'Confirm'} />
             </>
         }
