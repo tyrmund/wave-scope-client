@@ -11,7 +11,7 @@ const StartPage = () => {
       <div
         className="welcome-banner"
         style={{
-          backgroundImage: "url('https://res.cloudinary.com/dc7ycwd1u/image/upload/v1717663449/IMG-20240606-WA0003_z6v6rf.jpg')",
+          backgroundImage: "url('https://res.cloudinary.com/dc7ycwd1u/image/upload/v1717687353/filteredBackground_awwfpr.png')",
         }}
       >
 
