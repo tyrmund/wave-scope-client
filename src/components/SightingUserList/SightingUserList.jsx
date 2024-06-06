@@ -30,15 +30,14 @@ const SightingUserList = ({ user }) => {
     }
 
     return (
-        <Container className="WelcomePage mx-auto mt-3">
+        <Container className="WelcomePage mx-auto">
             <div >
-                <br />
                 {
                     isLoading
                         ?
                         <Loader />
                         :
-                        <Container className="SightingsList mb-5">
+                        <Container className="SightingsList">
 
                             <Row className="mt-5 mb-3">
                                 {

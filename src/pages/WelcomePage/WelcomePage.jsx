@@ -1,5 +1,5 @@
 
-import { Container, Row, Col } from "react-bootstrap"
+import { Container, Row, Col, Card } from "react-bootstrap"
 import SightingUserList from "../../components/SightingUserList/SightingUserList"
 import { useContext } from "react"
 import { AuthContext } from "../../contexts/auth.context"
@@ -7,6 +7,9 @@ import { useState, useEffect } from "react"
 import Loader from "../../components/Loader/Loader"
 import sightingServices from "../../services/sighting.services"
 import SightingCard from "../../components/SightingCard/SightingCard"
+import beachServices from "../../services/beach.services"
+import CustomMap from "../../components/CustomMap/CustomMap"
+import './WelcomePage.css'
 
 
 
@@ -15,6 +18,7 @@ const WelcomePage = () => {
 
     const [sightings, setSightings] = useState()
     const [isLoading, setIsLoading] = useState(true)
+    const [beaches, setBeaches] = useState([])
 
     useEffect(() => {
         loadAllSightings()
@@ -33,6 +37,20 @@ const WelcomePage = () => {
     }
 
 
+    useEffect(() => {
+        loadBeaches()
+    }, [])
+
+
+    const loadBeaches = () => {
+        beachServices
+            .getAllBeaches('/beaches')
+            .then(({ data }) => {
+                setBeaches(data)
+                setIsloading(false)
+            })
+            .catch(err => console.log(err))
+    }
 
 
     return (
@@ -42,7 +60,28 @@ const WelcomePage = () => {
                 <h3>Your Sightings</h3>
                 <SightingUserList />
             </Row>
-            <h3>Recent Sightings of Wave Scope Community</h3>
+
+            <Row>
+                <Card.Body className="p-2 MapCard" >
+                    <Card.Title className="m-5">
+                        <h2> Your visited coastal sites</h2>
+                    </Card.Title>
+                    {
+                        isLoading
+                            ?
+                            <Loader />
+                            :
+                            <CustomMap
+                                zoom={3}
+                                center={beaches[0].location}
+                                markers={beaches}
+                                type={'beaches'}
+                            />
+                    }
+                </Card.Body>
+            </Row>
+
+            <h3 className="mt-5">Recent Sightings of Wave Scope Community</h3>
             {
                 isLoading
                     ?
