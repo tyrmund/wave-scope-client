@@ -52,8 +52,6 @@ const WelcomePage = () => {
       .catch(err => console.log(err))
   }
 
-  navigator.geolocation.getCurrentPosition(showPos, showErr)
-
   const userPosition = {}
 
   userPosition.coordinates = []
@@ -65,10 +63,12 @@ const WelcomePage = () => {
 
   }
 
-
   const showErr = err => {
     console.log("GetCurrentPosition couldn't retrieve data:", err)
   }
+
+  navigator.geolocation.getCurrentPosition(showPos, showErr)
+
 
 
   return (
