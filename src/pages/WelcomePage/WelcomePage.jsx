@@ -37,7 +37,6 @@ const WelcomePage = () => {
 
   }
 
-
   useEffect(() => {
     loadBeaches()
   }, [])
@@ -51,6 +50,24 @@ const WelcomePage = () => {
         setBeachesLoading(false)
       })
       .catch(err => console.log(err))
+  }
+
+  navigator.geolocation.getCurrentPosition(showPos, showErr)
+
+  const userPosition = {}
+
+  userPosition.coordinates = []
+
+  const showPos = (pos) => {
+
+    userPosition.coordinates[0] = pos.coords.longitude
+    userPosition.coordinates[1] = pos.coords.latitude
+
+  }
+
+
+  const showErr = err => {
+    console.log("GetCurrentPosition couldn't retrieve data:", err)
   }
 
 
@@ -75,9 +92,9 @@ const WelcomePage = () => {
               :
               <CustomMap
                 zoom={3}
-                center={beaches[0].location}
+                center={userPosition}
                 markers={beaches}
-                type={'beaches'}
+                type={'welcomeBeach'}
               />
           }
         </Card.Body>

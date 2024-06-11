@@ -68,6 +68,21 @@ function CustomMap({ zoom, center, markers, type, centerName }) {
                 />
               )}
             </>}
+          {
+            type === 'welcomeBeach' &&
+            <>
+              {markers.map((beach, index) =>
+                <Marker
+                  key={index}
+                  position={{ lat: beach.location.coordinates[1], lng: beach.location.coordinates[0] }}
+                  icon={'http://maps.google.com/mapfiles/ms/icons/red-dot.png'}
+                  title={beach.name}
+                />
+              )}
+            </>
+
+
+          }
 
         </GoogleMap>
       </Card>
