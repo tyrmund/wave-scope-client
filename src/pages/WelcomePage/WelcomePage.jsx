@@ -69,8 +69,6 @@ const WelcomePage = () => {
 
   navigator.geolocation.getCurrentPosition(showPos, showErr)
 
-
-
   return (
     <Container className="WelcomePage mx-auto mt-3">
       <h1 className="m-5 text-center">{`Welcome to the wave, ${loggedUser.username}`}</h1>

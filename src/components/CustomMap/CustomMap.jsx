@@ -73,7 +73,7 @@ function CustomMap({ zoom, center, markers, type, centerName }) {
             <>
               <Marker
                 position={{ lat: center.coordinates[1], lng: center.coordinates[0] }}
-                icon={'https://res.cloudinary.com/du8mlfcf9/image/upload/v1718102706/marker_vxsim1.png'}
+                icon={'http://maps.google.com/mapfiles/ms/icons/green-dot.png'}
               />
               {markers.map((beach, index) =>
                 <Marker
