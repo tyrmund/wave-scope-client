@@ -58,8 +58,8 @@ const WelcomePage = () => {
 
   const showPos = (pos) => {
 
-    userPosition.coordinates[0] = pos.coords.longitude
-    userPosition.coordinates[1] = pos.coords.latitude
+    userPosition.coordinates[0] = Number(pos.coords.longitude)
+    userPosition.coordinates[1] = Number(pos.coords.latitude)
 
   }
 
