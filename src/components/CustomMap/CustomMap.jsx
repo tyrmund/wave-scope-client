@@ -71,6 +71,10 @@ function CustomMap({ zoom, center, markers, type, centerName }) {
           {
             type === 'welcomeBeach' &&
             <>
+              <Marker
+                position={{ lat: center.coordinates[1], lng: center.coordinates[0] }}
+                icon={'https://res.cloudinary.com/du8mlfcf9/image/upload/v1718102706/marker_vxsim1.png'}
+              />
               {markers.map((beach, index) =>
                 <Marker
                   key={index}
